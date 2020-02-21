@@ -1,35 +1,134 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2019-02-09T11:18:45+01:00</updated><id>http://localhost:4000/</id><title type="html">Andreas Volkmann</title><subtitle>A Jekyll theme with JavaScript powers. &quot;Best Theme by a Mile&quot;. Combines the best of static sites and modern web apps. Open `_config.yml` to edit this text.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">M3U8 playlists and .ts segments</title><link href="http://localhost:4000/posts/2018-04-27-m3u8-and-ts-segments/" rel="alternate" type="text/html" title="M3U8 playlists and .ts segments" /><published>2018-04-27T00:00:00+02:00</published><updated>2018-04-27T00:00:00+02:00</updated><id>http://localhost:4000/posts/m3u8-and-ts-segments</id><content type="html" xml:base="http://localhost:4000/posts/2018-04-27-m3u8-and-ts-segments/">&lt;p&gt;I was recently working on my &lt;a href=&quot;https://github.com/AndreasVolkmann/nhk-easy-kumo&quot;&gt;NHK-Easy web crawler project&lt;/a&gt;, 
-since the site got an update with a number of breaking changes. 
-One of these changes was concerning the audio of the articles.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2020-02-21T20:51:12+01:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Aspect Oriented Programming: Spring, Kotlin, Gradle</title><link href="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/" rel="alternate" type="text/html" title="Aspect Oriented Programming: Spring, Kotlin, Gradle" /><published>2020-02-20T00:00:00+01:00</published><updated>2020-02-20T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/spring-kotlin-gradle-aop</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/">&lt;p&gt;I’ve seen a lot of resources regarding AOP for Java and / or Maven, but couldn’t find a lot about the Kotlin+Gradle combo.
+As for the Spring side, &lt;a href=&quot;https://start.spring.io/&quot;&gt;the Spring Initializr &lt;/a&gt; doesn’t even list the aop starter, which is apparently by design.
+So I decided to show a working solution for the mentioned stack. The code referenced can be found &lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Previously, each article had a corresponding static .mp3 resource. 
-The update introduced a new HLS (HTTP Live Streaming) media player, accompanied by a M3U8 playlist. 
-Furthermore, I observed that the audio was now split into several ts file segments, which were loaded on demand.&lt;/p&gt;
+&lt;p&gt;Aspect oriented programming is a great way of defining cross-cutting concerns that can simplify your project and help establish your architecture.&lt;/p&gt;
 
-&lt;p&gt;I had never worked with these file types before, so off I went to google. 
-However, it wasn’t exactly easy to find answers to my questions, 
-which is why I decided to summarize my findings here, in case other people have similar issues. 
-Also, I wanted to have a go at writing my first post.&lt;/p&gt;
+&lt;h3 id=&quot;setup&quot;&gt;Setup&lt;/h3&gt;
+&lt;p&gt;First thing is to add the required dependencies to the build.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The spring aop starter is needed for defining aspects.&lt;/li&gt;
+  &lt;li&gt;The aspectj plugin is needed for compile-time checks.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;See &lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/build.gradle.kts#L7&quot;&gt;the reference build file&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are a bunch of gradle plugins, but most are outdated and lack proper documentation.
+The freefair plugin was the only one I could get to work, &lt;a href=&quot;https://docs.freefair.io/gradle-plugins/current/reference/#_aspectj&quot;&gt;documentation here&lt;/a&gt;.
+Just add the post-compile-weaving plugin and set your aspectj version in &lt;code class=&quot;highlighter-rouge&quot;&gt;gradle.properties&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;aspects&quot;&gt;Aspects&lt;/h3&gt;
+
+&lt;p&gt;Now we can start writing a custom aspect.
+&lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/src/main/kotlin/com/example/demo/config/aspect/ActivityAspect.kt&quot;&gt;The example&lt;/a&gt;
+shows an aspect that monitors all activities by logging start and end events including the time elapsed and whether it succeeded or failed.
+Using &lt;code class=&quot;highlighter-rouge&quot;&gt;@Around&lt;/code&gt; advice we can wrap all methods that match the defined pointcut in a try-catch-finally.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Aspect&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ActivityAspect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;logger&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LoggerFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getLogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Around&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Architecture.activity() || Architecture.repository() || Architecture.service()&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;monitorActivity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;proceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ProceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;staticPart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toShortString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SUCCESS&quot;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Activity start: $name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;startTime&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proceed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ERROR&quot;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;timeElapsed&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;startTime&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Activity end: $name ($state $timeElapsed ms)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;pointcuts&quot;&gt;Pointcuts&lt;/h4&gt;
+&lt;p&gt;In order to define what methods the advice is applied to, pointcuts can be used to describe the architecture of the application.
+&lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/src/main/kotlin/com/example/demo/config/aspect/Architecture.kt&quot;&gt;In the example&lt;/a&gt;
+we want to monitor all public methods in any service or repository, as well as any method annotated with a custom &lt;code class=&quot;highlighter-rouge&quot;&gt;@Activity&lt;/code&gt; annotation.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Architecture&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Pointcut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;execution(* (@org.springframework.stereotype.Repository *).*(..))&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Pointcut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;execution (* (@org.springframework.stereotype.Service *).*(..))&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;repository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Pointcut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(@annotation(Activity) &amp;amp;&amp;amp; execution(* *(..)))&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;activity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here is a demo service that would match these pointcuts:&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Service&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DemoService&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Activity&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// optional, can be used on methods outside of services / repositories&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;someBool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;noAnnotation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;compile-time-checks&quot;&gt;Compile-time checks&lt;/h3&gt;
+
+&lt;p&gt;AspectJ can be used to define compile-time checks that produce errors or warnings when matched.
+For example, we can introduce a check that ensures that no code from the &lt;code class=&quot;highlighter-rouge&quot;&gt;java.sql&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;javax.sql&lt;/code&gt;
+package is called outside of a repository.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Aspect&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CheckAspect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@DeclareError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;!Architecture.repository() &amp;amp;&amp;amp; (call (* java.sql..*.*(..)) || call (* javax.sql..*.*(..)))&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;jdbcOutsideRepository&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Only call jdbc code from within repositories.&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When compiling the following function, the compiler will throw an error.&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;methodUsingJavaxSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;javax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rowset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RowSetMetaDataImpl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getCatalogName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I am really happy with the results and the fact that the Spring team is pushing and actively promoting Kotlin as the language of choice.
+One issue that still remains is handling suspending functions with AOP, since &lt;code class=&quot;highlighter-rouge&quot;&gt;proceed&lt;/code&gt; will return when suspending.
+Hopefully the fix makes it into the next release. &lt;a href=&quot;https://github.com/spring-projects/spring-framework/issues/22462&quot;&gt;Tracking issue here&lt;/a&gt;.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><summary type="html">I’ve seen a lot of resources regarding AOP for Java and / or Maven, but couldn’t find a lot about the Kotlin+Gradle combo. As for the Spring side, the Spring Initializr doesn’t even list the aop starter, which is apparently by design. So I decided to show a working solution for the mentioned stack. The code referenced can be found here.</summary></entry><entry><title type="html">M3U8 playlists and .ts segments</title><link href="https://andreasvolkmann.github.io//blog/2018-04-27-m3u8-and-ts-segments/" rel="alternate" type="text/html" title="M3U8 playlists and .ts segments" /><published>2018-04-27T00:00:00+02:00</published><updated>2018-04-27T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/m3u8-and-ts-segments</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2018-04-27-m3u8-and-ts-segments/">&lt;p&gt;I was recently working on my &lt;a href=&quot;https://github.com/AndreasVolkmann/nhk-easy-kumo&quot;&gt;NHK-Easy web crawler project&lt;/a&gt;, since the site got an update with a number of breaking changes. One of these changes was concerning the audio of the articles.&lt;/p&gt;
+
+&lt;p&gt;Previously, each article had a corresponding static .mp3 resource. The update introduced a new HLS (HTTP Live Streaming) media player, accompanied by a M3U8 playlist. Furthermore, I observed that the audio was now split into several ts file segments, which were loaded on demand.&lt;/p&gt;
+
+&lt;p&gt;I had never worked with these file types before, so off I went to google. However, it wasn’t exactly easy to find answers to my questions, which is why I decided to summarize my findings here, in case other people have similar issues. Also, I wanted to have a go at writing my first post.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Given a master M3U8 playlist, the goal is to end up with a single mp3 file.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;figure&gt;
-	&lt;a href=&quot;https://developer.apple.com/library/content/referencelibrary/GettingStarted/AboutHTTPLiveStreaming/Art/stream_playlists_2x.png&quot;&gt;&lt;img src=&quot;https://developer.apple.com/library/content/referencelibrary/GettingStarted/AboutHTTPLiveStreaming/Art/stream_playlists_2x.png&quot; /&gt;&lt;/a&gt;
-	&lt;figcaption&gt;Overview of M3U8 playlist structure.&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/m3u8.png&quot; alt=&quot;Overview of M3U8 playlist structure.&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;master-playlist&quot;&gt;Master Playlist&lt;/h4&gt;
+&lt;h3 id=&quot;master-playlist&quot;&gt;Master Playlist&lt;/h3&gt;
+
 &lt;p&gt;The first step when dealing with M3U8, is parsing the master playlist.&lt;/p&gt;
 
-&lt;p&gt;I found the &lt;a href=&quot;https://github.com/iheartradio/open-m3u8&quot;&gt;open-m3u8 library by iHeartRadio&lt;/a&gt; works best. 
-The alternative is &lt;a href=&quot;https://github.com/Comcast/hlsparserj&quot;&gt;Comcast’s hlsparserj&lt;/a&gt;, but it lacks features and requires more manual work.&lt;/p&gt;
+&lt;p&gt;I found the open-m3u8 library by iHeartRadio works best. The alternative is Comcast’s hlsparserj, but it lacks features and requires more manual work.&lt;/p&gt;
 
 &lt;p&gt;Once the master playlist is parsed, one can read its content, which consists of one or more media playlists.&lt;/p&gt;
 
-&lt;h4 id=&quot;media-playlist&quot;&gt;Media Playlist&lt;/h4&gt;
+&lt;h3 id=&quot;media-playlist&quot;&gt;Media Playlist&lt;/h3&gt;
+
 &lt;p&gt;A typical media playlist could look like the following.&lt;/p&gt;
 
 &lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;#EXTM3U&lt;/span&gt;
@@ -50,17 +149,15 @@ The alternative is &lt;a href=&quot;https://github.com/Comcast/hlsparserj&quot;&
 &lt;span class=&quot;nf&quot;&gt;#EXT-X-ENDLIST&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;It contains an url for each segment that the stream is made up of. 
-Additionally, there are a number of meta tags, of which one is particularly important.&lt;/p&gt;
+&lt;p&gt;It contains an url for each segment that the stream is made up of. Additionally, there are a number of meta tags, of which one is particularly important.&lt;/p&gt;
 
-&lt;h4 id=&quot;encryption&quot;&gt;Encryption&lt;/h4&gt;
-&lt;p&gt;What took me the longest to figure out was that the segments were encrypted. 
-According to specification, MPEG-TS files (.ts) start with a BOM (Byte Order Mark) in the form of the ASCII char &lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt;.
-What confused me was, that there was no &lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt;, since the files were encrypted. 
-Lesson learned, go read &lt;a href=&quot;https://tools.ietf.org/html/draft-pantos-http-live-streaming-23#section-3&quot;&gt;the specification&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;encryption&quot;&gt;Encryption&lt;/h3&gt;
+
+&lt;p&gt;What took me the longest to figure out was that the segments were encrypted. According to specification, MPEG-TS files (.ts) start with a BOM (Byte Order Mark) in the form of the ASCII char &lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt;. What confused me was, that there was no &lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt;, since the files were encrypted. Lesson learned, go read &lt;a href=&quot;https://tools.ietf.org/html/draft-pantos-http-live-streaming-23#section-3&quot;&gt;the specification&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Here is how I handle the encryption.&lt;/p&gt;
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getCipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EncryptionData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Cipher&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getCipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EncryptionData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Cipher&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;bytes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;chainmode&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;CBC&quot;&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -78,6 +175,7 @@ Lesson learned, go read &lt;a href=&quot;https://tools.ietf.org/html/draft-panto
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EncryptionData&lt;/code&gt; can be obtained from any track of the media playlist.&lt;/p&gt;
 
 &lt;p&gt;Critical for the success of decryption were the &lt;code class=&quot;highlighter-rouge&quot;&gt;chainmode&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;NoPadding&lt;/code&gt; argument.&lt;/p&gt;
+
 &lt;ul&gt;
   &lt;li&gt;Without any of those, e.g. just &lt;code class=&quot;highlighter-rouge&quot;&gt;AES&lt;/code&gt;, the decryption would throw.&lt;/li&gt;
   &lt;li&gt;With &lt;code class=&quot;highlighter-rouge&quot;&gt;NoPadding&lt;/code&gt;, but a different &lt;code class=&quot;highlighter-rouge&quot;&gt;chainmode&lt;/code&gt;, decryption would succeed, but the files were corrupted.&lt;/li&gt;
@@ -85,27 +183,27 @@ Lesson learned, go read &lt;a href=&quot;https://tools.ietf.org/html/draft-panto
 
 &lt;p&gt;I simply used trial and error until I found the right combination.&lt;/p&gt;
 
-&lt;h4 id=&quot;demux&quot;&gt;Demux&lt;/h4&gt;
-&lt;p&gt;MPEG-TS files are not the most ordinary media format and are therefore more difficult to work with. 
-Instead of .ts files, it would be nice if we could just work with the audio as wav files. 
-I have tried to find a way to do this in java, but ended up using FFMPEG because there was no suitable library for the job. 
-There is &lt;a href=&quot;https://github.com/jcodec/jcodec&quot;&gt;JCodec&lt;/a&gt;, but the api is awkward and it doesn’t seem like the required format is supported. 
-FFMPEG is pretty easy to use via cli and supports a range of formats.&lt;/p&gt;
+&lt;h3 id=&quot;demux&quot;&gt;Demux&lt;/h3&gt;
+
+&lt;p&gt;MPEG-TS files are not the most ordinary media format and are therefore more difficult to work with. Instead of .ts files, it would be nice if we could just work with the audio as wav files. I have tried to find a way to do this in java, but ended up using FFMPEG because there was no suitable library for the job. There is &lt;a href=&quot;https://github.com/jcodec/jcodec&quot;&gt;JCodec&lt;/a&gt;, but the api is awkward and it doesn’t seem like the required format is supported. FFMPEG is pretty easy to use via cli and supports a range of formats.&lt;/p&gt;
 
 &lt;p&gt;To demux a .ts segment to a .wav file, simply use the below code, where the target is a .wav File.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Converting wav to mp3 is similarly easy:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acodec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libmp3lame&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acodec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libmp3lame&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;merging&quot;&gt;Merging&lt;/h4&gt;
+&lt;h3 id=&quot;merging&quot;&gt;Merging&lt;/h3&gt;
+
 &lt;p&gt;Last step: merging the individual segments into one file.&lt;/p&gt;
 
 &lt;p&gt;I use the following to merge audio streams.&lt;/p&gt;
 
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;joinAudioStreams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AudioInputStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AudioInputStream&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;joinAudioStreams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;AudioInputStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AudioInputStream&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;vector&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InputStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AudioInputStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
@@ -120,4 +218,4 @@ FFMPEG is pretty easy to use via cli and supports a range of formats.&lt;/p&gt;
 
 &lt;p&gt;AudioInputStreams are obtained from files using &lt;code class=&quot;highlighter-rouge&quot;&gt;AudioSystem.getAudioInputStream&lt;/code&gt; and writing to file is done with &lt;code class=&quot;highlighter-rouge&quot;&gt;AudioSystem.write&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;And that’s basically how I went from M3U8 playlists and encrypted ts segments to a single mp3.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="programming" /><category term="audio" /><category term="kotlin" /><category term="java" /><summary type="html">Extracting audio from M3U8 media playlists and MPEG-TS segments.</summary></entry></feed>
+&lt;p&gt;And that’s basically how I went from M3U8 playlists and encrypted ts segments to a single mp3.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><summary type="html">I was recently working on my NHK-Easy web crawler project, since the site got an update with a number of breaking changes. One of these changes was concerning the audio of the articles.</summary></entry></feed>
