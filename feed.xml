@@ -1,5 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2020-02-21T21:11:48+01:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Aspect Oriented Programming: Spring, Kotlin, Gradle</title><link href="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/" rel="alternate" type="text/html" title="Aspect Oriented Programming: Spring, Kotlin, Gradle" /><published>2020-02-20T00:00:00+01:00</published><updated>2020-02-20T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/spring-kotlin-gradle-aop</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/">&lt;p&gt;I’ve seen a lot of resources regarding AOP for Java and / or Maven, but couldn’t find a lot about the Kotlin+Gradle combo.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2020-09-27T14:54:03+02:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Spring AOP: CustomizableTraceInterceptor</title><link href="https://andreasvolkmann.github.io//blog/2020-09-27-spring-aop-logging/" rel="alternate" type="text/html" title="Spring AOP: CustomizableTraceInterceptor" /><published>2020-09-27T00:00:00+02:00</published><updated>2020-09-27T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/spring-aop-logging</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-09-27-spring-aop-logging/">&lt;p&gt;The more I learn about Spring, the more I come to understand and appreciate its true power, 
+with one major appeal being developer productivity.&lt;/p&gt;
+
+&lt;p&gt;In my &lt;a href=&quot;https://andreasvolkmann.github.io/blog/2020-02-20-spring-kotlin-gradle-aop/&quot;&gt;previous post&lt;/a&gt; 
+I discussed some useful things we can do with aspect oriented programming, including logging. 
+Spring covers many of these use cases out of the box, without any additional concepts or dependencies.
+Let’s explore how to configure a trace interceptor and how this can make us more productive.
+___&lt;/p&gt;
+
+&lt;p&gt;Oftentimes, when we encounter a bug in the live application, 
+we want to get a deeper understanding of what lead to the current state 
+and turn to the logs.
+Now, during development we may not have decided upon and set up detailed logging, 
+which leads us to add some additional logging or print statements 
+to get insights into the erroneous process.&lt;/p&gt;
+
+&lt;p&gt;This costs time, is annoying, and is ultimately not a very lean process, as a better alternative is available.
+The premise is the following:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Automatically provide meaningful insights into the app. 
+Configure once, applied seamlessly to any existing or new code without additional work.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Say you implement a new part of your app, including a service with one central method:&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Service&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestService&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;testMultiply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;250&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TEST!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, during testing it turns out there is a bug which leads to inconsistent results, 
+even though you are sure the input params are as expected.&lt;/p&gt;
+
+&lt;p&gt;Wouldn’t it be nice to have the following in your logs:&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;2020-09-27 13:32:51.404 TRACE 2220 --- [Test worker] m.a.y.s.TestService&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Entering testMultiply(6,7)&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;TEST!&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;2020-09-27 13:32:51.654 TRACE 2220 --- [Test worker] m.a.y.s.TestService&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Leaving testMultiply(), returned 42, running time = 250 ms&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This includes a message on entering and leaving the method, 
+with information about the parameters, the return value and the time spent.
+This can be customized further, but is usually a good starting point.&lt;/p&gt;
+
+&lt;h3 id=&quot;logger-configuration&quot;&gt;Logger configuration&lt;/h3&gt;
+
+&lt;p&gt;Here is the corresponding logger configuration. Source available &lt;a href=&quot;https://github.com/AndreasVolkmann/Yunyin/blob/master/src/main/kotlin/me/avo/yunyin/config/LoggerConfig.kt&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LoggerConfig&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;customizableTraceInterceptor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CustomizableTraceInterceptor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;setUseDynamicLogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;setEnterMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Entering $[methodName]($[arguments])&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;setExitMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Leaving $[methodName](), returned $[returnValue], running time = $[invocationTime] ms&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;setExceptionMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error $[methodName](), exception $[exception], running time = $[invocationTime] ms&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loggingAdvisor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Advisor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;pointcut&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AspectJExpressionPointcut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;expression&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+                execution (* (@org.springframework.stereotype.Service *).*(..)) 
+             || execution (* (@org.springframework.stereotype.Component *).*(..))
+            &quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trimIndent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DefaultPointcutAdvisor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pointcut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;customizableTraceInterceptor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The details of the pointcut expression depend on what classes you want to target. 
+I just wanted to know about all services and components.&lt;/p&gt;
+
+&lt;p&gt;Notice that we do not need any explicit Spring AOP dependency 
+or any other application configuration. 
+The entire trace logging is self-contained and can be deployed from day one. 
+You can copy-paste this class, and it works immediately.&lt;/p&gt;
+
+&lt;p&gt;By default, the traces are logged as trace, so set the logging level accordingly.
+My &lt;code class=&quot;highlighter-rouge&quot;&gt;application.yml&lt;/code&gt; contains the following during development, 
+where the last part is my root package name.&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;level&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;me.avo.yunyin&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;TRACE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;No, or greatly reduced need to write debug statements!
+Thanks to proxying, your code stays clean, whilst Spring works its magic.&lt;/p&gt;
+
+&lt;p&gt;For production use, you will of course have to adapt your logging, 
+but during development this is value for no money.&lt;/p&gt;
+
+&lt;p&gt;I will experiment further to see how far I can push this, 
+but this will definitely be a part of every future app I work on.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><summary type="html">The more I learn about Spring, the more I come to understand and appreciate its true power, with one major appeal being developer productivity.</summary></entry><entry><title type="html">Aspect Oriented Programming: Spring, Kotlin, Gradle</title><link href="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/" rel="alternate" type="text/html" title="Aspect Oriented Programming: Spring, Kotlin, Gradle" /><published>2020-02-20T00:00:00+01:00</published><updated>2020-02-20T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/spring-kotlin-gradle-aop</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/">&lt;p&gt;I’ve seen a lot of resources regarding AOP for Java and / or Maven, but couldn’t find a lot about the Kotlin+Gradle combo.
 As for the Spring side, &lt;a href=&quot;https://start.spring.io/&quot;&gt;the Spring Initializr &lt;/a&gt; doesn’t even list the aop starter, which is apparently by design.
 So I decided to show a working solution for the mentioned stack. The code referenced can be found &lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
