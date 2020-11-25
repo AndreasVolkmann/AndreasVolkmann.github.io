@@ -39,22 +39,22 @@ Powered by Hydejack v8.5.1 <https://hydejack.com/>
 
   
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Spring AOP - CustomizableTraceInterceptor | Andreas Volkmann</title>
+<title>Spring AOP - Feature Switches | Andreas Volkmann</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Spring AOP - CustomizableTraceInterceptor" />
+<meta property="og:title" content="Spring AOP - Feature Switches" />
 <meta name="author" content="Andreas Volkmann" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Immediate, automated insights into your application." />
-<meta property="og:description" content="Immediate, automated insights into your application." />
-<link rel="canonical" href="https://andreasvolkmann.github.io//blog/2020-09-27-spring-aop-logging/" />
-<meta property="og:url" content="https://andreasvolkmann.github.io//blog/2020-09-27-spring-aop-logging/" />
+<meta name="description" content="Handle feature switch checks with AOP." />
+<meta property="og:description" content="Handle feature switch checks with AOP." />
+<link rel="canonical" href="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/" />
+<meta property="og:url" content="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/" />
 <meta property="og:site_name" content="Andreas Volkmann" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-09-27T00:00:00+02:00" />
+<meta property="article:published_time" content="2020-11-25T00:00:00+01:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Spring AOP - CustomizableTraceInterceptor" />
+<meta property="twitter:title" content="Spring AOP - Feature Switches" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://andreasvolkmann.github.io//assets/icons/icon.png"},"name":"Andreas Volkmann"},"headline":"Spring AOP - CustomizableTraceInterceptor","url":"https://andreasvolkmann.github.io//blog/2020-09-27-spring-aop-logging/","dateModified":"2020-09-27T00:00:00+02:00","datePublished":"2020-09-27T00:00:00+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://andreasvolkmann.github.io//blog/2020-09-27-spring-aop-logging/"},"author":{"@type":"Person","name":"Andreas Volkmann"},"description":"Immediate, automated insights into your application.","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://andreasvolkmann.github.io//assets/icons/icon.png"},"name":"Andreas Volkmann"},"headline":"Spring AOP - Feature Switches","url":"https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/","dateModified":"2020-11-25T00:00:00+01:00","datePublished":"2020-11-25T00:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/"},"author":{"@type":"Person","name":"Andreas Volkmann"},"description":"Handle feature switch checks with AOP.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -84,7 +84,7 @@ Powered by Hydejack v8.5.1 <https://hydejack.com/>
 
 
 
-<link rel="alternate" href="https://andreasvolkmann.github.io//blog/2020-09-27-spring-aop-logging/" hreflang="en">
+<link rel="alternate" href="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/" hreflang="en">
 
 <link rel="shortcut icon" href="/assets/icons/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/icons/icon.png">
@@ -208,17 +208,17 @@ Powered by Hydejack v8.5.1 <https://hydejack.com/>
 
 
 
-<article id="post-blog-spring-aop-logging" class="page post mb6" role="article">
+<article id="post-blog-spring-aop-feature-switches" class="page post mb6" role="article">
   <header>
     <h1 class="post-title">
       
-        Spring AOP - CustomizableTraceInterceptor
+        Spring AOP - Feature Switches
       
     </h1>
 
     <p class="post-date heading">
       
-      <time datetime="2020-09-27T00:00:00+02:00">27 Sep 2020</time>
+      <time datetime="2020-11-25T00:00:00+01:00">25 Nov 2020</time>
       
       
       
@@ -258,7 +258,7 @@ in <span>Blog</span>
 
   
     <p class="message" >
-      Immediate, automated insights into your application.
+      Handle feature switch checks with AOP.
 
     </p>
   
@@ -267,105 +267,73 @@ in <span>Blog</span>
   </header>
 
   
-    <p>The more I learn about Spring, the more I come to understand and appreciate its true power, 
-with one major appeal being developer productivity.</p>
+    <p>One idea I recently happened upon is handling feature switches in an aspect.
+Essentially, we want to externally control whether certain code should execute or not.</p>
 
-<p>In my <a href="https://andreasvolkmann.github.io/blog/2020-02-20-spring-kotlin-gradle-aop/">previous post</a> 
-I discussed some useful things we can do with aspect oriented programming, including logging. 
-Spring covers many of these use cases out of the box, without any additional concepts or dependencies.
-Let’s explore how to configure a trace interceptor and how this can make us more productive.
-___</p>
+<p>This is really a cross-cutting concern, and thereby a top contender for AOP!
+One way to identify candidates for AOP is looking for those small bits of code that are scattered around your code base 
+which do not really contribute to the single responsibility of the class.</p>
 
-<p>Oftentimes, when we encounter a bug in the live application, 
-we want to get a deeper understanding of what lead to the current state 
-and turn to the logs.
-Now, during development we may not have decided upon and set up detailed logging, 
-which leads us to add some additional logging or print statements 
-to get insights into the erroneous process.</p>
+<p>For feature switches it is annoying having to always inject some feature manager and start things off with:</p>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">isEnabled</span> <span class="p">=</span> <span class="n">featureSwitchManager</span><span class="p">.</span><span class="nf">isEnabled</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
 
-<p>This costs time, is annoying, and is ultimately not a very lean process, as a better alternative is available.
-The premise is the following:</p>
-<blockquote>
-  <p>Automatically provide meaningful insights into the app. 
-Configure once, applied seamlessly to any existing or new code without additional work.</p>
-</blockquote>
-
-<p>Say you implement a new part of your app, including a service with one central method:</p>
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
-<span class="kd">class</span> <span class="nc">TestService</span> <span class="p">{</span>
-
-    <span class="k">fun</span> <span class="nf">testMultiply</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="p">{</span>
-        <span class="nc">Thread</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">250</span><span class="p">)</span>
-        <span class="nf">println</span><span class="p">(</span><span class="s">"TEST!"</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">x</span> <span class="p">*</span> <span class="n">y</span>
-    <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">isEnabled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// actual code</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Now, during testing it turns out there is a bug which leads to inconsistent results, 
-even though you are sure the input params are as expected.</p>
+<p>This is a kind of meta capability that our code shouldn’t have to worry about. 
+Additionally, we are usually happier testing the code without all this extra noise.</p>
 
-<p>Wouldn’t it be nice to have the following in your logs:</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">2020-09-27 13:32:51.404 TRACE 2220 --- [Test worker] m.a.y.s.TestService</span><span class="pi">:</span> <span class="s">Entering testMultiply(6,7)</span>
-<span class="s">TEST!</span>
-<span class="s">2020-09-27 13:32:51.654 TRACE 2220 --- [Test worker] m.a.y.s.TestService</span><span class="pi">:</span> <span class="s">Leaving testMultiply(), returned 42, running time = 250 ms</span>
-</code></pre></div></div>
+<h2 id="the-aspect">The Aspect</h2>
 
-<p>This includes a message on entering and leaving the method, 
-with information about the parameters, the return value and the time spent.
-This can be customized further, but is usually a good starting point.</p>
+<p>The source is available <a href="https://github.com/AndreasVolkmann/playground/blob/master/src/main/kotlin/me/avo/cosmos/aspect/FeatureAspect.kt">here</a>.</p>
 
-<h3 id="logger-configuration">Logger configuration</h3>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">FeatureAspect</span><span class="p">(</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">featureSwitchManager</span><span class="p">:</span> <span class="nc">FeatureSwitchManager</span>
+<span class="p">)</span> <span class="p">{</span>
 
-<p>Here is the corresponding logger configuration. Source available <a href="https://github.com/AndreasVolkmann/Yunyin/blob/master/src/main/kotlin/me/avo/yunyin/config/LoggerConfig.kt">here</a>.</p>
+    <span class="nd">@Pointcut</span><span class="p">(</span><span class="n">value</span> <span class="p">=</span> <span class="s">"execution(public * *(..))"</span><span class="p">)</span>
+    <span class="k">fun</span> <span class="nf">anyPublicMethod</span><span class="p">()</span> <span class="p">=</span> <span class="nc">Unit</span>
 
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="kd">class</span> <span class="nc">LoggerConfig</span> <span class="p">{</span>
+    <span class="nd">@Around</span><span class="p">(</span><span class="s">"anyPublicMethod() &amp;&amp; @annotation(annotation)"</span><span class="p">)</span>
+    <span class="k">fun</span> <span class="nf">proceedIfEnabled</span><span class="p">(</span><span class="n">joinPoint</span><span class="p">:</span> <span class="nc">ProceedingJoinPoint</span><span class="p">,</span> <span class="k">annotation</span><span class="p">:</span> <span class="nc">FeatureSwitch</span><span class="p">):</span> <span class="nc">Any</span><span class="p">?</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">featureName</span> <span class="p">=</span> <span class="k">annotation</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="nf">takeIf</span><span class="p">(</span><span class="nc">String</span><span class="o">::</span><span class="n">isNotBlank</span><span class="p">)</span>
+            <span class="o">?:</span> <span class="k">throw</span> <span class="nc">FeatureNameBlankException</span><span class="p">(</span><span class="n">joinPoint</span><span class="p">.</span><span class="n">signature</span><span class="p">)</span>
 
-    <span class="nd">@Bean</span> <span class="k">fun</span> <span class="nf">customizableTraceInterceptor</span><span class="p">()</span> <span class="p">=</span> <span class="nc">CustomizableTraceInterceptor</span><span class="p">().</span><span class="nf">apply</span> <span class="p">{</span>
-        <span class="nf">setUseDynamicLogger</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
-        <span class="nf">setEnterMessage</span><span class="p">(</span><span class="s">"Entering $[methodName]($[arguments])"</span><span class="p">)</span>
-        <span class="nf">setExitMessage</span><span class="p">(</span><span class="s">"Leaving $[methodName](), returned $[returnValue], running time = $[invocationTime] ms"</span><span class="p">)</span>
-        <span class="nf">setExceptionMessage</span><span class="p">(</span><span class="s">"Error $[methodName](), exception $[exception], running time = $[invocationTime] ms"</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="nd">@Bean</span> <span class="k">fun</span> <span class="nf">loggingAdvisor</span><span class="p">():</span> <span class="nc">Advisor</span> <span class="p">{</span>
-        <span class="kd">val</span> <span class="py">pointcut</span> <span class="p">=</span> <span class="nc">AspectJExpressionPointcut</span><span class="p">().</span><span class="nf">apply</span> <span class="p">{</span>
-            <span class="n">expression</span> <span class="p">=</span> <span class="s">"""
-                execution (* (@org.springframework.stereotype.Service *).*(..)) 
-             || execution (* (@org.springframework.stereotype.Component *).*(..))
-            """</span><span class="p">.</span><span class="nf">trimIndent</span><span class="p">()</span>
+        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">featureSwitchManager</span><span class="p">.</span><span class="nf">isEnabled</span><span class="p">(</span><span class="n">featureName</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">true</span> <span class="p">-&gt;</span> <span class="n">joinPoint</span><span class="p">.</span><span class="nf">proceed</span><span class="p">()</span>
+            <span class="k">false</span> <span class="p">-&gt;</span> <span class="k">null</span>
         <span class="p">}</span>
-        <span class="k">return</span> <span class="nc">DefaultPointcutAdvisor</span><span class="p">(</span><span class="n">pointcut</span><span class="p">,</span> <span class="nf">customizableTraceInterceptor</span><span class="p">())</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The details of the pointcut expression depend on what classes you want to target. 
-I just wanted to know about all services and components.</p>
+<p>The implementation is super simple. 
+We define a pointcut for any public methods with the <code class="language-plaintext highlighter-rouge">@FeatureSwitch</code> annotation,
+and pass the provided feature name to the <code class="language-plaintext highlighter-rouge">FeatureSwitchManager</code>, implementing the actual feature check.</p>
 
-<p>Notice that we do not need any explicit Spring AOP dependency 
-or any other application configuration. 
-The entire trace logging is self-contained and can be deployed from day one. 
-You can copy-paste this class, and it works immediately.</p>
+<p>An example of a consuming service:</p>
 
-<p>By default, the traces are logged as trace, so set the logging level accordingly.
-My <code class="language-plaintext highlighter-rouge">application.yml</code> contains the following during development, 
-where the last part is my root package name.</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logging</span><span class="pi">:</span>
-  <span class="na">level</span><span class="pi">:</span>
-    <span class="s">me.avo.yunyin</span><span class="pi">:</span> <span class="s">TRACE</span>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">MessageService</span> <span class="p">{</span>
+
+    <span class="nd">@FeatureSwitch</span><span class="p">(</span><span class="s">"MessageService"</span><span class="p">)</span>
+    <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s">"Running message service!"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<h3 id="conclusion">Conclusion</h3>
-<p>No, or greatly reduced need to write debug statements!
-Thanks to proxying, your code stays clean, whilst Spring works its magic.</p>
+<p>Now the run method can be enabled by passing <code class="language-plaintext highlighter-rouge">true</code> in the application properties:</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">MessageService</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
 
-<p>For production use, you will of course have to adapt your logging, 
-but during development this is value for no money.</p>
-
-<p>I will experiment further to see how far I can push this, 
-but this will definitely be a part of every future app I work on.</p>
+<p>And there you have it.
+A simple AOP solution, taking care of feature switch boilerplate code.</p>
 
   
 </article>
@@ -580,8 +548,8 @@ but this will definitely be a part of every future app I work on.</p>
 
 
 <li>
-  <a href="/blog/2020-11-25-spring-aop-feature-switches/" class="h4 flip-title"><span>Spring AOP - Feature Switches</span></a>
-  <time class="heading faded fine" datetime="2020-11-25T00:00:00+01:00">25 Nov 2020</time>
+  <a href="/blog/2020-11-23-spring-scheduling/" class="h4 flip-title"><span>Spring scheduling</span></a>
+  <time class="heading faded fine" datetime="2020-11-23T00:00:00+01:00">23 Nov 2020</time>
 </li>
 
     
@@ -589,8 +557,8 @@ but this will definitely be a part of every future app I work on.</p>
 
 
 <li>
-  <a href="/blog/2020-11-23-spring-scheduling/" class="h4 flip-title"><span>Spring scheduling</span></a>
-  <time class="heading faded fine" datetime="2020-11-23T00:00:00+01:00">23 Nov 2020</time>
+  <a href="/blog/2020-09-27-spring-aop-logging/" class="h4 flip-title"><span>Spring AOP - CustomizableTraceInterceptor</span></a>
+  <time class="heading faded fine" datetime="2020-09-27T00:00:00+02:00">27 Sep 2020</time>
 </li>
 
     
