@@ -1,5 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2020-11-27T12:59:10+01:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Spring AOP - Feature Switches</title><link href="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/" rel="alternate" type="text/html" title="Spring AOP - Feature Switches" /><published>2020-11-25T00:00:00+01:00</published><updated>2020-11-25T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/spring-aop-feature-switches</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/">&lt;p&gt;One idea I recently happened upon is handling feature switches in an aspect.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-01-27T21:24:37+01:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">The x++ Chain of Command</title><link href="https://andreasvolkmann.github.io//blog/2021-01-25-xpp-chain-of-command/" rel="alternate" type="text/html" title="The x++ Chain of Command" /><published>2021-01-25T00:00:00+01:00</published><updated>2021-01-25T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/xpp-chain-of-command</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-01-25-xpp-chain-of-command/">&lt;p&gt;One of my favorite features of the x++ programming language is the ability 
+to extend classes by creating a chain of command, also referred to as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CoC&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;It allows multiple consumers to seamlessly augment existing code side-by-side 
+with minimal work required from the owner.&lt;/p&gt;
+
+&lt;p&gt;This is especially valuable for software where customization is the norm 
+and multiple independent parties want to customize the same code.&lt;/p&gt;
+
+&lt;p&gt;The result is a flexible extension model conforming to the open/closed principle.&lt;/p&gt;
+
+&lt;h2 id=&quot;extending-code&quot;&gt;Extending code&lt;/h2&gt;
+&lt;p&gt;Given a class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OrderSubmitService&lt;/code&gt; as defined below, we want to customize 
+the validation behavior when an order is submitted.&lt;/p&gt;
+
+&lt;p&gt;Inheritance is not an option, as the class is final.
+Furthermore, this approach requires that the class can be substituted at its call site,
+which is often not possible.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrderSubmitService&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleOrder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;submitOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Amount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ideally, we would like to just add our custom logic to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;validateOrder&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;h2 id=&quot;next&quot;&gt;Next&lt;/h2&gt;
+&lt;p&gt;In order to create a chain of command, we create a new class with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_Extension&lt;/code&gt; suffix 
+and add a reference to the target class in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ExtensionOf&lt;/code&gt; attribute.&lt;/p&gt;
+
+&lt;p&gt;Then we are free to declare any public or protected methods from the target class
+and define custom behavior.&lt;/p&gt;
+
+&lt;p&gt;In the below example we add another validation step to the existing one.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ExtensionOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classStr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;OrderSubmitService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrderSubmitService_Extension&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;IsAvailable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// access to protected members&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// calling next is mandatory&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Calling next invokes the next extension in the chain, until it reaches the base implementation.&lt;/p&gt;
+
+&lt;p&gt;In this way, independent parties can add more layers of code on top of the core,
+which can be locked down to prevent unintended side effects.&lt;/p&gt;
+
+&lt;p&gt;Looking at the code, this seems oddly familiar.&lt;/p&gt;
+
+&lt;h2 id=&quot;parallels&quot;&gt;Parallels&lt;/h2&gt;
+
+&lt;p&gt;There are no other languages with CoC support, AFAIK, but one parallel came to mind.&lt;/p&gt;
+
+&lt;p&gt;We can achieve similar results with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Around&lt;/code&gt; advice in AOP as shown in the Kotlin Spring code below.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Aspect&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrderSubmitServiceExtension&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;nd&quot;&gt;@Around&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;execution(* OrderSubmitService.validateOrder(..)) &amp;amp;&amp;amp; target(orderSubmitService)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ProceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orderSubmitService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrderSubmitService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orderSubmitService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;IsAvailable&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;proceed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;There are some major differences and changes needed to make this work, 
+like not being able to access protected members, 
+but otherwise it is really cool to observe the similarities here.&lt;/p&gt;
+
+&lt;p&gt;Calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proceed&lt;/code&gt; is required, just like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;next&lt;/code&gt; in x++, but we can ignore the result in both. 
+Both also provide access to the target class.&lt;/p&gt;
+
+&lt;p&gt;Whereas AOP is commonly leveraged to address cross-cutting concerns, 
+CoC addresses the cross-cutting concern of code extensibility in x++.&lt;/p&gt;
+
+&lt;p&gt;The extension model of x++ is of course much more than CoC.
+For example, you can also add state to classes via extensions.
+But I have to say, I really came to appreciate the power of the Chain of Command 
+in creating elegant, extensible solutions with minimal boilerplate.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">One of my favorite features of the x++ programming language is the ability to extend classes by creating a chain of command, also referred to as CoC.</summary></entry><entry><title type="html">Spring AOP - Feature Switches</title><link href="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/" rel="alternate" type="text/html" title="Spring AOP - Feature Switches" /><published>2020-11-25T00:00:00+01:00</published><updated>2020-11-25T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/spring-aop-feature-switches</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/">&lt;p&gt;One idea I recently happened upon is handling feature switches in an aspect.
 Essentially, we want to externally control whether certain code should execute or not.&lt;/p&gt;
 
 &lt;p&gt;This is really a cross-cutting concern, and thereby a top contender for AOP!
@@ -71,8 +169,7 @@ with one major appeal being developer productivity.&lt;/p&gt;
 &lt;p&gt;In my &lt;a href=&quot;https://andreasvolkmann.github.io/blog/2020-02-20-spring-kotlin-gradle-aop/&quot;&gt;previous post&lt;/a&gt; 
 I discussed some useful things we can do with aspect oriented programming, including logging. 
 Spring covers many of these use cases out of the box, without any additional concepts or dependencies.
-Let’s explore how to configure a trace interceptor and how this can make us more productive.
-___&lt;/p&gt;
+Let’s explore how to configure a trace interceptor and how this can make us more productive.&lt;/p&gt;
 
 &lt;p&gt;Oftentimes, when we encounter a bug in the live application, 
 we want to get a deeper understanding of what lead to the current state 
