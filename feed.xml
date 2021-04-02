@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-01-27T21:24:37+01:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-04-02T13:04:16+02:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
 </subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">The x++ Chain of Command</title><link href="https://andreasvolkmann.github.io//blog/2021-01-25-xpp-chain-of-command/" rel="alternate" type="text/html" title="The x++ Chain of Command" /><published>2021-01-25T00:00:00+01:00</published><updated>2021-01-25T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/xpp-chain-of-command</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-01-25-xpp-chain-of-command/">&lt;p&gt;One of my favorite features of the x++ programming language is the ability 
 to extend classes by creating a chain of command, also referred to as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CoC&lt;/code&gt;.&lt;/p&gt;
 
@@ -18,7 +18,7 @@ the validation behavior when an order is submitted.&lt;/p&gt;
 Furthermore, this approach requires that the class can be substituted at its call site,
 which is often not possible.&lt;/p&gt;
 
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrderSubmitService&lt;/span&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrderSubmitService&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// final class, no inheritance&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleOrder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
@@ -32,7 +32,7 @@ which is often not possible.&lt;/p&gt;
 
     &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Amount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Amount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// we want to customize this&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -88,8 +88,8 @@ which can be locked down to prevent unintended side effects.&lt;/p&gt;
 like not being able to access protected members, 
 but otherwise it is really cool to observe the similarities here.&lt;/p&gt;
 
-&lt;p&gt;Calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proceed&lt;/code&gt; is required, just like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;next&lt;/code&gt; in x++, but we can ignore the result in both. 
-Both also provide access to the target class.&lt;/p&gt;
+&lt;p&gt;Calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;next&lt;/code&gt; in x++ is required, but we can ignore the result in both. 
+Both provide access to the target class.&lt;/p&gt;
 
 &lt;p&gt;Whereas AOP is commonly leveraged to address cross-cutting concerns, 
 CoC addresses the cross-cutting concern of code extensibility in x++.&lt;/p&gt;
