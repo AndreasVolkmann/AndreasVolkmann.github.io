@@ -1,5 +1,134 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-04-02T13:04:16+02:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">The x++ Chain of Command</title><link href="https://andreasvolkmann.github.io//blog/2021-01-25-xpp-chain-of-command/" rel="alternate" type="text/html" title="The x++ Chain of Command" /><published>2021-01-25T00:00:00+01:00</published><updated>2021-01-25T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/xpp-chain-of-command</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-01-25-xpp-chain-of-command/">&lt;p&gt;One of my favorite features of the x++ programming language is the ability 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-04-07T18:30:34+02:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Arkenv v3.2.0 - available on maven central</title><link href="https://andreasvolkmann.github.io//blog/2021-04-03-arkenv-new-release/" rel="alternate" type="text/html" title="Arkenv v3.2.0 - available on maven central" /><published>2021-04-03T00:00:00+02:00</published><updated>2021-04-03T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/arkenv-new-release</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-04-03-arkenv-new-release/">&lt;p&gt;I am happy to announce that we have migrated from JCenter to &lt;a href=&quot;https://search.maven.org/search?q=arkenv&quot;&gt;Maven Central&lt;/a&gt;, and are
+releasing version &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.2.0&lt;/code&gt; with new features, including plain class support and constructor injection.
+Before we dive into the news, I want to take a look back at how we got here.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/aPureBase/arkenv/master/docs/arkenv_logo.png&quot; alt=&quot;Arkenv logo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Throughout its lifetime, &lt;a href=&quot;https://github.com/aPureBase/arkenv&quot;&gt;Arkenv&lt;/a&gt; has offered many great learning opportunities, 
+and having the chance to create such a project is something I wish upon every developer.&lt;/p&gt;
+
+&lt;p&gt;Even though it is in no way a complex, or groundbreaking venture, 
+I still consider it an important stepping stone, being my first open-source library.
+Keeping the scope small and manageable is probably an advantage when starting out.&lt;/p&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+&lt;p&gt;There were two primary reasons for the conception of Arkenv.&lt;/p&gt;
+
+&lt;p&gt;Firstly, we were looking for a way to seamlessly bridge the changing configuration needs in 
+different environments with minimal developer intervention.
+Starting out with command line libraries like &lt;a href=&quot;https://github.com/cbeust/jcommander&quot;&gt;JCommander&lt;/a&gt;, 
+we soon realized that we wanted a central abstraction to define our external configuration,
+which didn’t depend on the configuration source. 
+Pretty much like &lt;a href=&quot;https://spring.io/blog/2020/04/23/spring-tips-configuration&quot;&gt;Environment&lt;/a&gt; in Spring.&lt;/p&gt;
+
+&lt;p&gt;For example, we wanted to be able to go from a command line-driven environment to an
+environment variable-driven one without having to add code or recompile.&lt;/p&gt;
+
+&lt;p&gt;Secondly, I really wanted to try to build something with &lt;a href=&quot;https://kotlinlang.org/docs/delegated-properties.html&quot;&gt;Kotlin delegates&lt;/a&gt;.
+Another issue we had with many existing, annotation-based libraries, was the lack of type-safety 
+and null support. 
+Quickly, we saw that delegates were a perfect fit for these criteria, and the first version
+with CLI and ENV support didn’t fill more than a few lines.&lt;/p&gt;
+
+&lt;p&gt;The idea was to declare an immutable property, with nullability indicating whether it is optional or not,
+and whose name is used to resolve it.&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Once declared, it can be provided via CLI &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--port 443&lt;/code&gt;, environment variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PORT=443&lt;/code&gt;,
+or in a profile (properties, yaml) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;port: 443&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Later on we added support for other sources, like &lt;a href=&quot;https://apurebase.gitlab.io/arkenv/features/dot-env-files/&quot;&gt;.env files&lt;/a&gt;
+ and &lt;a href=&quot;https://apurebase.gitlab.io/arkenv/features/docker-secrets/&quot;&gt;Docker secrets&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;new-repository&quot;&gt;New repository&lt;/h2&gt;
+&lt;p&gt;With the announcement of JCenter ending support of their popular repository, 
+many open-source projects had to migrate to Maven Central.
+We could have lived without this interruption, but on the other hand,
+it is great to be able to go with the default repository.&lt;/p&gt;
+
+&lt;p&gt;From now on, all new releases will be available here.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;repositories&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;mavenCentral&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;implementation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.apurebase&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;arkenv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3.2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;implementation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.apurebase&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;arkenv-yaml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3.2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// for yaml support&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;new-features&quot;&gt;New features&lt;/h2&gt;
+
+&lt;h3 id=&quot;plain-class-support&quot;&gt;Plain class support&lt;/h3&gt;
+
+&lt;p&gt;It is no longer necessary to extend &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Arkenv&lt;/code&gt; when defining an argument class.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Configuration&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;Arkenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Plain classes do not have a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;help&lt;/code&gt; argument by default.&lt;/p&gt;
+
+&lt;h4 id=&quot;constructor-injection&quot;&gt;Constructor injection&lt;/h4&gt;
+&lt;p&gt;Instead of declaring arguments, one can now let &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Arkenv&lt;/code&gt; inject directly
+into the constructor of a plain class.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// construct an instance with the parse factory function&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Arkenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Consequently, we cannot apply any config to these arguments, 
+but default values are supported natively.&lt;/p&gt;
+
+&lt;h4 id=&quot;modules&quot;&gt;Modules&lt;/h4&gt;
+&lt;p&gt;The above approaches can be combined freely, and both support modules, too.
+In plain classes, modules are declared with a delegate, i.e. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;by module()&lt;/code&gt;.
+The module delegate function also accepts a configuration lambda with prefix support.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SubConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;country&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;object&lt;/span&gt;  &lt;span class=&quot;nc&quot;&gt;Configuration&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;subModule&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;SubConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;Arkenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// member access&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The above &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SubConfig&lt;/code&gt; class accepts constructor parameters and declares arguments in its body.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Configuration&lt;/code&gt; object declares a module that is automatically created on parse.&lt;/p&gt;
+
+&lt;h3 id=&quot;new-feature-syntax&quot;&gt;New feature syntax&lt;/h3&gt;
+&lt;p&gt;Features can now be configured with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Arkenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ProfileFeature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;breaking-changes&quot;&gt;Breaking changes&lt;/h2&gt;
+&lt;p&gt;Most extension functions have moved to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;util&lt;/code&gt; package.
+This will break your build when upgrading, but should be easy to fix,
+by importing the correct packages.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//import com.apurebase.arkenv.parse&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.apurebase.arkenv.util.parse&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;further-information&quot;&gt;Further information&lt;/h2&gt;
+&lt;p&gt;Log any bugs or feature requests on &lt;a href=&quot;https://github.com/aPureBase/arkenv&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;📃 Please visit &lt;a href=&quot;https://apurebase.gitlab.io/arkenv/&quot;&gt;https://apurebase.gitlab.io/arkenv/&lt;/a&gt; for in-depth documentation.&lt;/p&gt;
+
+&lt;p&gt;🤝 Ask any questions in the Arkenv channel in the &lt;a href=&quot;https://kotlinlang.slack.com/messages/CGF74HD19/&quot;&gt;official Kotlin Slack&lt;/a&gt;.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">I am happy to announce that we have migrated from JCenter to Maven Central, and are releasing version 3.2.0 with new features, including plain class support and constructor injection. Before we dive into the news, I want to take a look back at how we got here.</summary></entry><entry><title type="html">The x++ Chain of Command</title><link href="https://andreasvolkmann.github.io//blog/2021-01-25-xpp-chain-of-command/" rel="alternate" type="text/html" title="The x++ Chain of Command" /><published>2021-01-25T00:00:00+01:00</published><updated>2021-01-25T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/xpp-chain-of-command</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-01-25-xpp-chain-of-command/">&lt;p&gt;One of my favorite features of the x++ programming language is the ability 
 to extend classes by creating a chain of command, also referred to as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CoC&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;It allows multiple consumers to seamlessly augment existing code side-by-side 
@@ -54,7 +183,7 @@ and define custom behavior.&lt;/p&gt;
     &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;IsAvailable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// access to protected members&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// calling next is mandatory&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// calling next is mandatory&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -79,7 +208,7 @@ which can be locked down to prevent unintended side effects.&lt;/p&gt;
   &lt;span class=&quot;nd&quot;&gt;@Around&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;execution(* OrderSubmitService.validateOrder(..)) &amp;amp;&amp;amp; target(orderSubmitService)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ProceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orderSubmitService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OrderSubmitService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orderSubmitService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;simpleOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;IsAvailable&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;proceed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;proceed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isAvailable&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
