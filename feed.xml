@@ -1,5 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-04-07T18:30:34+02:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Arkenv v3.2.0 - available on maven central</title><link href="https://andreasvolkmann.github.io//blog/2021-04-03-arkenv-new-release/" rel="alternate" type="text/html" title="Arkenv v3.2.0 - available on maven central" /><published>2021-04-03T00:00:00+02:00</published><updated>2021-04-03T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/arkenv-new-release</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-04-03-arkenv-new-release/">&lt;p&gt;I am happy to announce that we have migrated from JCenter to &lt;a href=&quot;https://search.maven.org/search?q=arkenv&quot;&gt;Maven Central&lt;/a&gt;, and are
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-04-25T10:15:41+02:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Clean Architecture with ArchUnit</title><link href="https://andreasvolkmann.github.io//blog/2021-04-24-clean-arch-unit/" rel="alternate" type="text/html" title="Clean Architecture with ArchUnit" /><published>2021-04-24T00:00:00+02:00</published><updated>2021-04-24T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/clean-arch-unit</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-04-24-clean-arch-unit/">&lt;p&gt;In a &lt;a href=&quot;/blog/2020-02-20-spring-kotlin-gradle-aop&quot;&gt;previous post&lt;/a&gt;
+I discussed ways in which AOP can help in defining our architecture, 
+even allowing us to verify architectural rules at compile time.&lt;/p&gt;
+
+&lt;p&gt;While this approach certainly does work, it has a few drawbacks, like its reliance on 
+AOP, which is not always an option. 
+Furthermore, the way these rules are defined is slightly unnatural.&lt;/p&gt;
+
+&lt;p&gt;A more idiomatic way of automatically verifying one’s architecture is &lt;a href=&quot;https://www.archunit.org/&quot;&gt;ArchUnit&lt;/a&gt;,
+which enables us to define our rules as unit tests.&lt;/p&gt;
+
+&lt;p&gt;Originally a Java library, the project has since been ported to C#, 
+which makes sense, considering &lt;s&gt;Java&lt;/s&gt; Kotlin and C# are the same language.
+If a truly useful library is created in either of these, 
+it will eventually be ported to the others, 
+just like for &lt;a href=&quot;https://en.wikipedia.org/wiki/AspectJ&quot;&gt;AspectJ&lt;/a&gt; we now got &lt;a href=&quot;https://www.postsharp.net/&quot;&gt;PostSharp&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Anyway, this is convenient for me, 
+since I wanted to take a look at enforcing a clean architecture in C# today. 
+(Please read &lt;a href=&quot;https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html&quot;&gt;Uncle Bob’s post&lt;/a&gt;)
+&lt;a href=&quot;https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html&quot;&gt;&lt;img src=&quot;/assets/img/CleanArchitecture.jpg&quot; alt=&quot;Overview of the Clean Architecture&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In the Java ArchUnit, there is out of the box support for both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layered&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onion&lt;/code&gt; architectures, 
+but not in the dotnet ports.&lt;/p&gt;
+
+&lt;p&gt;I won’t be going for a full-blown onion / clean arch as my purpose is to slowly evolve 
+and improve the architecture of my project. Taking things from 0 to 100 in one step is 
+likely not gonna benefit anyone, and it is easier to adapt to small, incremental changes.
+So, while the end goal is a clean architecture, 
+for now I just want to implement some simple layer checks, 
+similar to the ones shown in the image below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/layer-check.png&quot; alt=&quot;Overview of the Clean Architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;setup&quot;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;I found two candidates for ArchUnit-style tests:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/TNG/ArchUnitNET&quot;&gt;ArchUnitNET&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/BenMorris/NetArchTest&quot;&gt;NetArchTest&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I decided to go with the former, as it is from TNG, the same team as the original library.&lt;/p&gt;
+
+&lt;p&gt;After installing, I noticed there is no assert support for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MSTest&lt;/code&gt;, 
+so I recommend to just copy the related classes from &lt;a href=&quot;https://github.com/TNG/ArchUnitNET/tree/master/ArchUnitNET.xUnit&quot;&gt;the xUnit folder&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/AndreasVolkmann/archNet/tree/master/TestProject1/Arch&quot;&gt;Here&lt;/a&gt; is what I ended up with.&lt;/p&gt;
+
+&lt;h2 id=&quot;rules&quot;&gt;Rules&lt;/h2&gt;
+
+&lt;p&gt;The individual layers can be defined like this:&lt;/p&gt;
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serviceLayer&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Types&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;That&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ResideInNamespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.Service&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;controllerLayer&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Types&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;That&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ResideInNamespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.Controller&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;peristenceLayer&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Types&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;That&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ResideInNamespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.Repository&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s start with our first rule: 
+None of our code should depend on any controller / inbound port.&lt;/p&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TestMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;LayeredArch_Controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rule&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Types&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;That&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AreNot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;controllerLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Should&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;NotDependOnAny&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;controllerLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;rule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Architecture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The next rule prevents access from the persistence layer to the service layer.&lt;/p&gt;
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;Types&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;That&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Are&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;peristenceLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Should&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;NotDependOnAny&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serviceLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And lastly, only allow the service layer to access the persistence layer.&lt;/p&gt;
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;Types&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;That&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AreNot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serviceLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Should&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;NotDependOnAny&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;peristenceLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The complete test class is available &lt;a href=&quot;https://github.com/AndreasVolkmann/archNet/blob/master/TestProject1/Arch/ArchitectureTests.cs&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;ArchUnit provides an elegant way of defining architectural rules, helping you enforce
+your design. 
+Whilst the AOP compile-time approach is great, too, I prefer an AOP-independent solution.&lt;/p&gt;
+
+&lt;p&gt;It would be great to have the layer and onion dsl ported to C#, too.&lt;/p&gt;
+
+&lt;p&gt;I will be experimenting with the layers and slowly approach a clean architecture.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">In a previous post I discussed ways in which AOP can help in defining our architecture, even allowing us to verify architectural rules at compile time.</summary></entry><entry><title type="html">Arkenv v3.2.0 - available on maven central</title><link href="https://andreasvolkmann.github.io//blog/2021-04-03-arkenv-new-release/" rel="alternate" type="text/html" title="Arkenv v3.2.0 - available on maven central" /><published>2021-04-03T00:00:00+02:00</published><updated>2021-04-03T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/arkenv-new-release</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-04-03-arkenv-new-release/">&lt;p&gt;I am happy to announce that we have migrated from JCenter to &lt;a href=&quot;https://search.maven.org/search?q=arkenv&quot;&gt;Maven Central&lt;/a&gt;, and are
 releasing version &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.2.0&lt;/code&gt; with new features, including plain class support and constructor injection.
 Before we dive into the news, I want to take a look back at how we got here.&lt;/p&gt;
 
