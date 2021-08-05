@@ -1,5 +1,633 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-04-25T10:15:41+02:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Clean Architecture with ArchUnit</title><link href="https://andreasvolkmann.github.io//blog/2021-04-24-clean-arch-unit/" rel="alternate" type="text/html" title="Clean Architecture with ArchUnit" /><published>2021-04-24T00:00:00+02:00</published><updated>2021-04-24T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/clean-arch-unit</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-04-24-clean-arch-unit/">&lt;p&gt;In a &lt;a href=&quot;/blog/2020-02-20-spring-kotlin-gradle-aop&quot;&gt;previous post&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2021-08-05T15:54:27+02:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Language features across the boundary</title><link href="https://andreasvolkmann.github.io//blog/2021-07-25-topic-markers-in-language-design/" rel="alternate" type="text/html" title="Language features across the boundary" /><published>2021-07-25T00:00:00+02:00</published><updated>2021-07-25T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/topic-markers-in-language-design</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-07-25-topic-markers-in-language-design/">&lt;p&gt;In western languages we are used to repeatedly re-declare the topic we are talking about.
+There is hardly a sentence without a pronoun,
+and we often have to find &lt;a href=&quot;https://owl.purdue.edu/owl/general_writing/academic_writing/sentence_variety/for_repeated_subjects_or_topics.html&quot;&gt;creative ways&lt;/a&gt;
+to reduce repetition, in order not to sound dry and robotic.&lt;/p&gt;
+
+&lt;p&gt;Imagine a typical conversation between person &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;How is your new teacher?&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;I don't like him. He's too strict.&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Is he worse than Mr. X?&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;No, but he still thinks it's the 80s.&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This could go on for quite a bit,
+but after the first sentence it should be clear to everyone what the topic is.
+Then why do we have to repeatedly refer to it?&lt;/p&gt;
+
+&lt;p&gt;Think about introducing yourself to an audience.
+Nobody is in doubt who you are talking about, 
+yet practically every sentence will contain an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;I&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Growing up with such a language, this feels normal. 
+Although, as developers, we tend to get an allergic reaction when seeing excessive repetition.&lt;/p&gt;
+
+&lt;p&gt;Once we discover an elegant alternative, 
+we realize that languages like English, German, Danish are really quite verbose. 
+They are said to be &lt;a href=&quot;https://en.wikipedia.org/wiki/Topic-prominent_language&quot;&gt;subject-prominent&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;topic-markers&quot;&gt;Topic markers&lt;/h1&gt;
+
+&lt;p&gt;Some natural languages, like Japanese and Korean, support a feature called &lt;a href=&quot;https://en.wikipedia.org/wiki/Topic_marker&quot;&gt;topic markers&lt;/a&gt;.
+They allow you to declare a topic, and then largely omit referencing it throughout the conversation.&lt;/p&gt;
+
+&lt;p&gt;Going back to the previous example, once the topic is established, we can stop referring to it.&lt;/p&gt;
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;How is new teacher?&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Don't like. Too strict.&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Worse than Mr. X?&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;No, but still thinks it's the 80s.&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This sounds unnatural in English, but is the default in Japanese.
+In fact, we can omit nearly all pronouns, as they are usually inferred from the context:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt; asks &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B&lt;/code&gt; a question, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B&lt;/code&gt; is not in doubt whose teacher &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A&lt;/code&gt; is talking about.&lt;/li&gt;
+  &lt;li&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B&lt;/code&gt; states her opinion, both know who about.&lt;/li&gt;
+  &lt;li&gt;As long as the topic doesn’t change, there is no need to refer to the teacher with pronouns.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;implicit-topics&quot;&gt;Implicit topics&lt;/h2&gt;
+&lt;p&gt;Context-heavy languages assume a lot of implicit information, allowing for very succinct communication.
+Japanese is known for being on the extreme end of the context-heavy scala, 
+as almost every sentence will omit some information.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In high context cultures many of the words you might think of as essential in another linguistic setting become unnecessary or out of place. Japanese is one such language, where things are often implied by context and mutual understanding.&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://www.italki.com/article/877/omitting-the-subject-in-japanese?hl=en&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Japanese_grammar#Thematic_wa&quot;&gt;A classic&lt;/a&gt; 
+is the sentence &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;僕はウナギだ&lt;/code&gt;, which can be interpreted as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;I am an eel&lt;/code&gt;, which doesn’t make much sense.
+The implicit context is that we are in a restaurant, where the sentence is used to state your order, 
+as in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;I'd like the eel, please&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;More generally, you omit pronouns in most conversations.
+When talking about yourself, stating your thoughts, or telling a story about your kids, you won’t have to 
+ say &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;I&lt;/code&gt; / &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my&lt;/code&gt;. Once you open your mouth, it is clear that you are the topic.
+When seeing a colleague and asking a question, you won’t say &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;You&lt;/code&gt;. 
+The other person understands that he is the one being asked.&lt;/p&gt;
+
+&lt;p&gt;Once I went to a book store, where a band was playing. 
+Just as I entered, they stopped playing, 
+and I went up to one of the members to ask whether they would continue later.
+The entire conversation was:&lt;/p&gt;
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;Me&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;もう終わった？&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# ~ Already finished?&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;He&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;まだ。&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;# ~ Still.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I was taken aback by the curtness of his answer, but this is really quite common.&lt;/p&gt;
+
+&lt;h1 id=&quot;programming-analog&quot;&gt;Programming analog&lt;/h1&gt;
+
+&lt;p&gt;The first similar concept that comes to mind is a plain class, 
+from which we can reference other members of the class without qualification.&lt;/p&gt;
+
+&lt;p&gt;As mentioned, in Japanese you can omit declaring yourself as the topic.
+Let’s imagine a class about ourselves, called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;I&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;I&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;think&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;about&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;say&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;think&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;No more subject!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;think&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Context is awesome!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As opposed to:&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;say&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;think&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;therefore I am&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;think&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;repetition is boring&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Generally, good design will produce classes with low subject repetition.
+Similar to how we organize our prose to minimize repetition and keep the reader engaged. 
+If we find ourselves frequently referring to the same subject, 
+then that is a sign that the code belongs in a (topic) class.&lt;/p&gt;
+
+&lt;p&gt;This works well when we own the class, but what if the topic is out of our control?&lt;/p&gt;
+
+&lt;h2 id=&quot;extension-functions-with-receivers&quot;&gt;Extension functions with receivers&lt;/h2&gt;
+
+&lt;p&gt;Have you ever had to write a function which operates on an external type, like the below?&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mutate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;External&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Test&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10_000&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getCurrentLocation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yetAnotherField&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; 
+    &lt;span class=&quot;c1&quot;&gt;/// 10 more fields to set&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This is super annoying. We basically want a way to declare &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;external&lt;/code&gt; as our topic, 
+and then stop referring to it in every single line, as if it was a function of the class itself.&lt;/p&gt;
+
+&lt;p&gt;In Kotlin, &lt;a href=&quot;https://kotlinlang.org/docs/extensions.html#extension-functions&quot;&gt;extension functions&lt;/a&gt; 
+are declared by defining a receiver type for the function.
+Within its scope, the receiver becomes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;this&lt;/code&gt;, and can be omitted.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;External&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mutate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Test&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10_000&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getCurrentLocation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Such receivers can be thought of as topic markers, 
+indicating that the following block of code will invoke the topic without explicitly referencing it.&lt;/p&gt;
+
+&lt;p&gt;The standard library contains generic helper functions, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apply&lt;/code&gt; to facilitate this inline.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;StringBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;forEach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;,&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setLength&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Hello A, B!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Without &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apply&lt;/code&gt;, we would have to declare the subject in every line, sometimes even twice.
+We could actually create a similar helper for the Japanese topic marker &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;は&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;infix&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;は(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;RestaurantOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;は&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;unagi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Receivers are frequently leveraged to enable custom DSLs / &lt;a href=&quot;https://kotlinlang.org/docs/type-safe-builders.html&quot;&gt;type-safe builders&lt;/a&gt;. 
+For example, a type-safe way to build html in code:&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;stylesheet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;blue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;form&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;textColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OK&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;footer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Another cool thing here is the notion of nested receivers / topics, just as in natural language.
+The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;textColumn&lt;/code&gt; only makes sense in the context of a form in a body in html.&lt;/p&gt;
+
+&lt;p&gt;Going back to the eel example, how could we express this in code?
+First, we can always assume an implicit context of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;I&lt;/code&gt;.
+Next, we are in a restaurant and, facing the waiter, it is clear that we intend to order food.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;I&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RestaurantOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unagi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;order&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Menu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;EelOnRice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;I&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// implicit I&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;restaurant&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// when in restaurant&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// when about to order&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;unagi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// when in the right context, a single word is sufficient&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Notice that we can define &lt;a href=&quot;https://kotlinlang.org/docs/extensions.html#declaring-extensions-as-members&quot;&gt;local extensions&lt;/a&gt;! 
+This really allows us to express the concept of sub-topics, 
+i.e. the unagi restaurant order only applies to me.&lt;/p&gt;
+
+&lt;h3 id=&quot;further-parallels&quot;&gt;Further parallels&lt;/h3&gt;
+&lt;p&gt;In Japanese, adding back the omitted subject references still leads to grammatically correct sentences,
+but they will be perceived as awkward, and you will have trouble making yourself understood.
+This is analogous to unclean code with excessive duplication, or unnecessary qualifications.
+For others reading your code, this noise is an impairment to understanding your true intent.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;In programming, topics are generally handled by defining classes of cohesive members, 
+which can operate on the topic without explicit references. 
+Kotlin adds the magic by allowing the same behavior on external types via extensions.
+Bonus points for local extensions!&lt;/p&gt;
+
+&lt;p&gt;Natural languages like Japanese have a special topic marker particle 
+which feels similar to defining the receiver on an extension function.
+In context-heavy languages we can omit a lot of implicit information, 
+often leading to much shorter, concise sentences.&lt;/p&gt;
+
+&lt;p&gt;To me, both Kotlin and Japanese have a sense of elegance, 
+as it is super easy to produce highly expressive and concise output.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">In western languages we are used to repeatedly re-declare the topic we are talking about. There is hardly a sentence without a pronoun, and we often have to find creative ways to reduce repetition, in order not to sound dry and robotic.</summary></entry><entry><title type="html"></title><link href="https://andreasvolkmann.github.io//blog/2021-07-24-/" rel="alternate" type="text/html" title="" /><published>2021-07-24T00:00:00+02:00</published><updated>2021-07-24T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-07-24-/">&lt;p&gt;Languages should encourage best practices via language design.&lt;/p&gt;
+
+&lt;h1 id=&quot;primary-constructors&quot;&gt;Primary Constructors&lt;/h1&gt;
+&lt;p&gt;https://github.com/dotnet/csharplang/blob/main/proposals/primary-constructors.md&lt;/p&gt;
+
+&lt;p&gt;In C#, it is easier to declare a public property with getter+setter,
+than a class dependency.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CommandHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CommandHandler&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Database&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CommandHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Database&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;database&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;file-scoped-namespaces&quot;&gt;File-scoped namespaces&lt;/h1&gt;
+&lt;p&gt;https://github.com/dotnet/csharplang/blob/main/proposals/csharp-10.0/file-scoped-namespaces.md&lt;/p&gt;
+
+&lt;p&gt;https://github.com/dotnet/csharplang/blob/main/proposals/declaration-expressions.md&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.)&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;B&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(...)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">Languages should encourage best practices via language design.</summary></entry><entry><title type="html">Good Language Design Scoping copy</title><link href="https://andreasvolkmann.github.io//blog/2021-07-24-good-language-design-scoping-Copy/" rel="alternate" type="text/html" title="Good Language Design Scoping copy" /><published>2021-07-24T00:00:00+02:00</published><updated>2021-07-24T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/good-language-design-scoping%20-%20Copy</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-07-24-good-language-design-scoping-Copy/">&lt;p&gt;In natural languages there are different degrees of context, ranging from low to high, 
+correlated to &lt;a href=&quot;https://en.wikipedia.org/wiki/High-context_and_low-context_cultures#Examples_of_higher-_and_lower-context_cultures&quot;&gt;high- and low-context cultures&lt;/a&gt;).
+Highly context-based languages allow for very succinct communication, 
+since conversations assume a lot of implicit information. 
+One example being that references to the topic and/or subject can be either wholly omitted, 
+or drastically reduced.&lt;/p&gt;
+
+&lt;p&gt;With a western background, it is initially difficult to understand such languages, 
+because European languages are mostly low-context and more grammar / syntax heavy. 
+German is a good example of a very verbose language with tons of grammatical rules and cases, 
+making it one of the more dreaded languages for students out there.
+Almost everything has to be conjugated based on tense, number, or gender.&lt;/p&gt;
+
+&lt;p&gt;In contrast to this syntax-heavy grammar, Asian languages feel like a fresh breeze.
+If German makes you feel like it is almost overloaded with grammar, 
+then Chinese feels like no grammar at all.
+No tense, no grammatical number, no gender, no nothing!&lt;/p&gt;
+
+&lt;p&gt;When trying to formulate a sentence in Chinese, 
+I am frequently surprised by how easy and straight-forward it is.
+Generally, once you learn a new word, 
+you can immediately start using it in all kinds of situations without a second thought.
+This is truly a liberating feeling, and makes language-learning fun again.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, when learning a new word in a language like French, 
+students frequently have issues remembering the correct gender, or have trouble parsing 
+a verb in futur proche. 
+I remember something with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aura&lt;/code&gt;, 
+but it’s clear that my class never really mastered french verb conjugation, even after many years of school.
+On top of that there’s all the special cases, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;animal&lt;/code&gt; &amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;animaux&lt;/code&gt;.
+Sure, you can remember all that. But why? And how is that enjoyable?&lt;/p&gt;
+
+&lt;p&gt;Even for nordic languages, like Danish or Swedish, which are far less grammar-dependent, you have to
+take some time to get a feeling for whether a noun is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;en&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;et&lt;/code&gt;, since there is no rule.&lt;/p&gt;
+
+&lt;h1 id=&quot;safe-languages&quot;&gt;Safe languages&lt;/h1&gt;
+&lt;p&gt;An analog in programming languages could be low- and high-level languages.
+In low-level languages you usually have to write more explicit code to convey the same intent. 
+In exchange, you get to provide more detailed instructions.
+High-level languages rely on conventions and abstractions to facilitate a safe and expressive syntax.&lt;/p&gt;
+
+&lt;p&gt;Looking at the history of programming languages, 
+we have learned that restricting what a user can and has to do improves code, and the software we produce.
+Famous examples are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;goto considered harmful&lt;/code&gt;, immutable &amp;gt; mutable data, the billion dollar mistake, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://imgs.xkcd.com/comics/goto.png&quot; alt=&quot;Goto considered harmful comic&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Eliminating entire classes of errors seems to be the way to go.&lt;/p&gt;
+
+&lt;p&gt;Why do we need safe languages? Are they only for beginners? Can’t we just put the pros to work?
+No, because &lt;strong&gt;there aren’t enough pros&lt;/strong&gt;. 
+The amount of programmers doubles every couple of years, 
+meaning that there will always be more juniors than seniors.&lt;/p&gt;
+
+&lt;p&gt;Consequently, we need languages which prevent us from making common mistakes.
+If you are passionate about programming, you may think that the others should just bring the same passion,
+or find something else to do. 
+But obviously there is a vast market need for programmers, whilst supply is dwindling.
+As other occupations become less lucrative / extinct, more people will have to turn towards programming,
+all the while not being interested in the craft.
+This doesn’t mean that these people lack the intelligence to write good software. 
+There are tons of highly-intelligent PHDs, 
+who couldn’t find a job in their field and had to settle for a developer job.
+Programming certainly requires a minimum level of intelligence, 
+but beyond that other qualities might be better predictors of success.
+If programming wasn’t your first choice, you will likely bring less conscientiousness to the table.
+And then there’s the dissonance between what the customer needs and what is fun to program.
+Inventing a new algorithm that drastically improves performance requires very smart people,
+but customer focus can be achieved by anyone willing to focus.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-evolution-of-the-chinese-language&quot;&gt;The evolution of the Chinese language&lt;/h1&gt;
+&lt;p&gt;The modern mandarin language has been underway for quite some time, 
+and is a result of merging many dialects into a common, standardized language.&lt;/p&gt;
+
+&lt;p&gt;In order to facilitate the coming together of different tribes, dialects, and 100s of millions of people,
+the language had to become simpler. 
+Just as recently as the 1950s, the writing system underwent a &lt;a href=&quot;https://en.wikipedia.org/wiki/Chinese_Character_Simplification_Scheme&quot;&gt;simplification scheme&lt;/a&gt;,
+in part to achieve a higher literacy rate.
+In other words, the government intentionally simplified the official language, 
+to make it more accessible for the masses.&lt;/p&gt;
+
+&lt;p&gt;This sounds very familiar from a programming perspective, 
+as we have been going through a similar evolution.
+On the one hand, high-level languages have completely overtaken the general purpose market.
+At the same time tools and languages for non-devs have become prevalent.
+For example:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The x++ language is essentially a DSL for writing business applications, 
+without pre-requisite knowledge about the database and presentation layers.&lt;/li&gt;
+  &lt;li&gt;No/low-code platforms like PowerAutomate make programming accessible to everyone.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Simplifying the way code or prose is written enables more people to participate.&lt;/p&gt;
+
+&lt;p&gt;Chinese and Japanese tend to be more literal, giving children a head start.
+https://gineersnow.com/students/best-explanation-asians-good-math&lt;/p&gt;
+
+&lt;p&gt;How many kids know what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pediatrics&lt;/code&gt; means?
+Maybe some, but can they understand the meaning of the word by reading it?
+In contrast, the words &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;小児科&lt;/code&gt; in Japanese, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;小儿科&lt;/code&gt; in Chinese (even simpler), 
+carry their meaning and can be understood by kids with basic reading ability.
+Even without a grasp of the medical system, they will know that the word is about small children.&lt;/p&gt;
+
+&lt;p&gt;Do you know what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gastroenterology&lt;/code&gt; is? 
+In Chinese, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;胃肠学&lt;/code&gt; leaves no room for doubt: It’s the study of the stomach and intestines.
+That’s what I call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kinderleicht&lt;/code&gt; (child’s play).&lt;/p&gt;
+
+&lt;p&gt;The reality for modern European languages is that they all borrow from each other,
+which increases the complexity for learners, as different origins mean new stems, prefixes, suffixes, etc.
+I still have to look up what &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;endocrinology&lt;/code&gt; means, even though I have worked with medical terms quite a bit.
+Sure, you will eventually deduct that &lt;a href=&quot;https://en.wiktionary.org/wiki/-logy#Suffix&quot;&gt;ology&lt;/a&gt; 
+identifies a scientific study, 
+but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;学&lt;/code&gt; is literally the word for learning and features in 1st grade words like school &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;学校&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Minimal grammar&lt;/li&gt;
+  &lt;li&gt;Literal words&lt;/li&gt;
+  &lt;li&gt;Simple number system&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.hawaii.edu/satocenter/langnet/definitions/singlish.html&quot;&gt;Singlish&lt;/a&gt; can give an impression 
+of what English would look like with some of the Chinese simplifications applied.&lt;/p&gt;
+
+&lt;p&gt;Malcolm Gladwell, Asian / Chinese children are better at math because
+their numbers are shorter. They can remember more numbers.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">In natural languages there are different degrees of context, ranging from low to high, correlated to high- and low-context cultures). Highly context-based languages allow for very succinct communication, since conversations assume a lot of implicit information. One example being that references to the topic and/or subject can be either wholly omitted, or drastically reduced.</summary></entry><entry><title type="html">Hacking</title><link href="https://andreasvolkmann.github.io//blog/2021-07-05-hacking/" rel="alternate" type="text/html" title="Hacking" /><published>2021-07-05T00:00:00+02:00</published><updated>2021-07-05T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/hacking</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-07-05-hacking/">&lt;p&gt;Ideas&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fixing problems&lt;/p&gt;
+
+    &lt;p&gt;Almost any operation could cause problems back then.&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Installing AOE 1 on Win95 takes forever, crashed, hope it works&lt;/li&gt;
+      &lt;li&gt;Computer broke after installing WinXP update&lt;/li&gt;
+      &lt;li&gt;Trying to play CounterStrike at a LAN party with a Win98 laptop&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;Nowadays, operations still fail, 
+but rarely cause the entire OS to hang or break.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Burn CDs
+    &lt;ul&gt;
+      &lt;li&gt;Heroes 3&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Writable Gameboy cartridge&lt;/li&gt;
+  &lt;li&gt;Modding
+    &lt;ul&gt;
+      &lt;li&gt;LF2&lt;/li&gt;
+      &lt;li&gt;GTA&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Map editors
+    &lt;ul&gt;
+      &lt;li&gt;AOE&lt;/li&gt;
+      &lt;li&gt;Never Winter Nights, Battle Realms&lt;/li&gt;
+      &lt;li&gt;Warcraft 3 Map Editor&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;Essentially a kind of open source community.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">Ideas Fixing problems</summary></entry><entry><title type="html">Persistence</title><link href="https://andreasvolkmann.github.io//blog/2021-05-09-TODO/" rel="alternate" type="text/html" title="Persistence" /><published>2021-05-09T00:00:00+02:00</published><updated>2021-05-09T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/TODO</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-05-09-TODO/">&lt;p&gt;Short term - long term, finite - infinite.
+Most shortcuts come with a trade-off…&lt;/p&gt;
+
+&lt;p&gt;With most day-to-day decisions it seems we have two options:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;We can trade &lt;em&gt;short term gain&lt;/em&gt; for &lt;em&gt;long term detriment&lt;/em&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;Additional time is most frequently traded for long term detriment.&lt;/li&gt;
+      &lt;li&gt;Staying up late to have fun, consuming coffee or sugar to stay awake, 
+eating fast food rather than cooking healthy, 
+or not exercising so that you can spend the time on something else.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We can trade &lt;em&gt;short term discomfort&lt;/em&gt; for &lt;em&gt;long term gain&lt;/em&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;This can be active, like exercise where we exert ourselves to improve our body over time, 
+or passive, as in restraint, where we deny ourselves a fleeting pleasure for later benefit.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For both, however, it seems we can adapt the short term action into a habit, 
+which often mitigates the discomfort of option 2, but not the long term detriment of option 1.&lt;/p&gt;
+
+&lt;p&gt;We can establish a habit of partying with our friends every weekend, 
+drinking (more and more) coffee and soda every day, having a favorite burger at a fast food chain, 
+and consuming media after work instead of moving our body.
+Such habits make us stick to and appreciate the actions, 
+but do not help us avoid their long term impacts.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, we can slowly build a habit of exercising regularly, 
+which reduces the short term discomfort, but not the long term gains.&lt;/p&gt;
+
+&lt;p&gt;Another way of framing it: … where a better alternative exists.&lt;/p&gt;
+
+&lt;p&gt;…
+If your life span was not bound to conventional expectations, and you&lt;/p&gt;
+
+&lt;p&gt;…&lt;/p&gt;
+
+&lt;h2 id=&quot;the-basics&quot;&gt;The basics&lt;/h2&gt;
+
+&lt;p&gt;The basics for a well-functioning human body and brain are well known and 
+therefore do not require a lengthy introduction.&lt;/p&gt;
+
+&lt;p&gt;In order of importance: Sleep, nutrition, exercise.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/basic_needs.png&quot; alt=&quot;Basic needs pyramid&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;sleep&quot;&gt;Sleep&lt;/h3&gt;
+&lt;p&gt;Sleep is the basis for all life.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;[…] sleep was the first state of life on this planet, and it was from sleep that wakefulness emerged.&lt;/p&gt;
+
+  &lt;p&gt;&lt;em&gt;Why We Sleep, Matthew Walker&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The guideline is simple:
+Regular 8 hours of sleep, ideally same start and end time every day (also weekends).&lt;/p&gt;
+
+&lt;p&gt;An important point to make regarding sleep shortcuts now and then, 
+is that we cannot recover from lost sleep.&lt;/p&gt;
+
+&lt;p&gt;In other words, every hour of sleep lost has detrimental effects, 
+and our brains are incapable of recovering fully.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[…] the shorter you sleep, the shorter your life.&lt;/p&gt;
+
+  &lt;p&gt;&lt;em&gt;Why We Sleep, Matthew Walker&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Next time you think about borrowing time, know where you are taking it from.&lt;/p&gt;
+
+&lt;h3 id=&quot;nutrition&quot;&gt;Nutrition&lt;/h3&gt;
+&lt;p&gt;Modern nutrition is full of shortcuts that come back to haunt us later on.
+Added sugar, fat, and salt can generally be seen as a short term gain in taste 
+at the expense of long term health.
+Furthermore, as you adjust to this new taste you will slowly come to expect it as the new standard, 
+making healthy food seem less tasty.&lt;/p&gt;
+
+&lt;p&gt;The guideline:
+Maximize the amount and variety of whole fruits and vegetables you eat.
+(Fruit juice doesn’t count)&lt;/p&gt;
+
+&lt;p&gt;Alcohol intake should be severely limited.&lt;/p&gt;
+
+&lt;p&gt;Don’t go too far with caffeine, favor tea over coffee. 
+Artificial sources like energy drinks are literal cancer and are never ok to drink.&lt;/p&gt;
+
+&lt;h4 id=&quot;insulin-spikes&quot;&gt;Insulin spikes&lt;/h4&gt;
+&lt;p&gt;Processed foods are a common shortcut, providing a comfortable, tasty option, often with a long shelf life.
+There are many arguments against processed foods, one of them being the accompanying insulin spikes.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nutritionfacts.org/video/if-fructose-is-bad-what-about-fruit/&quot;&gt;&lt;img src=&quot;/assets/img/insulin_spike.png&quot; alt=&quot;Insulin spike graph&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In the graph, we see that consumption of white bread causes a sharp insulin spike, 
+which can be blunted by adding berries to the bread, thereby applying the nutrition guideline.&lt;/p&gt;
+
+&lt;p&gt;This is why the guideline recommends maximizing, 
+rather than enforcing a diet consisting of 100% fruits and vegetables.
+It is possible to get most of the benefits from plants and still enjoy some not-entirely healthy products.&lt;/p&gt;
+
+&lt;h3 id=&quot;exercise&quot;&gt;Exercise&lt;/h3&gt;
+&lt;p&gt;Exercise trades short term discomfort for long term health.
+We can mitigate the discomfort by changing our mindset or engaging in play. 
+A game of badminton makes us move, but we may not even notice that we exerted ourselves.&lt;/p&gt;
+
+&lt;p&gt;The guideline:
+There is not much to say, just go out and move.&lt;/p&gt;
+
+&lt;h2 id=&quot;acquired-taste&quot;&gt;Acquired taste&lt;/h2&gt;
+&lt;p&gt;Everything that is appreciated, you can appreciate, too.
+It should be quite obvious that this has nothing to do with race / ethnicity, but everything with exposure.
+Descendants of immigrants may take on the local culture 
+and develop the same taste preferences as “native” people.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-king-of-fruits&quot;&gt;The king of fruits&lt;/h3&gt;
+&lt;p&gt;A good example of acquired taste is the fruit &lt;a href=&quot;https://en.wikipedia.org/wiki/Durian&quot;&gt;durian&lt;/a&gt;, 
+mostly unknown in the western hemisphere, 
+whilst enjoying the title &lt;em&gt;king of fruits&lt;/em&gt; in some Asian countries.&lt;/p&gt;
+
+&lt;p&gt;It has a very distinct smell and quite a special taste. 
+Although considered a royalty in some parts of the world, 
+a quick google search presents us with the following questions:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Why does durian taste so bad?&lt;/li&gt;
+  &lt;li&gt;Why is the durian fruit banned?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/durian.png&quot; alt=&quot;Durian&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I still haven’t learned to fully appreciate this fruit, but I try to eat some every chance I get. 
+If there is a large group of people deeming durian the best fruit on earth, 
+then we can be sure that there is yet another facet of life that has hitherto eluded us.&lt;/p&gt;
+
+&lt;h3 id=&quot;life-enriched&quot;&gt;Life enriched&lt;/h3&gt;
+&lt;p&gt;Trying something new, the first couple of times may indeed be uncomfortable, 
+but the long term benefits are many.&lt;/p&gt;
+
+&lt;p&gt;Spicy and fermented foods are often difficult to get used to, 
+but many of these are accompanied by great health benefits.&lt;/p&gt;
+
+&lt;p&gt;Then there are genres, for example music, 
+where people like to argue that their personal favorite style is the best.
+The answer to this is simple: Exposure. 
+Go, listen to more music, and you will find that there is something good in every genre.&lt;/p&gt;
+
+&lt;p&gt;Different cultures use different scales, which may sound weird / disharmonious to us initially.
+Again, it is obvious that this is just a question of exposure.&lt;/p&gt;
+
+&lt;p&gt;Let’s take the example of Arabic music, where we encounter notes, 
+which from a western perspective, are off the scale.&lt;/p&gt;
+
+&lt;h2 id=&quot;supplements&quot;&gt;Supplements&lt;/h2&gt;
+&lt;p&gt;SUPPLEMENTS&lt;/p&gt;
+
+&lt;p&gt;Smoking should of course be avoided.&lt;/p&gt;
+
+&lt;h2 id=&quot;education&quot;&gt;Education&lt;/h2&gt;
+&lt;p&gt;When kids show bad behavior, we scold or reprimand them, trading short term unhappiness / conflict 
+for long term education, as the child learns about interpersonal relationships, 
+societal limits and norms.&lt;/p&gt;
+
+&lt;p&gt;In situations where your child hurts another during an argument, 
+the easy way out would be to defend your own child, 
+thereby minimizing conflict and maintaining your relationship to your child in the short term.
+Eventually, the child will be put in his/her place by other authorities, 
+this time with actual consequences.
+If we don’t show sufficient sternness towards children, we harm them in the long run.&lt;/p&gt;
+
+&lt;h2 id=&quot;conversation&quot;&gt;Conversation&lt;/h2&gt;
+&lt;p&gt;Quality conversations are rare, and people try to steer the topic into a direction that benefits themselves.
+We generally feel an urge to talk about ourselves or about the things that we find interesting.
+Holding back things you want to say in the short term can benefit 
+the quality and outcome of the conversation.&lt;/p&gt;
+
+&lt;h2 id=&quot;screens&quot;&gt;Screens&lt;/h2&gt;
+&lt;p&gt;Phone and apps short term attention
+Take a walk, close eyes, meditation&lt;/p&gt;
+
+&lt;h3 id=&quot;books-vs-articles&quot;&gt;Books vs “articles”&lt;/h3&gt;
+&lt;p&gt;Unless you have a high quality source, I would not recommend reading articles.
+Focus on books instead.&lt;/p&gt;
+
+&lt;h2 id=&quot;money&quot;&gt;Money&lt;/h2&gt;
+&lt;p&gt;Investing over time better than short term gains&lt;/p&gt;
+
+&lt;h2 id=&quot;software&quot;&gt;Software&lt;/h2&gt;
+&lt;p&gt;Resist short term fun for long term happiness
+Premature optimization&lt;/p&gt;
+
+&lt;h2 id=&quot;industry&quot;&gt;Industry&lt;/h2&gt;
+&lt;p&gt;Short term boosts often at the cost of long term health
+Fitness industry, caffeine, protein, supplements&lt;/p&gt;
+
+&lt;h2 id=&quot;purism&quot;&gt;Purism&lt;/h2&gt;
+&lt;p&gt;Purism and gatekeeping is usually bad.
+Do not follow … 100% just to achieve a 100% rate.
+This is most easily illustrated by nutrition.
+You can cook with fat, add dressing to your salad, have a beer / coffee, and eat some meat.
+Trying to stay at 100% no meat, so you can call yourself vegetarian, 
+or going further for the vegan seal does not actually earn you an award.
+Likely, the 80-20 rule applies. So try to hit 80% with the good habits first, 
+before micro-optimizing the remaining 20%.
+For example, if your diet is unhealthy, and you rarely exercise, 
+improve your diet to acceptable levels, and then do the same thing for your exercise, 
+ideally both at the same time.&lt;/p&gt;
+
+&lt;p&gt;Make the long term benefits your habit, and the short term gains the exception.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">Short term - long term, finite - infinite. Most shortcuts come with a trade-off…</summary></entry><entry><title type="html">Clean Architecture with ArchUnit</title><link href="https://andreasvolkmann.github.io//blog/2021-04-24-clean-arch-unit/" rel="alternate" type="text/html" title="Clean Architecture with ArchUnit" /><published>2021-04-24T00:00:00+02:00</published><updated>2021-04-24T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/clean-arch-unit</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-04-24-clean-arch-unit/">&lt;p&gt;In a &lt;a href=&quot;/blog/2020-02-20-spring-kotlin-gradle-aop&quot;&gt;previous post&lt;/a&gt;
 I discussed ways in which AOP can help in defining our architecture, 
 even allowing us to verify architectural rules at compile time.&lt;/p&gt;
 
@@ -480,223 +1108,4 @@ Thanks to proxying, your code stays clean, whilst Spring works its magic.&lt;/p&
 but during development this is value for no money.&lt;/p&gt;
 
 &lt;p&gt;I will experiment further to see how far I can push this, 
-but this will definitely be a part of every future app I work on.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">The more I learn about Spring, the more I come to understand and appreciate its true power, with one major appeal being developer productivity.</summary></entry><entry><title type="html">Aspect Oriented Programming: Spring, Kotlin, Gradle</title><link href="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/" rel="alternate" type="text/html" title="Aspect Oriented Programming: Spring, Kotlin, Gradle" /><published>2020-02-20T00:00:00+01:00</published><updated>2020-02-20T00:00:00+01:00</updated><id>https://andreasvolkmann.github.io//blog/spring-kotlin-gradle-aop</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/">&lt;p&gt;I’ve seen a lot of resources regarding AOP for Java and / or Maven, but couldn’t find a lot about the Kotlin+Gradle combo.
-As for the Spring side, &lt;a href=&quot;https://start.spring.io/&quot;&gt;the Spring Initializr &lt;/a&gt; doesn’t even list the aop starter, which is apparently by design.
-So I decided to show a working solution for the mentioned stack. The code referenced can be found &lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Aspect oriented programming is a great way of defining cross-cutting concerns that can simplify your project and help establish your architecture.&lt;/p&gt;
-
-&lt;h3 id=&quot;setup&quot;&gt;Setup&lt;/h3&gt;
-&lt;p&gt;First thing is to add the required dependencies to the build.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;The spring aop starter is needed for defining aspects.&lt;/li&gt;
-  &lt;li&gt;The aspectj plugin is needed for compile-time checks.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/build.gradle.kts#L7&quot;&gt;the reference build file&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;There are a bunch of gradle plugins, but most are outdated and lack proper documentation.
-The freefair plugin was the only one I could get to work, &lt;a href=&quot;https://docs.freefair.io/gradle-plugins/current/reference/#_aspectj&quot;&gt;documentation here&lt;/a&gt;.
-Just add the post-compile-weaving plugin and set your aspectj version in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gradle.properties&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;aspects&quot;&gt;Aspects&lt;/h3&gt;
-
-&lt;p&gt;Now we can start writing a custom aspect.
-&lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/src/main/kotlin/com/example/demo/config/aspect/ActivityAspect.kt&quot;&gt;The example&lt;/a&gt;
-shows an aspect that monitors all activities by logging start and end events including the time elapsed and whether it succeeded or failed.
-Using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Around&lt;/code&gt; advice we can wrap all methods that match the defined pointcut in a try-catch-finally.&lt;/p&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Aspect&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ActivityAspect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;logger&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LoggerFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getLogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Around&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Architecture.activity() || Architecture.repository() || Architecture.service()&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;monitorActivity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ProceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;staticPart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toShortString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SUCCESS&quot;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Activity start: $name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;startTime&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proceedingJoinPoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;proceed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ERROR&quot;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;timeElapsed&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;startTime&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Activity end: $name ($state $timeElapsed ms)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;pointcuts&quot;&gt;Pointcuts&lt;/h4&gt;
-&lt;p&gt;In order to define what methods the advice is applied to, pointcuts can be used to describe the architecture of the application.
-&lt;a href=&quot;https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/src/main/kotlin/com/example/demo/config/aspect/Architecture.kt&quot;&gt;In the example&lt;/a&gt;
-we want to monitor all public methods in any service or repository, as well as any method annotated with a custom &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Activity&lt;/code&gt; annotation.&lt;/p&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Architecture&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Pointcut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;execution(* (@org.springframework.stereotype.Repository *).*(..))&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Unit&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Pointcut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;execution (* (@org.springframework.stereotype.Service *).*(..))&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;repository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Unit&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Pointcut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(@annotation(Activity) &amp;amp;&amp;amp; execution(* *(..)))&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;activity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Unit&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Here is a demo service that would match these pointcuts:&lt;/p&gt;
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Service&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DemoService&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Activity&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// optional, can be used on methods outside of services / repositories&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someBool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;noAnnotation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;compile-time-checks&quot;&gt;Compile-time checks&lt;/h3&gt;
-
-&lt;p&gt;AspectJ can be used to define compile-time checks that produce errors or warnings when matched.
-For example, we can introduce a check that ensures that no code from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.sql&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;javax.sql&lt;/code&gt;
-package is called outside of a repository.&lt;/p&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Aspect&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CheckAspect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@DeclareError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;!Architecture.repository() &amp;amp;&amp;amp; (call (* java.sql..*.*(..)) || call (* javax.sql..*.*(..)))&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;jdbcOutsideRepository&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Only call jdbc code from within repositories.&quot;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;When compiling the following function, the compiler will throw an error.&lt;/p&gt;
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;methodUsingJavaxSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;javax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rowset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RowSetMetaDataImpl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getCatalogName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I am really happy with the results and the fact that the Spring team is pushing and actively promoting Kotlin as the language of choice.
-One issue that still remains is handling suspending functions with AOP, since &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proceed&lt;/code&gt; will return when suspending.
-Hopefully the fix makes it into the next release. &lt;a href=&quot;https://github.com/spring-projects/spring-framework/issues/22462&quot;&gt;Tracking issue here&lt;/a&gt;.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">I’ve seen a lot of resources regarding AOP for Java and / or Maven, but couldn’t find a lot about the Kotlin+Gradle combo. As for the Spring side, the Spring Initializr doesn’t even list the aop starter, which is apparently by design. So I decided to show a working solution for the mentioned stack. The code referenced can be found here.</summary></entry><entry><title type="html">M3U8 playlists and .ts segments</title><link href="https://andreasvolkmann.github.io//blog/2018-04-27-m3u8-and-ts-segments/" rel="alternate" type="text/html" title="M3U8 playlists and .ts segments" /><published>2018-04-27T00:00:00+02:00</published><updated>2018-04-27T00:00:00+02:00</updated><id>https://andreasvolkmann.github.io//blog/m3u8-and-ts-segments</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2018-04-27-m3u8-and-ts-segments/">&lt;p&gt;I was recently working on my &lt;a href=&quot;https://github.com/AndreasVolkmann/nhk-easy-kumo&quot;&gt;NHK-Easy web crawler project&lt;/a&gt;, since the site got an update with a number of breaking changes. One of these changes was concerning the audio of the articles.&lt;/p&gt;
-
-&lt;p&gt;Previously, each article had a corresponding static .mp3 resource. The update introduced a new HLS (HTTP Live Streaming) media player, accompanied by a M3U8 playlist. Furthermore, I observed that the audio was now split into several ts file segments, which were loaded on demand.&lt;/p&gt;
-
-&lt;p&gt;I had never worked with these file types before, so off I went to google. However, it wasn’t exactly easy to find answers to my questions, which is why I decided to summarize my findings here, in case other people have similar issues. Also, I wanted to have a go at writing my first post.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Given a master M3U8 playlist, the goal is to end up with a single mp3 file.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/m3u8.png&quot; alt=&quot;Overview of M3U8 playlist structure.&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;master-playlist&quot;&gt;Master Playlist&lt;/h3&gt;
-
-&lt;p&gt;The first step when dealing with M3U8, is parsing the master playlist.&lt;/p&gt;
-
-&lt;p&gt;I found the open-m3u8 library by iHeartRadio works best. The alternative is Comcast’s hlsparserj, but it lacks features and requires more manual work.&lt;/p&gt;
-
-&lt;p&gt;Once the master playlist is parsed, one can read its content, which consists of one or more media playlists.&lt;/p&gt;
-
-&lt;h3 id=&quot;media-playlist&quot;&gt;Media Playlist&lt;/h3&gt;
-
-&lt;p&gt;A typical media playlist could look like the following.&lt;/p&gt;
-
-&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;#EXTM3U&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXT-X-TARGETDURATION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;6&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXT-X-ALLOW-CACHE&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:YES&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXT-X-KEY&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:METHOD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;AES-128&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;URI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&quot;https://site.net/path/to/resource.mp4/crypt.key?id=somekey&quot;&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXT-X-PLAYLIST-TYPE&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:VOD&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXT-X-VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;3&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXT-X-MEDIA-SEQUENCE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXTINF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;://&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.mp4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;segment1_0_a&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.ts&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXTINF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;://&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.mp4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;segment2_0_a&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.ts&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXTINF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;://&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.mp4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;segment3_0_a&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.ts&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXTINF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;992&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;://&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.mp4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;segment4_0_a&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.ts&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#EXT-X-ENDLIST&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It contains an url for each segment that the stream is made up of. Additionally, there are a number of meta tags, of which one is particularly important.&lt;/p&gt;
-
-&lt;h3 id=&quot;encryption&quot;&gt;Encryption&lt;/h3&gt;
-
-&lt;p&gt;What took me the longest to figure out was that the segments were encrypted. According to specification, MPEG-TS files (.ts) start with a BOM (Byte Order Mark) in the form of the ASCII char &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt;. What confused me was, that there was no &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt;, since the files were encrypted. Lesson learned, go read &lt;a href=&quot;https://tools.ietf.org/html/draft-pantos-http-live-streaming-23#section-3&quot;&gt;the specification&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here is how I handle the encryption.&lt;/p&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getCipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EncryptionData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Cipher&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;bytes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;readBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;chainmode&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;CBC&quot;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;EncryptionMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;AES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;AES/$chainmode/NoPadding&quot;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;keySpec&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SecretKeySpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Decrypting using method ${data.method} ($method)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Cipher&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DECRYPT_MODE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keySpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IvParameterSpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ByteArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EncryptionData&lt;/code&gt; can be obtained from any track of the media playlist.&lt;/p&gt;
-
-&lt;p&gt;Critical for the success of decryption were the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chainmode&lt;/code&gt; and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NoPadding&lt;/code&gt; argument.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Without any of those, e.g. just &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AES&lt;/code&gt;, the decryption would throw.&lt;/li&gt;
-  &lt;li&gt;With &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NoPadding&lt;/code&gt;, but a different &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chainmode&lt;/code&gt;, decryption would succeed, but the files were corrupted.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I simply used trial and error until I found the right combination.&lt;/p&gt;
-
-&lt;h3 id=&quot;demux&quot;&gt;Demux&lt;/h3&gt;
-
-&lt;p&gt;MPEG-TS files are not the most ordinary media format and are therefore more difficult to work with. Instead of .ts files, it would be nice if we could just work with the audio as wav files. I have tried to find a way to do this in java, but ended up using FFMPEG because there was no suitable library for the job. There is &lt;a href=&quot;https://github.com/jcodec/jcodec&quot;&gt;JCodec&lt;/a&gt;, but the api is awkward and it doesn’t seem like the required format is supported. FFMPEG is pretty easy to use via cli and supports a range of formats.&lt;/p&gt;
-
-&lt;p&gt;To demux a .ts segment to a .wav file, simply use the below code, where the target is a .wav File.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Converting wav to mp3 is similarly easy:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ffmpeg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acodec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libmp3lame&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;merging&quot;&gt;Merging&lt;/h3&gt;
-
-&lt;p&gt;Last step: merging the individual segments into one file.&lt;/p&gt;
-
-&lt;p&gt;I use the following to merge audio streams.&lt;/p&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;joinAudioStreams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;AudioInputStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;):&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AudioInputStream&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;vector&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Vector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InputStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AudioInputStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;SequenceInputStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;streams&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frameLength&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;AudioInputStreams are obtained from files using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AudioSystem.getAudioInputStream&lt;/code&gt; and writing to file is done with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AudioSystem.write&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;And that’s basically how I went from M3U8 playlists and encrypted ts segments to a single mp3.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">I was recently working on my NHK-Easy web crawler project, since the site got an update with a number of breaking changes. One of these changes was concerning the audio of the articles.</summary></entry></feed>
+but this will definitely be a part of every future app I work on.&lt;/p&gt;</content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html">The more I learn about Spring, the more I come to understand and appreciate its true power, with one major appeal being developer productivity.</summary></entry></feed>
