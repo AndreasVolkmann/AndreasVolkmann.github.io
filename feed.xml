@@ -1,5 +1,212 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2022-10-30T15:06:32-07:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">♨️ My favorite hot springs</title><link href="https://andreasvolkmann.github.io//blog/2022-10-30-onsen/" rel="alternate" type="text/html" title="♨️ My favorite hot springs" /><published>2022-10-30T00:00:00-07:00</published><updated>2022-10-30T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2022-10-30-onsen/"><![CDATA[<ol id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2023-02-18T19:38:43-08:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">🎨 DRY the paint on your Cross Cutting Concerns</title><link href="https://andreasvolkmann.github.io//blog/2023-02-12-dry-srp-caching/" rel="alternate" type="text/html" title="🎨 DRY the paint on your Cross Cutting Concerns" /><published>2023-02-12T00:00:00-08:00</published><updated>2023-02-12T00:00:00-08:00</updated><id>https://andreasvolkmann.github.io//blog/dry-srp-caching</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2023-02-12-dry-srp-caching/"><![CDATA[<ol id="markdown-toc">
+  <li><a href="#scenario" id="markdown-toc-scenario">Scenario</a>    <ol>
+      <li><a href="#requirements" id="markdown-toc-requirements">Requirements</a></li>
+    </ol>
+  </li>
+  <li><a href="#techniques" id="markdown-toc-techniques">Techniques</a>    <ol>
+      <li><a href="#simple-approach" id="markdown-toc-simple-approach">Simple approach</a></li>
+      <li><a href="#dynamic-dispatch" id="markdown-toc-dynamic-dispatch">Dynamic dispatch</a></li>
+      <li><a href="#query-pattern" id="markdown-toc-query-pattern">Query pattern</a></li>
+      <li><a href="#aspect-oriented-programming-aop" id="markdown-toc-aspect-oriented-programming-aop">Aspect Oriented Programming (AOP)</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+<p>There are many techniques of varying sophistication to achieve clean cross cutting concerns. 
+Let’s walk through some of them and discuss their pros and cons.</p>
+
+<blockquote>
+  <p>This post mostly serves as a reference for myself, to gather my thoughts.
+I won’t bother with implementation details and sample code may not compile.</p>
+</blockquote>
+
+<h1 id="scenario">Scenario</h1>
+
+<p>Imagine we have a repository that fetches weather data from a database.</p>
+
+<p>It could look similar to the below, but assume many more methods.</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IWeatherRepository</span>
+<span class="p">{</span>
+    <span class="n">WeatherForecast</span> <span class="nf">GetForecast</span><span class="p">();</span>
+
+    <span class="kt">int</span> <span class="nf">GetTemperature</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="requirements">Requirements</h2>
+<p>We will evaluate the techniques based on the following requirements:</p>
+
+<ol>
+  <li>We don’t really care about the implementation, 
+but we want to start applying some caching to avoid repeated database calls, 
+as we have a lot of read requests coming in and the data won’t change for some time.
+    <ul>
+      <li>Bonus points for not needing to duplicate the caching code in each method.</li>
+    </ul>
+  </li>
+  <li>Initially we can use a memory cache, but later we might want to switch to a distributed cache.
+    <ul>
+      <li>Bonus points for least amount of changes needed to switch the caching implementation.</li>
+    </ul>
+  </li>
+  <li>We want to apply other cross-cutting concerns to the repository, like logging.
+    <ul>
+      <li>Bonus points for ease of extensibility and maintainability.</li>
+    </ul>
+  </li>
+  <li>Lastly, we want to be able to test the repository without caching and logging.</li>
+</ol>
+
+<h1 id="techniques">Techniques</h1>
+
+<h2 id="simple-approach">Simple approach</h2>
+<p>Often the first approach that comes to mind is to inject a cache and add the caching logic to each of the methods.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">WeatherRepositoryWithCache</span> <span class="p">:</span> <span class="n">IWeatherRepository</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IMemoryCache</span> <span class="n">cache</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="n">WeatherForecast</span> <span class="nf">GetForecast</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">cache</span><span class="p">.</span><span class="nf">GetOrCreate</span><span class="p">(</span>
+        <span class="k">nameof</span><span class="p">(</span><span class="n">GetForecast</span><span class="p">),</span>
+        <span class="n">entry</span> <span class="p">=&gt;</span> <span class="n">Extensions</span><span class="p">.</span><span class="nf">GetDemoForecast</span><span class="p">());</span>
+
+    <span class="k">public</span> <span class="k">virtual</span> <span class="kt">int</span> <span class="nf">GetTemperature</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">cache</span><span class="p">.</span><span class="nf">GetOrCreate</span><span class="p">(</span>
+        <span class="k">nameof</span><span class="p">(</span><span class="n">GetTemperature</span><span class="p">),</span>
+        <span class="n">entry</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="nf">Random</span><span class="p">().</span><span class="nf">Next</span><span class="p">(-</span><span class="m">10</span><span class="p">,</span> <span class="m">40</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>It might seem simple at first, but once you start applying this at scale,
+you will quickly realize that this is not maintainable.
+Think about tens of repository classes, each with tens of methods.</p>
+
+<h2 id="dynamic-dispatch">Dynamic dispatch</h2>
+<p>By overriding the methods in our repository, we can achieve separation of concerns between
+the business logic and the caching.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">CachedWeatherRepository</span> <span class="p">:</span> <span class="n">WeatherRepository</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">MemoryCache</span> <span class="n">cache</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="n">WeatherForecast</span> <span class="nf">GetForecast</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">key</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DateOnly</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">cache</span><span class="p">.</span><span class="n">GetOrCreate</span><span class="p">&lt;</span><span class="n">WeatherForecast</span><span class="p">&gt;(</span>
+            <span class="n">key</span><span class="p">,</span>
+            <span class="n">entry</span> <span class="p">=&gt;</span> <span class="k">base</span><span class="p">.</span><span class="nf">GetForecast</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now we have a semi-central place for caching, although it still has to be duplicated per repository class.
+We also still have to duplicate the caching logic in each method.</p>
+
+<p>Note that this requires the methods to be virtual. We can work around this limitation with the decorator pattern.</p>
+
+<p>Given <code class="language-plaintext highlighter-rouge">n</code> repositories, and <code class="language-plaintext highlighter-rouge">m</code> cross-cutting concerns, we would need <code class="language-plaintext highlighter-rouge">n * m</code> subclasses.
+Simple code, but not maintainable.</p>
+
+<h2 id="query-pattern">Query pattern</h2>
+<p>This approach combines several patterns to achieve high flexibility.</p>
+
+<p>The central idea is to treat any request to the database as a query object, which is passed to an executor.
+Contrary to their name, these query objects actually implement the command pattern,
+meaning they encapsulate a set of instructions that can be defined separately from their execution.</p>
+
+<p>Usually, you will have some interface like this at the top level:</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IQuery</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="n">T</span> <span class="nf">Execute</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Important is that these queries can be newed without any dependencies.
+We can then isolate the query specification / construction by using a factory.
+The concrete implementation depends on your database.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">sealed</span> <span class="k">class</span> <span class="nc">QueryFactory</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">IQuery</span><span class="p">&lt;</span><span class="n">WeatherForecast</span><span class="p">&gt;</span> <span class="nf">BuildForecastQuery</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="nf">QueryExpression</span><span class="p">(...);</span>
+    
+    <span class="k">public</span> <span class="n">IQuery</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="nf">BuildTemperatureQuery</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="nf">QueryExpression</span><span class="p">(...);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Using the decorator pattern, we can wrap the core query logic with additional behavior.</p>
+
+<p>Combining this, you will end up with something like this:</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">QueryWeatherRepository</span> <span class="p">:</span> <span class="n">IWeatherRepository</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">QueryExecutor</span> <span class="n">queryExecutor</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">QueryFactory</span> <span class="n">queryFactory</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="n">WeatherForecast</span> <span class="nf">GetForecast</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">query</span> <span class="p">=</span> <span class="n">queryFactory</span><span class="p">.</span><span class="nf">BuildForecastQuery</span><span class="p">()</span>
+            <span class="p">.</span><span class="nf">UseCaching</span><span class="p">()</span> <span class="c1">// extensions that leverage the decorator pattern</span>
+            <span class="p">.</span><span class="nf">UseLogging</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">queryExecutor</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>No subclassing, no virtual methods, no need to duplicate the caching or logging logic.</p>
+
+<p>A downside is that you have to think and come up with a setup for this.</p>
+
+<p>Let’s check off the requirements:</p>
+<ul>
+  <li>No duplicated caching logic</li>
+  <li>Switching caching implementation only touches a single class (caching decorator)</li>
+  <li>We can add any cross-cutting concern by adding a decorator</li>
+  <li>We can test the queries independently</li>
+</ul>
+
+<p>One more thing to observe is how our code becomes much more declarative and high level.
+Our repository no longer dishes out specific, brittle instructions. 
+Rather, we specify the behavior we would like to see and rely on the framework to execute it.</p>
+
+<h2 id="aspect-oriented-programming-aop">Aspect Oriented Programming (AOP)</h2>
+<p>Although I haven’t had a chance to try AOP in C# yet,
+I am familiar with <a href="https://en.wikipedia.org/wiki/AspectJ">AspectJ</a> and <a href="/blog/2020-02-20-spring-kotlin-gradle-aop/">Spring AOP</a>.</p>
+
+<p><a href="https://www.postsharp.net/caching">PostSharp</a> is similar to Spring, with the main downside that it is commercial.
+We can add caching with a few attributes:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">CacheConfiguration</span><span class="p">(</span><span class="n">AbsoluteExpiration</span> <span class="p">=</span> <span class="m">10</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">sealed</span> <span class="k">class</span> <span class="nc">WeatherRepository</span> <span class="p">:</span> <span class="n">IWeatherRepository</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">Cache</span><span class="p">]</span>
+    <span class="k">public</span> <span class="n">WeatherForecast</span> <span class="nf">GetForecast</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="k">throw</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is easily the cleanest approach, requiring the least amount of code.
+You can add more behavior like logging or retry simply by adding the corresponding attributes.</p>
+
+<p>It feels like magic, which is sometimes claimed to be a bad thing.
+I for one believe AOP is a true boon to software development.
+One downside is the framework buy-in.</p>
+
+<p>Even if you don’t use AOP in your daily work,
+I still highly recommend learning about it on your own time.
+It gives you a new perspective that will help you
+identify and solve architectural problems in your code.</p>
+
+<p>In particular, I found this course to be a great learning resource:</p>
+<ul>
+  <li><a href="https://www.pluralsight.com/courses/aspect-oriented-programming-spring-aspectj">Aspect Oriented Programming (AOP) using Spring AOP and AspectJ
+by Eberhard Wolff</a></li>
+</ul>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>My personal favorite is the AOP approach, when available.
+Otherwise the query pattern is a good alternative that offers a lot of flexibility.</p>
+
+<p>The simpler patterns can be used during POC,
+but any non-trivial app will benefit from a clear-defined architecture.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Techniques to achieve clean cross cutting concerns]]></summary></entry><entry><title type="html">♨️ My favorite hot springs</title><link href="https://andreasvolkmann.github.io//blog/2022-10-30-onsen/" rel="alternate" type="text/html" title="♨️ My favorite hot springs" /><published>2022-10-30T00:00:00-07:00</published><updated>2022-10-30T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2022-10-30-onsen/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#yakushima" id="markdown-toc-yakushima">Yakushima</a></li>
   <li><a href="#ischia" id="markdown-toc-ischia">Ischia</a></li>
   <li><a href="#são-miguel" id="markdown-toc-são-miguel">São Miguel</a>    <ol>
@@ -99,7 +306,7 @@ Definitely check it out, but be aware that it gets busy towards the evening.</p>
 <hr />
 
 <p>The main attraction is Parque Terra Nostra, which is a botanical garden with several hot spring baths included.
-One if these is actually a gigantic pool in which you can swim freely.</p>
+One of these is actually a gigantic pool in which you can swim freely.</p>
 
 <p>  <hy-img root-margin="512px"  src="/assets/img/onsen_terra_nostra.jpg" alt="Terra Nostra" >    <noscript><img data-ignore  src="/assets/img/onsen_terra_nostra.jpg" alt="Terra Nostra" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
@@ -1101,123 +1308,4 @@ package is called outside of a repository.</p>
 
 <p>I am really happy with the results and the fact that the Spring team is pushing and actively promoting Kotlin as the language of choice.
 One issue that still remains is handling suspending functions with AOP, since <code class="language-plaintext highlighter-rouge">proceed</code> will return when suspending.
-Hopefully the fix makes it into the next release. <a href="https://github.com/spring-projects/spring-framework/issues/22462">Tracking issue here</a>.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[System architecture and compile-time checks using AOP.]]></summary></entry><entry><title type="html">M3U8 playlists and .ts segments</title><link href="https://andreasvolkmann.github.io//blog/2018-04-27-m3u8-and-ts-segments/" rel="alternate" type="text/html" title="M3U8 playlists and .ts segments" /><published>2018-04-27T00:00:00-07:00</published><updated>2018-04-27T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/m3u8-and-ts-segments</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2018-04-27-m3u8-and-ts-segments/"><![CDATA[<ol id="markdown-toc">
-  <li><a href="#master-playlist" id="markdown-toc-master-playlist">Master Playlist</a></li>
-  <li><a href="#media-playlist" id="markdown-toc-media-playlist">Media Playlist</a></li>
-  <li><a href="#encryption" id="markdown-toc-encryption">Encryption</a></li>
-  <li><a href="#demux" id="markdown-toc-demux">Demux</a></li>
-  <li><a href="#merging" id="markdown-toc-merging">Merging</a></li>
-</ol>
-
-<p>I was recently working on my <a href="https://github.com/AndreasVolkmann/nhk-easy-kumo">NHK-Easy web crawler project</a>, since the site got an update with a number of breaking changes. One of these changes was concerning the audio of the articles.</p>
-
-<p>Previously, each article had a corresponding static .mp3 resource. The update introduced a new HLS (HTTP Live Streaming) media player, accompanied by a M3U8 playlist. Furthermore, I observed that the audio was now split into several ts file segments, which were loaded on demand.</p>
-
-<p>I had never worked with these file types before, so off I went to google. However, it wasn’t exactly easy to find answers to my questions, which is why I decided to summarize my findings here, in case other people have similar issues. Also, I wanted to have a go at writing my first post.</p>
-
-<blockquote>
-  <p>Given a master M3U8 playlist, the goal is to end up with a single mp3 file.</p>
-</blockquote>
-
-<p>  <hy-img root-margin="512px"  src="/assets/img/m3u8.png" alt="Overview of M3U8 playlist structure." >    <noscript><img data-ignore  src="/assets/img/m3u8.png" alt="Overview of M3U8 playlist structure." /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
-
-<h3 id="master-playlist">Master Playlist</h3>
-
-<p>The first step when dealing with M3U8, is parsing the master playlist.</p>
-
-<p>I found the open-m3u8 library by iHeartRadio works best. The alternative is Comcast’s hlsparserj, but it lacks features and requires more manual work.</p>
-
-<p>Once the master playlist is parsed, one can read its content, which consists of one or more media playlists.</p>
-
-<h3 id="media-playlist">Media Playlist</h3>
-
-<p>A typical media playlist could look like the following.</p>
-
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#EXTM3U</span>
-<span class="nf">#EXT-X-TARGETDURATION</span><span class="o">:</span><span class="err">6</span>
-<span class="nf">#EXT-X-ALLOW-CACHE</span><span class="nd">:YES</span>
-<span class="nf">#EXT-X-KEY</span><span class="nd">:METHOD</span><span class="o">=</span><span class="nt">AES-128</span><span class="o">,</span><span class="nt">URI</span><span class="o">=</span><span class="s1">"https://site.net/path/to/resource.mp4/crypt.key?id=somekey"</span>
-<span class="nf">#EXT-X-PLAYLIST-TYPE</span><span class="nd">:VOD</span>
-<span class="nf">#EXT-X-VERSION</span><span class="o">:</span><span class="err">3</span>
-<span class="nf">#EXT-X-MEDIA-SEQUENCE</span><span class="o">:</span><span class="err">1</span>
-<span class="nf">#EXTINF</span><span class="o">:</span><span class="err">6</span><span class="o">.</span><span class="err">000</span><span class="o">,</span>
-<span class="nt">https</span><span class="o">://</span><span class="nt">site</span><span class="nc">.net</span><span class="o">/</span><span class="nt">path</span><span class="o">/</span><span class="nt">to</span><span class="o">/</span><span class="nt">resource</span><span class="nc">.mp4</span><span class="o">/</span><span class="nt">segment1_0_a</span><span class="nc">.ts</span>
-<span class="nf">#EXTINF</span><span class="o">:</span><span class="err">6</span><span class="o">.</span><span class="err">000</span><span class="o">,</span>
-<span class="nt">https</span><span class="o">://</span><span class="nt">site</span><span class="nc">.net</span><span class="o">/</span><span class="nt">path</span><span class="o">/</span><span class="nt">to</span><span class="o">/</span><span class="nt">resource</span><span class="nc">.mp4</span><span class="o">/</span><span class="nt">segment2_0_a</span><span class="nc">.ts</span>
-<span class="nf">#EXTINF</span><span class="o">:</span><span class="err">6</span><span class="o">.</span><span class="err">000</span><span class="o">,</span>
-<span class="nt">https</span><span class="o">://</span><span class="nt">site</span><span class="nc">.net</span><span class="o">/</span><span class="nt">path</span><span class="o">/</span><span class="nt">to</span><span class="o">/</span><span class="nt">resource</span><span class="nc">.mp4</span><span class="o">/</span><span class="nt">segment3_0_a</span><span class="nc">.ts</span>
-<span class="nf">#EXTINF</span><span class="o">:</span><span class="err">1</span><span class="o">.</span><span class="err">992</span><span class="o">,</span>
-<span class="nt">https</span><span class="o">://</span><span class="nt">site</span><span class="nc">.net</span><span class="o">/</span><span class="nt">path</span><span class="o">/</span><span class="nt">to</span><span class="o">/</span><span class="nt">resource</span><span class="nc">.mp4</span><span class="o">/</span><span class="nt">segment4_0_a</span><span class="nc">.ts</span>
-<span class="nf">#EXT-X-ENDLIST</span>
-</code></pre></div></div>
-
-<p>It contains an url for each segment that the stream is made up of. Additionally, there are a number of meta tags, of which one is particularly important.</p>
-
-<h3 id="encryption">Encryption</h3>
-
-<p>What took me the longest to figure out was that the segments were encrypted. According to specification, MPEG-TS files (.ts) start with a BOM (Byte Order Mark) in the form of the ASCII char <code class="language-plaintext highlighter-rouge">G</code>. What confused me was, that there was no <code class="language-plaintext highlighter-rouge">G</code>, since the files were encrypted. Lesson learned, go read <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-23#section-3">the specification</a>.</p>
-
-<p>Here is how I handle the encryption.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">getCipher</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nc">EncryptionData</span><span class="p">):</span> <span class="nc">Cipher</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">bytes</span> <span class="p">=</span> <span class="nc">URL</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">uri</span><span class="p">).</span><span class="nf">readBytes</span><span class="p">()</span>
-    <span class="kd">val</span> <span class="py">chainmode</span> <span class="p">=</span> <span class="s">"CBC"</span>
-    <span class="kd">val</span> <span class="py">method</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">method</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nc">EncryptionMethod</span><span class="p">.</span><span class="nc">AES</span> <span class="p">-&gt;</span> <span class="s">"AES/$chainmode/NoPadding"</span>
-        <span class="k">else</span> <span class="p">-&gt;</span> <span class="n">data</span><span class="p">.</span><span class="n">method</span><span class="p">.</span><span class="n">name</span>
-    <span class="p">}</span>
-    <span class="kd">val</span> <span class="py">keySpec</span> <span class="p">=</span> <span class="nc">SecretKeySpec</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">method</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">logger</span><span class="p">.</span><span class="nf">trace</span><span class="p">(</span><span class="s">"Decrypting using method ${data.method} ($method)"</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nc">Cipher</span>
-        <span class="p">.</span><span class="nf">getInstance</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
-        <span class="p">.</span><span class="nf">apply</span> <span class="p">{</span> <span class="nf">init</span><span class="p">(</span><span class="nc">Cipher</span><span class="p">.</span><span class="nc">DECRYPT_MODE</span><span class="p">,</span> <span class="n">keySpec</span><span class="p">,</span> <span class="nc">IvParameterSpec</span><span class="p">(</span><span class="nc">ByteArray</span><span class="p">(</span><span class="mi">16</span><span class="p">)))</span> <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">EncryptionData</code> can be obtained from any track of the media playlist.</p>
-
-<p>Critical for the success of decryption were the <code class="language-plaintext highlighter-rouge">chainmode</code> and the <code class="language-plaintext highlighter-rouge">NoPadding</code> argument.</p>
-
-<ul>
-  <li>Without any of those, e.g. just <code class="language-plaintext highlighter-rouge">AES</code>, the decryption would throw.</li>
-  <li>With <code class="language-plaintext highlighter-rouge">NoPadding</code>, but a different <code class="language-plaintext highlighter-rouge">chainmode</code>, decryption would succeed, but the files were corrupted.</li>
-</ul>
-
-<p>I simply used trial and error until I found the right combination.</p>
-
-<h3 id="demux">Demux</h3>
-
-<p>MPEG-TS files are not the most ordinary media format and are therefore more difficult to work with. Instead of .ts files, it would be nice if we could just work with the audio as wav files. I have tried to find a way to do this in java, but ended up using FFMPEG because there was no suitable library for the job. There is <a href="https://github.com/jcodec/jcodec">JCodec</a>, but the api is awkward and it doesn’t seem like the required format is supported. FFMPEG is pretty easy to use via cli and supports a range of formats.</p>
-
-<p>To demux a .ts segment to a .wav file, simply use the below code, where the target is a .wav File.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ffmpeg</span> <span class="o">-</span><span class="n">i</span> <span class="err">$</span><span class="o">{</span><span class="n">source</span><span class="o">.</span><span class="na">absolutePath</span><span class="o">}</span> <span class="err">$</span><span class="o">{</span><span class="n">target</span><span class="o">.</span><span class="na">absolutePath</span><span class="o">}</span>
-</code></pre></div></div>
-
-<p>Converting wav to mp3 is similarly easy:</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ffmpeg</span> <span class="o">-</span><span class="n">i</span> <span class="err">$</span><span class="o">{</span><span class="n">file</span><span class="o">.</span><span class="na">absolutePath</span><span class="o">}</span> <span class="o">-</span><span class="n">acodec</span> <span class="n">libmp3lame</span> <span class="err">$</span><span class="o">{</span><span class="n">target</span><span class="o">.</span><span class="na">absolutePath</span><span class="o">}</span>
-</code></pre></div></div>
-
-<h3 id="merging">Merging</h3>
-
-<p>Last step: merging the individual segments into one file.</p>
-
-<p>I use the following to merge audio streams.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">joinAudioStreams</span><span class="p">(</span><span class="n">streams</span><span class="p">:</span> <span class="nc">Collection</span><span class="p">&lt;</span><span class="nc">AudioInputStream</span><span class="p">&gt;):</span> <span class="nc">AudioInputStream</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">vector</span> <span class="p">=</span> <span class="nc">Vector</span><span class="p">&lt;</span><span class="nc">InputStream</span><span class="p">&gt;(</span><span class="n">streams</span><span class="p">).</span><span class="nf">elements</span><span class="p">()</span>
-    <span class="kd">val</span> <span class="py">format</span> <span class="p">=</span> <span class="n">streams</span><span class="p">.</span><span class="nf">first</span><span class="p">().</span><span class="n">format</span>
-    <span class="k">return</span> <span class="nc">AudioInputStream</span><span class="p">(</span>
-        <span class="nc">SequenceInputStream</span><span class="p">(</span><span class="n">vector</span><span class="p">),</span>
-        <span class="n">format</span><span class="p">,</span>
-        <span class="n">streams</span>
-            <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">frameLength</span> <span class="p">}</span>
-            <span class="p">.</span><span class="nf">reduce</span><span class="p">(</span><span class="nc">Long</span><span class="o">::</span><span class="n">plus</span><span class="p">)</span>
-    <span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>AudioInputStreams are obtained from files using <code class="language-plaintext highlighter-rouge">AudioSystem.getAudioInputStream</code> and writing to file is done with <code class="language-plaintext highlighter-rouge">AudioSystem.write</code>.</p>
-
-<p>And that’s basically how I went from M3U8 playlists and encrypted ts segments to a single mp3.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Converting a M3U8 playlist to an mp3 file]]></summary></entry></feed>
+Hopefully the fix makes it into the next release. <a href="https://github.com/spring-projects/spring-framework/issues/22462">Tracking issue here</a>.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[System architecture and compile-time checks using AOP.]]></summary></entry></feed>
