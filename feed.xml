@@ -1,5 +1,163 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2023-02-18T19:38:43-08:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">🎨 DRY the paint on your Cross Cutting Concerns</title><link href="https://andreasvolkmann.github.io//blog/2023-02-12-dry-srp-caching/" rel="alternate" type="text/html" title="🎨 DRY the paint on your Cross Cutting Concerns" /><published>2023-02-12T00:00:00-08:00</published><updated>2023-02-12T00:00:00-08:00</updated><id>https://andreasvolkmann.github.io//blog/dry-srp-caching</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2023-02-12-dry-srp-caching/"><![CDATA[<ol id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2023-10-11T19:28:26-07:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">⚗️ Distilled knowledge</title><link href="https://andreasvolkmann.github.io//blog/2023-10-07-first-prompt/" rel="alternate" type="text/html" title="⚗️ Distilled knowledge" /><published>2023-10-07T00:00:00-07:00</published><updated>2023-10-07T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/first-prompt</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2023-10-07-first-prompt/"><![CDATA[<ol id="markdown-toc">
+  <li><a href="#the-intersection-of-programming-and-language" id="markdown-toc-the-intersection-of-programming-and-language">The intersection of programming and language</a></li>
+  <li><a href="#distilling-prompts" id="markdown-toc-distilling-prompts">Distilling prompts</a>    <ol>
+      <li><a href="#less-is-more" id="markdown-toc-less-is-more">Less is more</a></li>
+      <li><a href="#forcing-the-model-" id="markdown-toc-forcing-the-model-">Forcing the model …</a></li>
+      <li><a href="#native-code-intuition" id="markdown-toc-native-code-intuition">Native code intuition</a></li>
+    </ol>
+  </li>
+  <li><a href="#language-efficiency" id="markdown-toc-language-efficiency">Language efficiency</a></li>
+  <li><a href="#outro" id="markdown-toc-outro">Outro</a></li>
+</ol>
+
+<p>For this post I want to record some of my first impressions of LLMs and prompting,
+as well as some of the insights I believe to have gained.
+It will be interesting to revisit this later on and see how it held up.</p>
+
+<h2 id="the-intersection-of-programming-and-language">The intersection of programming and language</h2>
+
+<p>I anticipate a new paradigm at the intersection of programming and language understanding.</p>
+
+<p>LLMs are now capable enough so that software engineers can take off-the-shelf models and build applications with them.
+In order to instruct the model, prompts are written in natural language, just like the outputs.
+The hurdle of data science is no longer.</p>
+
+<p>Anyone can write such prompts, but to truly develop reliable, effective prompts,
+it seems to me one has to develop an understanding and intuition about the way the LLM speaks and comprehends language.</p>
+
+<p>At the same time, it’s not enough to just be good at prompting.
+One also needs a methodical approach to evaluate the results of the model.
+This is where programming concepts like unit testing come in handy.
+If you want to take your prompts to the next level, find a metric that measures the output quality,
+then apply TDD (Test Driven Development) to push the prompt to its limits, by continuously testing and refining.</p>
+
+<p>This is already being done at the model level, yielding the below chart,
+which can help visualize the strengths &amp; weaknesses of each model.
+<a href="https://browse.arxiv.org/pdf/2309.16583.pdf">  <hy-img root-margin="512px"  src="/assets/img/llm_model_strength_weakness.png" alt="Model Strengths &amp; Weaknesses" >    <noscript><img data-ignore  src="/assets/img/llm_model_strength_weakness.png" alt="Model Strengths &amp; Weaknesses" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></a></p>
+
+<p>Once you’ve tried to combine plain programming with LLM prompts,
+you might agree with me that this is the next big step for our industry.</p>
+
+<p>I recommend <a href="https://open.spotify.com/episode/3MK8V1DbT7d5YEBlrdbBdQ">this Latent Space episode</a>, which coins the term
+AI Engineer to define software engineers moving closer to the ML space to get enough proficiency to effectively apply
+LLMs to produce new applications.</p>
+
+<h2 id="distilling-prompts">Distilling prompts</h2>
+
+<p>The art of prompting is still in its infancy and no exact science.
+I don’t claim to have all the answers, but the following has worked well for me.</p>
+
+<blockquote>
+  <ul>
+    <li>Most of this applies to GPT 3.5 0613</li>
+    <li>Primarily targeting Reductive Operations, such as Summarization and Extraction</li>
+  </ul>
+</blockquote>
+
+<p>When writing prompts, I have observed the following tendencies.</p>
+
+<h3 id="less-is-more">Less is more</h3>
+
+<blockquote>
+  <p>You are like this tea cup, so full that nothing more can be added. Come
+back to me when the cup is empty. Come back to me with an empty mind.</p>
+
+  <p><em>Laozi</em></p>
+</blockquote>
+
+<p>Being overly prescriptive, wordy, and detailed.</p>
+
+<p>Lots of rules, and when something doesn’t quite turn out how we want it to, we add another special case sentence.
+The prompt ends up overloaded so that any single change, formatting or content, breaks it.
+In such cases it is better to go back to zero, and come back witn an empty mind / prompt.</p>
+
+<p>Try to distill your prompt down to the most essential meaning.
+Every single word in your prompt matters, and there should be a reason for why you include it.</p>
+
+<p>Just like we do with language and code,
+in order to really convey our intent,
+we distill our prompt down to its essence.</p>
+
+<blockquote>
+  <p>Distillation is at the very heart of all effective communication.
+The more important it is that your audience hear and take action on your message,
+the more distilled that message needs to be.</p>
+
+  <p><em>Building a Second Brain by Tiago Forte</em></p>
+</blockquote>
+
+<p>Lastly, it’s worth noting that the same meaning phrased differently can lead to radically different results.
+So rather than throw more words at it, I prefer to find few words which trigger the right response.</p>
+
+<h3 id="forcing-the-model-">Forcing the model …</h3>
+
+<p>… to do something it isn’t good at.</p>
+
+<p>Outputting JSON or producing answers that require non-language thinking.</p>
+
+<p>Instead of trying to control the output with rules and confusing the model with complex instructions where even we have to think,
+I found that starting out with a highly distilled version (as little as a single sentence)
+can shed some light on what the model is good at natively.</p>
+
+<p>So rather than trying to bend the model to your will, try to <em>cooperate</em>!</p>
+
+<p>I found that oftentimes you don’t have to instruct 3.5 about the output format at all.
+It tends to produce colon-delimited key-value pairs if only you change your wording slightly.
+<code class="language-plaintext highlighter-rouge">Provide X, Y, Z ...</code> seems to work well, where XYZ are properties that start with a captial letter.</p>
+
+<p>You can save yourself lots of trouble by simply going with the flow of whatever the LLM is comfortable with.</p>
+
+<h3 id="native-code-intuition">Native code intuition</h3>
+
+<p>GPT 3.5 seems to have very good intuition about coding concepts.
+As software engineers, this gives us superpowers, as we can boil down complex intent into sometimes single characters.</p>
+
+<p>As an example, if you use extraction prompts like the above, you can easily communicate that you want certain
+properties to be nullable/optional: <code class="language-plaintext highlighter-rouge">Provide X, Y?, Z ...</code>.
+Just by appending <code class="language-plaintext highlighter-rouge">?</code> to the property, the model will often prefer to omit rather than invent outputs.</p>
+
+<h2 id="language-efficiency">Language efficiency</h2>
+<p>One other thing I observed is that English is a pretty good language for prompts. 
+Usually one of the drawbacks of English is that it requires a lot of characters compared to languages like Chinese.</p>
+
+<p>Twitter used to have a really low character limit per tweet, which was easily consumed in “western” languages.
+Character-based writing systems can simply fit more meaning into a single tweet.
+It’s part of the reason why
+<a href="https://fortune.com/2022/11/23/elon-musk-twitter-japan-users-layoffs-moderation/">Musk stated that Twitter’s ideal market isn’t the U.S.—it’s Japan</a> (behind paywall but you can sidestep with reader).</p>
+
+<p>However, what matters in prompts are tokens, not characters, and from my experience the tokenization of English is quite efficient. 
+A lot of words are encoded as a single token, which means they can compete with Chinese characters. 
+<a href="https://platform.openai.com/tokenizer">  <hy-img root-margin="512px"  src="/assets/img/gpt_tokenizer.png" alt="GPT Tokenizer" >    <noscript><img data-ignore  src="/assets/img/gpt_tokenizer.png" alt="GPT Tokenizer" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></a></p>
+
+<h2 id="outro">Outro</h2>
+
+<p>The above is just a snapshot of my current ideas. Excited to see where things are at in a few months.
+Currently reading <a href="https://www.goodreads.com/book/show/59616977-building-a-second-brain">Building a Second Brain by Tiago Forte</a>,
+and it is amazing how much of it applies to LLMs / prompting.</p>
+
+<blockquote>
+  <p>[…] if you’re stuck on a task, break it down into smaller steps.</p>
+</blockquote>
+
+<p>This aligns with <a href="https://arxiv.org/abs/2201.11903">the Chain-of-Thought principle</a> for prompts.</p>
+
+<blockquote>
+  <p>As you distill your ideas, they naturally improve, because when you drop the merely good parts, the great parts can shine more brightly.</p>
+</blockquote>
+
+<p>Similar to what I wrote about distillation above.</p>
+
+<p>Lastly, I found this example from the book very interesting:</p>
+
+<blockquote>
+  <p>Coppola’s strategy for making the complex, multifaceted film rested on a technique he learned studying theater at Hofstra College, known as a “<strong>prompt book</strong>.”</p>
+
+  <p>Coppola considered the prompt book that emerged from this process the most important asset in the production of his now classic film: “the script was really an unnecessary document; I didn’t need a script because I could have made the movie just from this notebook.”</p>
+</blockquote>
+
+<p>Basically <a href="https://en.wikipedia.org/wiki/Francis_Ford_Coppola">Coppola</a> was prompting himself with this book, which enabled him to produce The Godfather without the full script.
+Sounds like he had enough training data :)</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[To attain knowledge, add things every day. To attain wisdom, remove things every day. (*Laozi*)]]></summary></entry><entry><title type="html">🎨 DRY the paint on your Cross Cutting Concerns</title><link href="https://andreasvolkmann.github.io//blog/2023-02-12-dry-srp-caching/" rel="alternate" type="text/html" title="🎨 DRY the paint on your Cross Cutting Concerns" /><published>2023-02-12T00:00:00-08:00</published><updated>2023-02-12T00:00:00-08:00</updated><id>https://andreasvolkmann.github.io//blog/dry-srp-caching</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2023-02-12-dry-srp-caching/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#scenario" id="markdown-toc-scenario">Scenario</a>    <ol>
       <li><a href="#requirements" id="markdown-toc-requirements">Requirements</a></li>
     </ol>
@@ -1191,121 +1349,4 @@ Thanks to proxying, your code stays clean, whilst Spring works its magic.</p>
 but during development this is value for no money.</p>
 
 <p>I will experiment further to see how far I can push this, 
-but this will definitely be a part of every future app I work on.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Immediate, automated insights into your application.]]></summary></entry><entry><title type="html">Aspect Oriented Programming: Spring, Kotlin, Gradle</title><link href="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/" rel="alternate" type="text/html" title="Aspect Oriented Programming: Spring, Kotlin, Gradle" /><published>2020-02-20T00:00:00-08:00</published><updated>2020-02-20T00:00:00-08:00</updated><id>https://andreasvolkmann.github.io//blog/spring-kotlin-gradle-aop</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-02-20-spring-kotlin-gradle-aop/"><![CDATA[<ol id="markdown-toc">
-  <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
-  <li><a href="#aspects" id="markdown-toc-aspects">Aspects</a>    <ol>
-      <li><a href="#pointcuts" id="markdown-toc-pointcuts">Pointcuts</a></li>
-    </ol>
-  </li>
-  <li><a href="#compile-time-checks" id="markdown-toc-compile-time-checks">Compile-time checks</a></li>
-</ol>
-
-<p>I’ve seen a lot of resources regarding AOP for Java and / or Maven, but couldn’t find a lot about the Kotlin+Gradle combo.
-As for the Spring side, <a href="https://start.spring.io/">the Spring Initializr </a> doesn’t even list the aop starter, which is apparently by design.
-So I decided to show a working solution for the mentioned stack. The code referenced can be found <a href="https://github.com/AndreasVolkmann/Spring-Reactive-Security">here</a>.</p>
-
-<p>Aspect oriented programming is a great way of defining cross-cutting concerns that can simplify your project and help establish your architecture.</p>
-
-<h3 id="setup">Setup</h3>
-<p>First thing is to add the required dependencies to the build.</p>
-<ul>
-  <li>The spring aop starter is needed for defining aspects.</li>
-  <li>The aspectj plugin is needed for compile-time checks.</li>
-</ul>
-
-<p>See <a href="https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/build.gradle.kts#L7">the reference build file</a>.</p>
-
-<p>There are a bunch of gradle plugins, but most are outdated and lack proper documentation.
-The freefair plugin was the only one I could get to work, <a href="https://docs.freefair.io/gradle-plugins/current/reference/#_aspectj">documentation here</a>.
-Just add the post-compile-weaving plugin and set your aspectj version in <code class="language-plaintext highlighter-rouge">gradle.properties</code>.</p>
-
-<h3 id="aspects">Aspects</h3>
-
-<p>Now we can start writing a custom aspect.
-<a href="https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/src/main/kotlin/com/example/demo/config/aspect/ActivityAspect.kt">The example</a>
-shows an aspect that monitors all activities by logging start and end events including the time elapsed and whether it succeeded or failed.
-Using <code class="language-plaintext highlighter-rouge">@Around</code> advice we can wrap all methods that match the defined pointcut in a try-catch-finally.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
-<span class="nd">@Component</span>
-<span class="kd">class</span> <span class="nc">ActivityAspect</span> <span class="p">{</span>
-
-    <span class="k">private</span> <span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">LoggerFactory</span><span class="p">.</span><span class="nf">getLogger</span><span class="p">(</span><span class="k">this</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
-
-    <span class="nd">@Around</span><span class="p">(</span><span class="s">"Architecture.activity() || Architecture.repository() || Architecture.service()"</span><span class="p">)</span>
-    <span class="k">fun</span> <span class="nf">monitorActivity</span><span class="p">(</span><span class="n">proceedingJoinPoint</span><span class="p">:</span> <span class="nc">ProceedingJoinPoint</span><span class="p">):</span> <span class="nc">Any</span><span class="p">?</span> <span class="p">{</span>
-        <span class="kd">val</span> <span class="py">name</span> <span class="p">=</span> <span class="n">proceedingJoinPoint</span><span class="p">.</span><span class="n">staticPart</span><span class="p">.</span><span class="n">signature</span><span class="p">.</span><span class="nf">toShortString</span><span class="p">()</span>
-        <span class="kd">var</span> <span class="py">state</span> <span class="p">=</span> <span class="s">"SUCCESS"</span>
-        <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s">"Activity start: $name"</span><span class="p">)</span>
-        <span class="kd">val</span> <span class="py">startTime</span> <span class="p">=</span> <span class="nc">System</span><span class="p">.</span><span class="nf">currentTimeMillis</span><span class="p">()</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">proceedingJoinPoint</span><span class="p">.</span><span class="nf">proceed</span><span class="p">()</span>
-        <span class="p">}</span>
-        <span class="k">catch</span> <span class="p">(</span><span class="n">ex</span><span class="p">:</span> <span class="nc">Exception</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">state</span> <span class="p">=</span> <span class="s">"ERROR"</span>
-            <span class="k">throw</span> <span class="n">ex</span>
-        <span class="p">}</span>
-        <span class="k">finally</span> <span class="p">{</span>
-            <span class="kd">val</span> <span class="py">timeElapsed</span> <span class="p">=</span> <span class="nc">System</span><span class="p">.</span><span class="nf">currentTimeMillis</span><span class="p">()</span> <span class="p">-</span> <span class="n">startTime</span>
-            <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s">"Activity end: $name ($state $timeElapsed ms)"</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h4 id="pointcuts">Pointcuts</h4>
-<p>In order to define what methods the advice is applied to, pointcuts can be used to describe the architecture of the application.
-<a href="https://github.com/AndreasVolkmann/Spring-Reactive-Security/blob/master/src/main/kotlin/com/example/demo/config/aspect/Architecture.kt">In the example</a>
-we want to monitor all public methods in any service or repository, as well as any method annotated with a custom <code class="language-plaintext highlighter-rouge">@Activity</code> annotation.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Architecture</span> <span class="p">{</span>
-
-    <span class="nd">@Pointcut</span><span class="p">(</span><span class="s">"execution(* (@org.springframework.stereotype.Repository *).*(..))"</span><span class="p">)</span>
-    <span class="k">fun</span> <span class="nf">service</span><span class="p">()</span> <span class="p">=</span> <span class="nc">Unit</span>
-
-    <span class="nd">@Pointcut</span><span class="p">(</span><span class="s">"execution (* (@org.springframework.stereotype.Service *).*(..))"</span><span class="p">)</span>
-    <span class="k">fun</span> <span class="nf">repository</span><span class="p">()</span> <span class="p">=</span> <span class="nc">Unit</span>
-
-    <span class="nd">@Pointcut</span><span class="p">(</span><span class="s">"(@annotation(Activity) &amp;&amp; execution(* *(..)))"</span><span class="p">)</span>
-    <span class="k">fun</span> <span class="nf">activity</span><span class="p">()</span> <span class="p">=</span> <span class="nc">Unit</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Here is a demo service that would match these pointcuts:</p>
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
-<span class="kd">class</span> <span class="nc">DemoService</span> <span class="p">{</span>
-
-    <span class="nd">@Activity</span> <span class="c1">// optional, can be used on methods outside of services / repositories</span>
-    <span class="k">fun</span> <span class="nf">run</span><span class="p">(</span><span class="n">someBool</span><span class="p">:</span> <span class="nc">Boolean</span><span class="p">):</span> <span class="nc">String</span> <span class="p">{</span>
-        <span class="o">..</span><span class="p">.</span>
-    <span class="p">}</span>
-
-    <span class="k">fun</span> <span class="nf">noAnnotation</span><span class="p">()</span> <span class="p">{</span>
-        <span class="o">..</span><span class="p">.</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="compile-time-checks">Compile-time checks</h3>
-
-<p>AspectJ can be used to define compile-time checks that produce errors or warnings when matched.
-For example, we can introduce a check that ensures that no code from the <code class="language-plaintext highlighter-rouge">java.sql</code> or <code class="language-plaintext highlighter-rouge">javax.sql</code>
-package is called outside of a repository.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
-<span class="kd">class</span> <span class="nc">CheckAspect</span> <span class="p">{</span>
-
-    <span class="nd">@DeclareError</span><span class="p">(</span><span class="s">"!Architecture.repository() &amp;&amp; (call (* java.sql..*.*(..)) || call (* javax.sql..*.*(..)))"</span><span class="p">)</span>
-    <span class="kd">val</span> <span class="py">jdbcOutsideRepository</span> <span class="p">=</span> <span class="s">"Only call jdbc code from within repositories."</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>When compiling the following function, the compiler will throw an error.</p>
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">methodUsingJavaxSql</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">javax</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">rowset</span><span class="p">.</span><span class="nc">RowSetMetaDataImpl</span><span class="p">().</span><span class="nf">getCatalogName</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>I am really happy with the results and the fact that the Spring team is pushing and actively promoting Kotlin as the language of choice.
-One issue that still remains is handling suspending functions with AOP, since <code class="language-plaintext highlighter-rouge">proceed</code> will return when suspending.
-Hopefully the fix makes it into the next release. <a href="https://github.com/spring-projects/spring-framework/issues/22462">Tracking issue here</a>.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[System architecture and compile-time checks using AOP.]]></summary></entry></feed>
+but this will definitely be a part of every future app I work on.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Immediate, automated insights into your application.]]></summary></entry></feed>
