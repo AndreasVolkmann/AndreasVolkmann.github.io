@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://andreasvolkmann.github.io//posts/</loc>
-<lastmod>2023-10-11T19:48:43-07:00</lastmod>
+<lastmod>2024-04-28T17:35:18-07:00</lastmod>
 </url>
 <url>
 <loc>https://andreasvolkmann.github.io//blog/2018-04-27-m3u8-and-ts-segments/</loc>
@@ -53,6 +53,10 @@
 <lastmod>2023-10-07T00:00:00-07:00</lastmod>
 </url>
 <url>
+<loc>https://andreasvolkmann.github.io//blog/2024-04-28-onsen-city/</loc>
+<lastmod>2024-04-28T00:00:00-07:00</lastmod>
+</url>
+<url>
 <loc>https://andreasvolkmann.github.io//about/</loc>
 </url>
 <url>
@@ -63,6 +67,6 @@
 </url>
 <url>
 <loc>https://andreasvolkmann.github.io//assets/Resume.pdf</loc>
-<lastmod>2023-10-11T19:48:43-07:00</lastmod>
+<lastmod>2024-04-28T17:35:18-07:00</lastmod>
 </url>
 </urlset>
