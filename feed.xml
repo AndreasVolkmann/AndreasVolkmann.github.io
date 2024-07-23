@@ -1,5 +1,119 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2024-04-28T17:42:08-07:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">♨️ Onsen City</title><link href="https://andreasvolkmann.github.io//blog/2024-04-28-onsen-city/" rel="alternate" type="text/html" title="♨️ Onsen City" /><published>2024-04-28T00:00:00-07:00</published><updated>2024-04-28T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen-city</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2024-04-28-onsen-city/"><![CDATA[<ol id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2024-07-22T20:39:05-07:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">⚗️ Learning from Agents</title><link href="https://andreasvolkmann.github.io//blog/2024-07-22-first-agent/" rel="alternate" type="text/html" title="⚗️ Learning from Agents" /><published>2024-07-22T00:00:00-07:00</published><updated>2024-07-22T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/first-agent</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2024-07-22-first-agent/"><![CDATA[<ol id="markdown-toc">
+  <li><a href="#less-is-more" id="markdown-toc-less-is-more">Less is more</a></li>
+  <li><a href="#context-is-everything" id="markdown-toc-context-is-everything">Context is everything</a></li>
+  <li><a href="#every-token-matters" id="markdown-toc-every-token-matters">Every token matters</a></li>
+  <li><a href="#over-anthropomorphization" id="markdown-toc-over-anthropomorphization">Over-Anthropomorphization</a></li>
+  <li><a href="#best-practices-still-apply" id="markdown-toc-best-practices-still-apply">Best practices still apply</a></li>
+  <li><a href="#hoping-for-better-models" id="markdown-toc-hoping-for-better-models">Hoping for better models</a></li>
+</ol>
+
+<p>It’s been some time since <a href="/blog/2023-10-07-first-prompt">my initial impression post on LLMs</a>, 
+and since I’ve recently had an opportunity to gather my thoughts, 
+I wanted to also summarize them here so that I can come back and see how they changed over time.</p>
+
+<p>The following are rough notes of lessons learned from working with LLMs and the Agent concept.</p>
+
+<h1 id="less-is-more">Less is more</h1>
+<ul>
+  <li>Usually to improve quality, we take away, rather than adding more</li>
+  <li>This means distill your prompts and systems as much as possible</li>
+</ul>
+
+<blockquote>
+  <p>As you distill your ideas, they naturally improve, because when you drop the merely good parts, the great parts can shine more brightly.</p>
+</blockquote>
+
+<ul>
+  <li>It’s easy to overdo it with premature planning, fine-tuning, and RAG</li>
+  <li>Until there is proven value from such efforts, better to keep it simple</li>
+</ul>
+
+<h1 id="context-is-everything">Context is everything</h1>
+<ul>
+  <li>Agents are tool-driven. Without tools, they cannot do anything and even if you had a super advanced orchestration loop, it wouldn’t help.</li>
+  <li>High quality tools are the bread and butter of effective agents</li>
+  <li>Emulate a real chat. All context interactions have to account for the fact that models are trained on chat and work best with realistic chat messages.</li>
+  <li>As an example, some tools might produce no output, which is an open invitation to hallucinate. Handle special cases so that they produce a coherent chat history.</li>
+</ul>
+
+<h1 id="every-token-matters">Every token matters</h1>
+<ul>
+  <li>Some time ago, we expected that as models got better, they would be less sensitive to minor token variations in prompts.</li>
+  <li>It doesn’t seem like this problem has solved itself yet. We still encounter cases where single tokens make or break a scenario. As an example, the difference between singular and plural <code class="language-plaintext highlighter-rouge">Contact</code> -&gt; <code class="language-plaintext highlighter-rouge">Contacts</code> is enough to produce the wrong table name in tests.</li>
+  <li>Reduce the noise - Any token can potentially throw off the LLM
+    <ul>
+      <li>As before, you will want to triple check every single token that makes it into your context, and only include those that add value.</li>
+      <li>Make sure your prompts are as distilled and concise as possible. Adopt a zero-tolerance stance towards grammar mistakes and typos.</li>
+    </ul>
+  </li>
+  <li>LLMs increasingly depend on free-text data like names and descriptions. Ensure this data is of high semantic quality, and not too complex.</li>
+  <li>Rule of thumb: If it doesn’t make sense to you, it won’t work for the LLM.</li>
+  <li>This may also apply to localizations!</li>
+  <li>Allow the LLM to focus on what it’s good at
+    <ul>
+      <li>If possible define data at design time rather
+than relying on LLM to re-generate Guids, etc.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="over-anthropomorphization">Over-Anthropomorphization</h1>
+<ul>
+  <li>The language used to describe LLM-backed products is too close to human semantics</li>
+  <li>This leads to expectations that go beyond merely predicting the next token</li>
+  <li>We tend to use human verbs like think, know.</li>
+  <li>Agent is a bad term that inspires human analogies. An alternative is to consistently use bot or LLM-bot instead as this more clearly communicates expectations to users.</li>
+  <li>There is no brain / memory / thought / knowledge.</li>
+  <li>Simply put, if critical data is missing from the
+context, then it is very unlikely that the LLM will predict the correct tokens.</li>
+  <li><a href="https://jurgengravestein.substack.com/p/the-intelligence-paradox">The Intelligence Paradox - by Jurgen Gravestein (substack.com)</a></li>
+</ul>
+
+<h1 id="best-practices-still-apply">Best practices still apply</h1>
+<ul>
+  <li>This is still just software. All previous best practices apply.</li>
+  <li>Most importantly: Write tests / eval / benchmark.</li>
+  <li>LLM features without tests are like black
+boxes (same as any software really)</li>
+  <li>You cannot improve what you cannot measure</li>
+  <li>I recommend to do as always:
+    <ul>
+      <li>Iterate with unit tests, incrementally improve with feedback</li>
+      <li>Some tests are better than none</li>
+      <li>Be smart about what to test. Find test cases that provide relatively stable expectations, but
+represent a distinct behavior.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="hoping-for-better-models">Hoping for better models</h1>
+<ul>
+  <li>Or: The one model to rule them all</li>
+  <li>Some time ago a belief emerged that future models would solve prevalent issues with LLMs</li>
+  <li><a href="https://crfm.stanford.edu/helm/lite/latest/">Holistic Evaluation of Language Models (HELM) (stanford.edu)</a></li>
+  <li>While GPT-4o does seem to be the best model on average, it is not significantly outperforming GPT-4 (0613), which at this point is over a year old.</li>
+  <li>Think back one year and what expectations we had back then for where we would be by now. Given how quickly GPT 3.5 and 4 dropped, people were led to believe that we would have some truly amazing next version by mid-2024.</li>
+  <li>New models are different, not just better
+    <ul>
+      <li>While we did get many new models (gpt 4 turbo and now 4o), it’s not entirely clear whether they are improvements across the board</li>
+      <li>Ultimately there hasn’t been any groundbreaking improvement in LLM output quality since GPT 4.</li>
+    </ul>
+  </li>
+  <li>Eventually GPT-5. But at what cost?
+  <hy-img root-margin="512px"  src="/assets/img/gpt5whale.jpeg" alt="GPT-5" >    <noscript><img data-ignore  src="/assets/img/gpt5whale.jpeg" alt="GPT-5" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+    <ul>
+      <li>Realism comes at the cost of coverage</li>
+      <li><a href="https://gorilla.cs.berkeley.edu/leaderboard.html#:~:text=The%20Berkeley%20Function%20Calling%20Leaderboard,and%20will%20be%20updated%20periodically.">Berkeley Function Calling Leaderboard (aka Berkeley Tool Calling Leaderboard)</a></li>
+      <li>LLM systems are more than their largest model</li>
+      <li>While we can expect to eventually get GPT 5 or the like (much better?), we are still constrained by COGS, which are likely higher. So
+we may want to explore SMLs, etc., and alternative approaches to improve</li>
+      <li>SLMs getting good at specific tasks. JIT model selection may help balance cost / quality. See <a href="https://github.com/lm-sys/RouteLLM">GitHub - lm-sys/RouteLLM: A framework for serving and evaluating LLM routers - save LLM costs without compromising quality!</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Those are my current thoughts. Excited to see how they will have changed in 6 months - 1 year’s time!</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[LLMs round 2 - lessons learned from working with agents]]></summary></entry><entry><title type="html">♨️ Onsen City</title><link href="https://andreasvolkmann.github.io//blog/2024-04-28-onsen-city/" rel="alternate" type="text/html" title="♨️ Onsen City" /><published>2024-04-28T00:00:00-07:00</published><updated>2024-04-28T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen-city</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2024-04-28-onsen-city/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#yuyama-no-sato-湯山の里" id="markdown-toc-yuyama-no-sato-湯山の里">Yuyama no Sato 湯山の里</a></li>
   <li><a href="#ebisu-湯屋えびす" id="markdown-toc-ebisu-湯屋えびす">Ebisu 湯屋えびす</a></li>
   <li><a href="#nabeyama-鍋山の湯" id="markdown-toc-nabeyama-鍋山の湯">Nabeyama 鍋山の湯</a></li>
@@ -1287,74 +1401,4 @@ CoC addresses the cross-cutting concern of code extensibility in x++.</p>
 <p>The extension model of x++ is of course much more than CoC.
 For example, you can also add state to classes via extensions.
 But I have to say, I really came to appreciate the power of the Chain of Command 
-in creating elegant, extensible solutions with minimal boilerplate.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Multi-tenant class extension without stepping on each other's toes.]]></summary></entry><entry><title type="html">Spring AOP - Feature Switches</title><link href="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/" rel="alternate" type="text/html" title="Spring AOP - Feature Switches" /><published>2020-11-25T00:00:00-08:00</published><updated>2020-11-25T00:00:00-08:00</updated><id>https://andreasvolkmann.github.io//blog/spring-aop-feature-switches</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2020-11-25-spring-aop-feature-switches/"><![CDATA[<ol id="markdown-toc">
-  <li><a href="#the-aspect" id="markdown-toc-the-aspect">The Aspect</a></li>
-</ol>
-
-<p>One idea I recently happened upon is handling feature switches in an aspect.
-Essentially, we want to externally control whether certain code should execute or not.</p>
-
-<p>This is really a cross-cutting concern, and thereby a top contender for AOP!
-One way to identify candidates for AOP is looking for those small bits of code that are scattered around your code base 
-which do not really contribute to the single responsibility of the class.</p>
-
-<p>For feature switches it is annoying having to always inject some feature manager and start things off with:</p>
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">isEnabled</span> <span class="p">=</span> <span class="n">featureSwitchManager</span><span class="p">.</span><span class="nf">isEnabled</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="p">(</span><span class="n">isEnabled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// actual code</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>This is a kind of meta capability that our code shouldn’t have to worry about. 
-Additionally, we are usually happier testing the code without all this extra noise.</p>
-
-<h2 id="the-aspect">The Aspect</h2>
-
-<p>The source is available <a href="https://github.com/AndreasVolkmann/playground/blob/master/src/main/kotlin/me/avo/cosmos/aspect/FeatureAspect.kt">here</a>.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
-<span class="nd">@Component</span>
-<span class="kd">class</span> <span class="nc">FeatureAspect</span><span class="p">(</span>
-    <span class="k">private</span> <span class="kd">val</span> <span class="py">featureSwitchManager</span><span class="p">:</span> <span class="nc">FeatureSwitchManager</span>
-<span class="p">)</span> <span class="p">{</span>
-
-    <span class="nd">@Pointcut</span><span class="p">(</span><span class="n">value</span> <span class="p">=</span> <span class="s">"execution(public * *(..))"</span><span class="p">)</span>
-    <span class="k">fun</span> <span class="nf">anyPublicMethod</span><span class="p">()</span> <span class="p">=</span> <span class="nc">Unit</span>
-
-    <span class="nd">@Around</span><span class="p">(</span><span class="s">"anyPublicMethod() &amp;&amp; @annotation(annotation)"</span><span class="p">)</span>
-    <span class="k">fun</span> <span class="nf">proceedIfEnabled</span><span class="p">(</span><span class="n">joinPoint</span><span class="p">:</span> <span class="nc">ProceedingJoinPoint</span><span class="p">,</span> <span class="k">annotation</span><span class="p">:</span> <span class="nc">FeatureSwitch</span><span class="p">):</span> <span class="nc">Any</span><span class="p">?</span> <span class="p">{</span>
-        <span class="kd">val</span> <span class="py">featureName</span> <span class="p">=</span> <span class="k">annotation</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="nf">takeIf</span><span class="p">(</span><span class="nc">String</span><span class="o">::</span><span class="n">isNotBlank</span><span class="p">)</span>
-            <span class="o">?:</span> <span class="k">throw</span> <span class="nc">FeatureNameBlankException</span><span class="p">(</span><span class="n">joinPoint</span><span class="p">.</span><span class="n">signature</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="k">when</span> <span class="p">(</span><span class="n">featureSwitchManager</span><span class="p">.</span><span class="nf">isEnabled</span><span class="p">(</span><span class="n">featureName</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">true</span> <span class="p">-&gt;</span> <span class="n">joinPoint</span><span class="p">.</span><span class="nf">proceed</span><span class="p">()</span>
-            <span class="k">false</span> <span class="p">-&gt;</span> <span class="k">null</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The implementation is super simple. 
-We define a pointcut for any public methods with the <code class="language-plaintext highlighter-rouge">@FeatureSwitch</code> annotation,
-and pass the provided feature name to the <code class="language-plaintext highlighter-rouge">FeatureSwitchManager</code>, implementing the actual feature check.</p>
-
-<p>An example of a consuming service:</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
-<span class="kd">class</span> <span class="nc">MessageService</span> <span class="p">{</span>
-
-    <span class="nd">@FeatureSwitch</span><span class="p">(</span><span class="s">"MessageService"</span><span class="p">)</span>
-    <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s">"Running message service!"</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Now the run method can be enabled by passing <code class="language-plaintext highlighter-rouge">true</code> in the application properties:</p>
-<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">MessageService</span><span class="pi">:</span>
-  <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
-</code></pre></div></div>
-
-<p>And there you have it.
-A simple AOP solution, taking care of feature switch boilerplate code.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Handle feature switch checks with AOP.]]></summary></entry></feed>
+in creating elegant, extensible solutions with minimal boilerplate.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Multi-tenant class extension without stepping on each other's toes.]]></summary></entry></feed>
