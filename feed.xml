@@ -1,5 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-04-30T18:28:39-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">Power Automate - Efficient CSV to JSON</title><link href="http://localhost:4000/blog/2025-04-19-flow-perf-csv-to-json/" rel="alternate" type="text/html" title="Power Automate - Efficient CSV to JSON" /><published>2025-04-19T00:00:00-07:00</published><updated>2025-04-19T00:00:00-07:00</updated><id>http://localhost:4000/blog/flow-perf-csv-to-json</id><content type="html" xml:base="http://localhost:4000/blog/2025-04-19-flow-perf-csv-to-json/"><![CDATA[<ol id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2025-04-30T20:56:00-07:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">♨️ Onsen - Yunnan</title><link href="https://andreasvolkmann.github.io//blog/onsen/2025-04-30-yunnan-onsen/" rel="alternate" type="text/html" title="♨️ Onsen - Yunnan" /><published>2025-04-30T00:00:00-07:00</published><updated>2025-04-30T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen/yunnan-onsen</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/onsen/2025-04-30-yunnan-onsen/"><![CDATA[<ol id="markdown-toc">
+  <li><a href="#angsana" id="markdown-toc-angsana">Angsana</a></li>
+  <li><a href="#huangguajing" id="markdown-toc-huangguajing">HuangguaJing</a></li>
+  <li><a href="#rehai" id="markdown-toc-rehai">Rehai</a></li>
+  <li><a href="#local-onsen" id="markdown-toc-local-onsen">Local Onsen</a></li>
+  <li><a href="#outside-tengchong" id="markdown-toc-outside-tengchong">Outside Tengchong</a></li>
+  <li><a href="#food" id="markdown-toc-food">Food</a></li>
+</ol>
+
+<p>Yunnan is colorful, vibrant, and very different from what most people imagine when they think of China.</p>
+
+<p>I was surprised by how little information is accessible about this region, especially when it comes to onsen.</p>
+
+<p>The Tengchong area has a ton of interesting hot springs in different styles: traditional, spa-style, decorative, and open-pool-style.</p>
+
+<p>I recommend Heshun as a base, situated between many hot springs. 
+Many houses, including the one I stayed in, have onsen water in their bath.</p>
+
+<p>The area is full of mountains, lakes, rivers, making for amazing views. This one is taken close to Simolawa village:
+  <hy-img root-margin="512px"  src="/assets/img/yunnan/fengjing.png" alt="view near Simolawa" >    <noscript><img data-ignore  src="/assets/img/yunnan/fengjing.png" alt="view near Simolawa" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
+
+<h2 id="angsana">Angsana</h2>
+<p>One of the spa hotels in the area with a large selection of outdoor pools. 
+They have a wide temperature selection, making it a good choice for beginners.
+Unfortunately, only a few pools are around 41-42 degrees.</p>
+
+<p><a href="https://www.angsana.com/china/tengchong">Angsana website</a></p>
+
+<p>  <hy-img root-margin="512px"  src="/assets/img/yunnan/angsana.png" alt="pools in agsana" >    <noscript><img data-ignore  src="/assets/img/yunnan/angsana.png" alt="pools in agsana" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+  <hy-img root-margin="512px"  src="/assets/img/yunnan/angsana_2.png" alt="pools in agsana" >    <noscript><img data-ignore  src="/assets/img/yunnan/angsana_2.png" alt="pools in agsana" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
+
+<p>Here is the water quality report from the hotel.
+  <hy-img root-margin="512px"  src="/assets/img/yunnan/shui_zhiliang.png" alt="Water quality" >    <noscript><img data-ignore  src="/assets/img/yunnan/shui_zhiliang.png" alt="Water quality" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+This is bicarbonate water.</p>
+
+<p>Another similar onsen hotel we visited is “the Lotus” or Hehua (荷花温泉). Hardly any presence in English, but this is it: 
+<a href="https://www.trip.com/travel-guide/attraction/lianghe/hehua-hot-spring-10759140/">Lotus onsen</a></p>
+
+<h2 id="huangguajing">HuangguaJing</h2>
+
+<p>Huangguajing has the hottest water (&gt;43) and overall the most authentic experience without the “spa” atmosphere. 
+  <hy-img root-margin="512px"  src="/assets/img/yunnan/huangguajing.png" alt="onsen in hotel" >    <noscript><img data-ignore  src="/assets/img/yunnan/huangguajing.png" alt="onsen in hotel" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
+
+<p>It’s small and very crowded, which can impact the experience a bit.</p>
+
+<h2 id="rehai">Rehai</h2>
+<p>Rehai has a bit of Beppu with the many decorative pools.
+  <hy-img root-margin="512px"  src="/assets/img/yunnan/rehai.png" alt="view" >    <noscript><img data-ignore  src="/assets/img/yunnan/rehai.png" alt="view" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+It’s a nice, scenic path from the shuttle to the onsen.</p>
+
+<h2 id="local-onsen">Local Onsen</h2>
+<p>This onsen has no presence online, as far as I can tell.
+It’s near the road, easy to miss if you don’t know where to look.</p>
+
+<p>It features several foot onsen, as well as large pools.
+  <hy-img root-margin="512px"  src="/assets/img/yunnan/pool.png" alt="view" >    <noscript><img data-ignore  src="/assets/img/yunnan/pool.png" alt="view" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
+
+<p>I like the variety that onsen pools offer, as it’s super comfortable take a swim in them.</p>
+
+<p>The sunset here was amazing.</p>
+
+<p>This is definitely more of a local spot, so I am happy I got to experience it.</p>
+
+<h2 id="outside-tengchong">Outside Tengchong</h2>
+<p>I also visited some onsen outside Tengchong, like Reguo (热国) near Dali.
+If you’re in the area, it’s worth checking out.</p>
+
+<h2 id="food">Food</h2>
+
+<p>Lastly, Yunnan’s got it all. Amazing food, fruit, coffee, and tea (the local tea is called Dianhong 滇红).
+  <hy-img root-margin="512px"  src="/assets/img/yunnan/food.jpg" alt="food" >    <noscript><img data-ignore  src="/assets/img/yunnan/food.jpg" alt="food" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+The cuisine has strong influences from neighboring Thailand and Myanmar, often incorporating fruit.
+I am especially fond of anything with passion fruit. 
+I had both a hotpot with passion fruit in the soup, and amazing local tomatoes with passion fruit dressing.</p>
+
+<p>  <hy-img root-margin="512px"  src="/assets/img/yunnan/shuiguo.png" alt="local fruit" >    <noscript><img data-ignore  src="/assets/img/yunnan/shuiguo.png" alt="local fruit" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+There are some fruits here that I have never tried before, and unfortunately don’t know the name right now.</p>
+
+<p>We checked out one of the coffee plantations. 
+  <hy-img root-margin="512px"  src="/assets/img/yunnan/coffee.png" alt="coffee" >    <noscript><img data-ignore  src="/assets/img/yunnan/coffee.png" alt="coffee" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+I really enjoyed the local coffee and the surrounding culture. It reminds me a bit of Italy.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="onsen" /><summary type="html"><![CDATA[An unexpectedly onsen experience in mysterious Yunnan]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://andreasvolkmann.github.io//assets/img/yunnan/bridge.jpg" /><media:content medium="image" url="https://andreasvolkmann.github.io//assets/img/yunnan/bridge.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">⚡ Power Automate - Efficient CSV to JSON</title><link href="https://andreasvolkmann.github.io//blog/software/2025-04-19-flow-perf-csv-to-json/" rel="alternate" type="text/html" title="⚡ Power Automate - Efficient CSV to JSON" /><published>2025-04-19T00:00:00-07:00</published><updated>2025-04-19T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/software/flow-perf-csv-to-json</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/software/2025-04-19-flow-perf-csv-to-json/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#split-lines" id="markdown-toc-split-lines">Split Lines</a></li>
   <li><a href="#split-rows" id="markdown-toc-split-rows">Split Rows</a></li>
   <li><a href="#map-to-object" id="markdown-toc-map-to-object">Map to Object</a></li>
@@ -12,13 +92,7 @@
 
 <p>The overall flow looks like this:</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/flow_csv-to-json_overview.png" alt="Flow CSV to JSON" >
-    <noscript><img data-ignore  src="/assets/img/flow_csv-to-json_overview.png" alt="Flow CSV to JSON" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/flow_csv-to-json_overview.png" alt="Flow CSV to JSON" >    <noscript><img data-ignore  src="/assets/img/flow_csv-to-json_overview.png" alt="Flow CSV to JSON" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>High level overview:</p>
 <ol>
@@ -49,13 +123,7 @@
 
 <p>Takes an array of strings and splits them by comma into an array of arrays of strings.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/flow_csv-to-json_split-rows.png" alt="Split Rows" >
-    <noscript><img data-ignore  src="/assets/img/flow_csv-to-json_split-rows.png" alt="Split Rows" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/flow_csv-to-json_split-rows.png" alt="Split Rows" >    <noscript><img data-ignore  src="/assets/img/flow_csv-to-json_split-rows.png" alt="Split Rows" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">split</span><span class="o">(</span><span class="n">item</span><span class="o">(),</span> <span class="sc">','</span><span class="o">)</span>
 </code></pre></div></div>
@@ -68,13 +136,7 @@
 
 <p>For each column, assign <code class="language-plaintext highlighter-rouge">item()?[0]</code> with the corresponding index</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/flow_csv-to-json_map-objects.png" alt="Map to Object" >
-    <noscript><img data-ignore  src="/assets/img/flow_csv-to-json_map-objects.png" alt="Map to Object" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/flow_csv-to-json_map-objects.png" alt="Map to Object" >    <noscript><img data-ignore  src="/assets/img/flow_csv-to-json_map-objects.png" alt="Map to Object" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>The final output will be an array of objects:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
@@ -96,7 +158,7 @@
 
 <p>Looping over even small collections will take seconds as opposed to near-instant data operations.</p>
 
-<p>For more see <a href="/blog/2022-04-09-dataverse-perf-flow-loops">Dataverse Performance - Flow Iteration</a></p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Recently had to convert a CSV file to JSON in a Power Automate Flow and found that all existing articles on this are using inefficient loops]]></summary></entry><entry><title type="html">⚗️ Learning from Agents</title><link href="http://localhost:4000/blog/2024-07-22-first-agent/" rel="alternate" type="text/html" title="⚗️ Learning from Agents" /><published>2024-07-22T00:00:00-07:00</published><updated>2024-07-22T00:00:00-07:00</updated><id>http://localhost:4000/blog/first-agent</id><content type="html" xml:base="http://localhost:4000/blog/2024-07-22-first-agent/"><![CDATA[<ol id="markdown-toc">
+<p>For more see <a href="/blog/2022-04-09-dataverse-perf-flow-loops">Dataverse Performance - Flow Iteration</a></p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[Recently had to convert a CSV file to JSON in a Power Automate Flow and found that all existing articles on this are using inefficient loops]]></summary></entry><entry><title type="html">⚗️ Learning from Agents</title><link href="https://andreasvolkmann.github.io//blog/software/2024-07-22-first-agent/" rel="alternate" type="text/html" title="⚗️ Learning from Agents" /><published>2024-07-22T00:00:00-07:00</published><updated>2024-07-22T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/software/first-agent</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/software/2024-07-22-first-agent/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#less-is-more" id="markdown-toc-less-is-more">Less is more</a></li>
   <li><a href="#context-is-everything" id="markdown-toc-context-is-everything">Context is everything</a></li>
   <li><a href="#every-token-matters" id="markdown-toc-every-token-matters">Every token matters</a></li>
@@ -198,13 +260,7 @@ represent a distinct behavior.</li>
     </ul>
   </li>
   <li>Eventually GPT-5. But at what cost?
-
-  <hy-img root-margin="512px"  src="/assets/img/gpt5whale.jpeg" alt="GPT-5" >
-    <noscript><img data-ignore  src="/assets/img/gpt5whale.jpeg" alt="GPT-5" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img>
+  <hy-img root-margin="512px"  src="/assets/img/gpt5whale.jpeg" alt="GPT-5" >    <noscript><img data-ignore  src="/assets/img/gpt5whale.jpeg" alt="GPT-5" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
     <ul>
       <li>Realism comes at the cost of coverage</li>
       <li><a href="https://gorilla.cs.berkeley.edu/leaderboard.html#:~:text=The%20Berkeley%20Function%20Calling%20Leaderboard,and%20will%20be%20updated%20periodically.">Berkeley Function Calling Leaderboard (aka Berkeley Tool Calling Leaderboard)</a></li>
@@ -216,7 +272,7 @@ we may want to explore SMLs, etc., and alternative approaches to improve</li>
   </li>
 </ul>
 
-<p>Those are my current thoughts. Excited to see how they will have changed in 6 months - 1 year’s time!</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[LLMs round 2 - lessons learned from working with agents]]></summary></entry><entry><title type="html">♨️ Onsen City</title><link href="http://localhost:4000/blog/2024-04-28-onsen-city/" rel="alternate" type="text/html" title="♨️ Onsen City" /><published>2024-04-28T00:00:00-07:00</published><updated>2024-04-28T00:00:00-07:00</updated><id>http://localhost:4000/blog/onsen-city</id><content type="html" xml:base="http://localhost:4000/blog/2024-04-28-onsen-city/"><![CDATA[<ol id="markdown-toc">
+<p>Those are my current thoughts. Excited to see how they will have changed in 6 months - 1 year’s time!</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[LLMs round 2 - lessons learned from working with agents]]></summary></entry><entry><title type="html">♨️ Onsen City</title><link href="https://andreasvolkmann.github.io//blog/onsen/2024-04-28-onsen-city/" rel="alternate" type="text/html" title="♨️ Onsen City" /><published>2024-04-28T00:00:00-07:00</published><updated>2024-04-28T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen/onsen-city</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/onsen/2024-04-28-onsen-city/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#yuyama-no-sato-湯山の里" id="markdown-toc-yuyama-no-sato-湯山の里">Yuyama no Sato 湯山の里</a></li>
   <li><a href="#ebisu-湯屋えびす" id="markdown-toc-ebisu-湯屋えびす">Ebisu 湯屋えびす</a></li>
   <li><a href="#nabeyama-鍋山の湯" id="markdown-toc-nabeyama-鍋山の湯">Nabeyama 鍋山の湯</a></li>
@@ -251,29 +307,11 @@ there’s a small 5 min hike through a small bamboo forest, down to then onsen.<
 
 <p>Since we didn’t meet anyone else here, this would be my secret tip.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/yuyama.png" alt="Yuyama Main Bath" >
-    <noscript><img data-ignore  src="/assets/img/yuyama.png" alt="Yuyama Main Bath" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/yuyama.png" alt="Yuyama Main Bath" >    <noscript><img data-ignore  src="/assets/img/yuyama.png" alt="Yuyama Main Bath" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/yuyama_2.png" alt="Yuyama waterfall" >
-    <noscript><img data-ignore  src="/assets/img/yuyama_2.png" alt="Yuyama waterfall" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/yuyama_2.png" alt="Yuyama waterfall" >    <noscript><img data-ignore  src="/assets/img/yuyama_2.png" alt="Yuyama waterfall" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/yuyama_3.png" alt="Yuyama river" >
-    <noscript><img data-ignore  src="/assets/img/yuyama_3.png" alt="Yuyama river" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/yuyama_3.png" alt="Yuyama river" >    <noscript><img data-ignore  src="/assets/img/yuyama_3.png" alt="Yuyama river" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>There is an abundance of different pools, with the temperature on the hotter side.</p>
 
@@ -281,34 +319,10 @@ there’s a small 5 min hike through a small bamboo forest, down to then onsen.<
 
 <p>Located in Myoban (明礬). They have both shared and private baths.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/ebisu_1.png" alt="Ebisu" >
-    <noscript><img data-ignore  src="/assets/img/ebisu_1.png" alt="Ebisu" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img>
-
-  <hy-img root-margin="512px"  src="/assets/img/ebisu_2.png" alt="Ebisu geranium" >
-    <noscript><img data-ignore  src="/assets/img/ebisu_2.png" alt="Ebisu geranium" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img>
-
-  <hy-img root-margin="512px"  src="/assets/img/ebisu_3.png" alt="Ebisu outdoor" >
-    <noscript><img data-ignore  src="/assets/img/ebisu_3.png" alt="Ebisu outdoor" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img>
-
-  <hy-img root-margin="512px"  src="/assets/img/ebisu_4.png" alt="Ebisu private" >
-    <noscript><img data-ignore  src="/assets/img/ebisu_4.png" alt="Ebisu private" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/ebisu_1.png" alt="Ebisu" >    <noscript><img data-ignore  src="/assets/img/ebisu_1.png" alt="Ebisu" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+  <hy-img root-margin="512px"  src="/assets/img/ebisu_2.png" alt="Ebisu geranium" >    <noscript><img data-ignore  src="/assets/img/ebisu_2.png" alt="Ebisu geranium" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+  <hy-img root-margin="512px"  src="/assets/img/ebisu_3.png" alt="Ebisu outdoor" >    <noscript><img data-ignore  src="/assets/img/ebisu_3.png" alt="Ebisu outdoor" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
+  <hy-img root-margin="512px"  src="/assets/img/ebisu_4.png" alt="Ebisu private" >    <noscript><img data-ignore  src="/assets/img/ebisu_4.png" alt="Ebisu private" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <h1 id="nabeyama-鍋山の湯">Nabeyama 鍋山の湯</h1>
 
@@ -339,35 +353,17 @@ there’s a small 5 min hike through a small bamboo forest, down to then onsen.<
 <p>Since these places are closely located, I group them under this moniker.</p>
 
 <h2 id="horita-堀田温泉">Horita 堀田温泉</h2>
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/horita.png" alt="Horita Men's bath" >
-    <noscript><img data-ignore  src="/assets/img/horita.png" alt="Horita Men's bath" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/horita.png" alt="Horita Men's bath" >    <noscript><img data-ignore  src="/assets/img/horita.png" alt="Horita Men's bath" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <h2 id="mugen-no-sato-夢幻の里">Mugen no Sato 夢幻の里</h2>
 
 <p>Consists of multiple private onsen, which you can rent for 1h for very little money (I think 1000?).</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/mugen-no-sato-yu.png" alt="Mugen no Sato private bath" >
-    <noscript><img data-ignore  src="/assets/img/mugen-no-sato-yu.png" alt="Mugen no Sato private bath" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/mugen-no-sato-yu.png" alt="Mugen no Sato private bath" >    <noscript><img data-ignore  src="/assets/img/mugen-no-sato-yu.png" alt="Mugen no Sato private bath" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>You can also steam your own food here, using the steam from the water.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/mugen-no-sato-mushi.png" alt="Mugen no Sato steam cooking area" >
-    <noscript><img data-ignore  src="/assets/img/mugen-no-sato-mushi.png" alt="Mugen no Sato steam cooking area" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/mugen-no-sato-mushi.png" alt="Mugen no Sato steam cooking area" >    <noscript><img data-ignore  src="/assets/img/mugen-no-sato-mushi.png" alt="Mugen no Sato steam cooking area" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>Recommend to capitalize on this and bring lots of raw ingredients.</p>
 
@@ -379,25 +375,13 @@ there’s a small 5 min hike through a small bamboo forest, down to then onsen.<
 
 <p>Suggest to time your visit for sunset and enjoy the evening here.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/suginoi_1.avif" alt="Suginoi Onsen" >
-    <noscript><img data-ignore  src="/assets/img/suginoi_1.avif" alt="Suginoi Onsen" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/suginoi_1.avif" alt="Suginoi Onsen" >    <noscript><img data-ignore  src="/assets/img/suginoi_1.avif" alt="Suginoi Onsen" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/suginoi_2.jpg" alt="Suginoi Swimming Pools" >
-    <noscript><img data-ignore  src="/assets/img/suginoi_2.jpg" alt="Suginoi Swimming Pools" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/suginoi_2.jpg" alt="Suginoi Swimming Pools" >    <noscript><img data-ignore  src="/assets/img/suginoi_2.jpg" alt="Suginoi Swimming Pools" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <hr />
 
-<p>For more Onsen, see <a href="/blog/2022-10-30-onsen">some of my favorite hot springs</a>.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[An entire city of onsen exceeding expectations]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/onsen_beppu.jpg" /><media:content medium="image" url="http://localhost:4000/assets/img/onsen_beppu.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">⚗️ Distilled knowledge</title><link href="http://localhost:4000/blog/2023-10-07-first-prompt/" rel="alternate" type="text/html" title="⚗️ Distilled knowledge" /><published>2023-10-07T00:00:00-07:00</published><updated>2023-10-07T00:00:00-07:00</updated><id>http://localhost:4000/blog/first-prompt</id><content type="html" xml:base="http://localhost:4000/blog/2023-10-07-first-prompt/"><![CDATA[<ol id="markdown-toc">
+<p>For more Onsen, see <a href="/blog/2022-10-30-onsen">some of my favorite hot springs</a>.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="onsen" /><summary type="html"><![CDATA[An entire city of onsen exceeding expectations]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://andreasvolkmann.github.io//assets/img/onsen_beppu.jpg" /><media:content medium="image" url="https://andreasvolkmann.github.io//assets/img/onsen_beppu.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">⚗️ Distilled knowledge</title><link href="https://andreasvolkmann.github.io//blog/software/2023-10-07-first-prompt/" rel="alternate" type="text/html" title="⚗️ Distilled knowledge" /><published>2023-10-07T00:00:00-07:00</published><updated>2023-10-07T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/software/first-prompt</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/software/2023-10-07-first-prompt/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#the-intersection-of-programming-and-language" id="markdown-toc-the-intersection-of-programming-and-language">The intersection of programming and language</a></li>
   <li><a href="#distilling-prompts" id="markdown-toc-distilling-prompts">Distilling prompts</a>    <ol>
       <li><a href="#less-is-more" id="markdown-toc-less-is-more">Less is more</a></li>
@@ -432,13 +416,7 @@ then apply TDD (Test Driven Development) to push the prompt to its limits, by co
 
 <p>This is already being done at the model level, yielding the below chart,
 which can help visualize the strengths &amp; weaknesses of each model.
-<a href="https://browse.arxiv.org/pdf/2309.16583.pdf">
-  <hy-img root-margin="512px"  src="/assets/img/llm_model_strength_weakness.png" alt="Model Strengths &amp; Weaknesses" >
-    <noscript><img data-ignore  src="/assets/img/llm_model_strength_weakness.png" alt="Model Strengths &amp; Weaknesses" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></a></p>
+<a href="https://browse.arxiv.org/pdf/2309.16583.pdf">  <hy-img root-margin="512px"  src="/assets/img/llm_model_strength_weakness.png" alt="Model Strengths &amp; Weaknesses" >    <noscript><img data-ignore  src="/assets/img/llm_model_strength_weakness.png" alt="Model Strengths &amp; Weaknesses" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></a></p>
 
 <p>Once you’ve tried to combine plain programming with LLM prompts,
 you might agree with me that this is the next big step for our industry.</p>
@@ -533,13 +511,7 @@ I explore some of the reasons why Japanese is more concise in <a href="/blog/202
 
 <p>However, what matters in prompts are tokens, not characters, and from my experience the tokenization of English is quite efficient. 
 A lot of words are encoded as a single token, which means they can compete with Chinese characters. 
-<a href="https://platform.openai.com/tokenizer">
-  <hy-img root-margin="512px"  src="/assets/img/gpt_tokenizer.png" alt="GPT Tokenizer" >
-    <noscript><img data-ignore  src="/assets/img/gpt_tokenizer.png" alt="GPT Tokenizer" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></a></p>
+<a href="https://platform.openai.com/tokenizer">  <hy-img root-margin="512px"  src="/assets/img/gpt_tokenizer.png" alt="GPT Tokenizer" >    <noscript><img data-ignore  src="/assets/img/gpt_tokenizer.png" alt="GPT Tokenizer" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></a></p>
 
 <h2 id="outro">Outro</h2>
 
@@ -568,7 +540,7 @@ and it is amazing how much of it applies to LLMs / prompting.</p>
 </blockquote>
 
 <p>Basically <a href="https://en.wikipedia.org/wiki/Francis_Ford_Coppola">Coppola</a> was prompting himself with this book, which enabled him to produce The Godfather without the full script.
-Sounds like he had enough training data :)</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[To attain knowledge, add things every day. To attain wisdom, remove things every day. (*Laozi*)]]></summary></entry><entry><title type="html">🎨 DRY the paint on your Cross Cutting Concerns</title><link href="http://localhost:4000/blog/2023-02-12-dry-srp-caching/" rel="alternate" type="text/html" title="🎨 DRY the paint on your Cross Cutting Concerns" /><published>2023-02-12T00:00:00-08:00</published><updated>2023-02-12T00:00:00-08:00</updated><id>http://localhost:4000/blog/dry-srp-caching</id><content type="html" xml:base="http://localhost:4000/blog/2023-02-12-dry-srp-caching/"><![CDATA[<ol id="markdown-toc">
+Sounds like he had enough training data :)</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[To attain knowledge, add things every day. To attain wisdom, remove things every day. (*Laozi*)]]></summary></entry><entry><title type="html">🎨 DRY the paint on your Cross Cutting Concerns</title><link href="https://andreasvolkmann.github.io//blog/software/2023-02-12-dry-srp-caching/" rel="alternate" type="text/html" title="🎨 DRY the paint on your Cross Cutting Concerns" /><published>2023-02-12T00:00:00-08:00</published><updated>2023-02-12T00:00:00-08:00</updated><id>https://andreasvolkmann.github.io//blog/software/dry-srp-caching</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/software/2023-02-12-dry-srp-caching/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#scenario" id="markdown-toc-scenario">Scenario</a>    <ol>
       <li><a href="#requirements" id="markdown-toc-requirements">Requirements</a></li>
     </ol>
@@ -775,7 +747,7 @@ by Eberhard Wolff</a></li>
 Otherwise the query pattern is a good alternative that offers a lot of flexibility.</p>
 
 <p>The simpler patterns can be used during POC,
-but any non-trivial app will benefit from a clear-defined architecture.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Techniques to achieve clean cross cutting concerns]]></summary></entry><entry><title type="html">♨️ My favorite hot springs</title><link href="http://localhost:4000/blog/2022-10-30-onsen/" rel="alternate" type="text/html" title="♨️ My favorite hot springs" /><published>2022-10-30T00:00:00-07:00</published><updated>2022-10-30T00:00:00-07:00</updated><id>http://localhost:4000/blog/onsen</id><content type="html" xml:base="http://localhost:4000/blog/2022-10-30-onsen/"><![CDATA[<ol id="markdown-toc">
+but any non-trivial app will benefit from a clear-defined architecture.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[Techniques to achieve clean cross cutting concerns]]></summary></entry><entry><title type="html">♨️ My favorite hot springs 2022</title><link href="https://andreasvolkmann.github.io//blog/onsen/2022-10-30-onsen/" rel="alternate" type="text/html" title="♨️ My favorite hot springs 2022" /><published>2022-10-30T00:00:00-07:00</published><updated>2022-10-30T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen/onsen</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/onsen/2022-10-30-onsen/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#yakushima" id="markdown-toc-yakushima">Yakushima</a></li>
   <li><a href="#ischia" id="markdown-toc-ischia">Ischia</a></li>
   <li><a href="#são-miguel" id="markdown-toc-são-miguel">São Miguel</a>    <ol>
@@ -797,25 +769,13 @@ These hot springs developed naturally on the coast, which makes them quite uniqu
 <p>This small island south of the Japanese mainland is one of my favorite places in Japan, 
 not least because of its amazing hot springs!</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/yakushima.jpg" alt="Yakushima is beautiful" >
-    <noscript><img data-ignore  src="/assets/img/yakushima.jpg" alt="Yakushima is beautiful" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/yakushima.jpg" alt="Yakushima is beautiful" >    <noscript><img data-ignore  src="/assets/img/yakushima.jpg" alt="Yakushima is beautiful" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>The <a href="https://www.town.yakushima.kagoshima.jp/cust-facility/1421/">Hirauchi Kaichuu Onsen - 平内海中温泉</a> lies at the coast of the island and its basins
 are filled with ocean water. 
 It’s basically free, but you are encouraged to donate a few hundred yen to the locals maintaining it.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/onsen_hirauchi.jpg" alt="The Hirauchi hot spring" >
-    <noscript><img data-ignore  src="/assets/img/onsen_hirauchi.jpg" alt="The Hirauchi hot spring" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/onsen_hirauchi.jpg" alt="The Hirauchi hot spring" >    <noscript><img data-ignore  src="/assets/img/onsen_hirauchi.jpg" alt="The Hirauchi hot spring" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>One of the coolest experiences is to come here in the night and enjoy the starry sky whilst taking a hot bath.
 There are various temperatures to choose from in the basins, but a little caution is required as some can get very hot.</p>
@@ -827,13 +787,7 @@ made Yakushima one of my favorite destinations.</p>
 <h1 id="ischia">Ischia</h1>
 <p>Ischia is an island off the coast of Napoli in Italy.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/ischia.jpg" alt="Ischia is an island" >
-    <noscript><img data-ignore  src="/assets/img/ischia.jpg" alt="Ischia is an island" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/ischia.jpg" alt="Ischia is an island" >    <noscript><img data-ignore  src="/assets/img/ischia.jpg" alt="Ischia is an island" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>It’s a popular tourist destination and unfortunately we made the mistake of coming here during the summer, 
 meaning it was very crowded and our overall experience wasn’t the best.</p>
@@ -841,13 +795,7 @@ meaning it was very crowded and our overall experience wasn’t the best.</p>
 <p>Besides some negative experiences, 
 what saved the trip was our discovery of a hot spring in the ocean in the island’s southern part.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/onsen_baia_di_sorgeto.jpg" alt="Baia di Sorgeto Ischia" >
-    <noscript><img data-ignore  src="/assets/img/onsen_baia_di_sorgeto.jpg" alt="Baia di Sorgeto Ischia" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/onsen_baia_di_sorgeto.jpg" alt="Baia di Sorgeto Ischia" >    <noscript><img data-ignore  src="/assets/img/onsen_baia_di_sorgeto.jpg" alt="Baia di Sorgeto Ischia" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>Baia di Sorgeto is a little more difficult to access, but worth it every time.
 We spent every evening here. As it is entirely natural, this onsen is also free.
@@ -857,13 +805,7 @@ Even so, I felt the trip was worth it because Baia di Sorgeto was outstanding.</
 <h1 id="são-miguel">São Miguel</h1>
 <p>In the middle of the atlantic ocean lie the Azores, a group of Portugese islands, the biggest of which is São Miguel.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/sao_miguel.jpg" alt="São Miguel" >
-    <noscript><img data-ignore  src="/assets/img/sao_miguel.jpg" alt="São Miguel" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/sao_miguel.jpg" alt="São Miguel" >    <noscript><img data-ignore  src="/assets/img/sao_miguel.jpg" alt="São Miguel" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>I decided to visit because of the many similarities to Japan / Yakushima: 
 A volcanic island with lush, green vegetation, warm but rainy weather, tea plantations, and of course hot springs ♨️.</p>
@@ -875,13 +817,7 @@ so the most likely route is via Portugal’s mainland.</p>
 
 <p>Caldeira Velha is like a little trip through the jungle, with hot springs along the way. 
 Although there is only one smaller basin with really hot water, it’s a very atmospheric and relaxing journey.
-
-  <hy-img root-margin="512px"  src="/assets/img/onsen_caldeiravelha.jpg" alt="Caldeira Velha" >
-    <noscript><img data-ignore  src="/assets/img/onsen_caldeiravelha.jpg" alt="Caldeira Velha" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+  <hy-img root-margin="512px"  src="/assets/img/onsen_caldeiravelha.jpg" alt="Caldeira Velha" >    <noscript><img data-ignore  src="/assets/img/onsen_caldeiravelha.jpg" alt="Caldeira Velha" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <hr />
 
@@ -896,13 +832,7 @@ This place also has probably the hottest pool available.</p>
 <hr />
 
 <p>There is also an onsen in the sea, but we had no luck with the tide, so the water wasn’t warm enough.
-
-  <hy-img root-margin="512px"  src="/assets/img/onsen_ponta_ferraria.jpg" alt="Ponta Ferraria" >
-    <noscript><img data-ignore  src="/assets/img/onsen_ponta_ferraria.jpg" alt="Ponta Ferraria" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img>
+  <hy-img root-margin="512px"  src="/assets/img/onsen_ponta_ferraria.jpg" alt="Ponta Ferraria" >    <noscript><img data-ignore  src="/assets/img/onsen_ponta_ferraria.jpg" alt="Ponta Ferraria" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
 This hot spring goes by the name Ponta Ferraria, but it’s a little further away from everything so we didn’t try again.</p>
 
 <h2 id="furnas">Furnas</h2>
@@ -919,13 +849,7 @@ Definitely check it out, but be aware that it gets busy towards the evening.</p>
 <p>The main attraction is Parque Terra Nostra, which is a botanical garden with several hot spring baths included.
 One of these is actually a gigantic pool in which you can swim freely.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/onsen_terra_nostra.jpg" alt="Terra Nostra" >
-    <noscript><img data-ignore  src="/assets/img/onsen_terra_nostra.jpg" alt="Terra Nostra" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/onsen_terra_nostra.jpg" alt="Terra Nostra" >    <noscript><img data-ignore  src="/assets/img/onsen_terra_nostra.jpg" alt="Terra Nostra" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>The park itself is well worth seeing, but that onsen pool is truly a rare sight to behold! 
 It’s extremely satisfying to swim in the thermal water and you can find temperature differences throughout the pool.</p>
@@ -945,7 +869,7 @@ This is definitely worth trying! Amazing to see the many use cases thermal heat 
 <h1 id="conclusion">Conclusion</h1>
 <p>Hot springs are amazing and I wish they could be found anywhere. 
 In recent years I found a few hot springs that can make up for their general absence throughout Europe.
-I hope to visit many more in other parts of the world.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Explore these fascinating hot springs around the globe.]]></summary></entry><entry><title type="html">Dataverse Performance - Flow Iteration</title><link href="http://localhost:4000/blog/2022-04-09-dataverse-perf-flow-loops/" rel="alternate" type="text/html" title="Dataverse Performance - Flow Iteration" /><published>2022-04-09T00:00:00-07:00</published><updated>2022-04-09T00:00:00-07:00</updated><id>http://localhost:4000/blog/dataverse-perf-flow-loops</id><content type="html" xml:base="http://localhost:4000/blog/2022-04-09-dataverse-perf-flow-loops/"><![CDATA[<ol id="markdown-toc">
+I hope to visit many more in other parts of the world.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="onsen" /><summary type="html"><![CDATA[Explore these fascinating hot springs around the globe.]]></summary></entry><entry><title type="html">⚡ Power Automate - Iteration Performance</title><link href="https://andreasvolkmann.github.io//blog/software/2022-04-09-dataverse-perf-flow-loops/" rel="alternate" type="text/html" title="⚡ Power Automate - Iteration Performance" /><published>2022-04-09T00:00:00-07:00</published><updated>2022-04-09T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/software/dataverse-perf-flow-loops</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/software/2022-04-09-dataverse-perf-flow-loops/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#control" id="markdown-toc-control">Control</a></li>
   <li><a href="#data-operations" id="markdown-toc-data-operations">Data Operations</a>    <ol>
       <li><a href="#select" id="markdown-toc-select">Select</a></li>
@@ -966,26 +890,14 @@ and doesn’t provide many options to address the issues.</p>
 
 <h1 id="control">Control</h1>
 <p>One issue I’ve seen come up again and again in Flows is the use of imperative iteration.
-
-  <hy-img root-margin="512px"  src="/assets/img/flow-control.png" alt="Flow control" >
-    <noscript><img data-ignore  src="/assets/img/flow-control.png" alt="Flow control" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+  <hy-img root-margin="512px"  src="/assets/img/flow-control.png" alt="Flow control" >    <noscript><img data-ignore  src="/assets/img/flow-control.png" alt="Flow control" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>In other words, the two control actions <code class="language-plaintext highlighter-rouge">Apply to each</code> and <code class="language-plaintext highlighter-rouge">Do until</code>.
 At first glance, they seem like the go-to actions for looping.</p>
 
 <p>Turns out you are better off avoiding them unless absolutely necessary, seeing as the performance is abyssmal.
 Consider this simple, bare-bones <code class="language-plaintext highlighter-rouge">Do until</code>, with a single action to increment an integer inside:
-
-  <hy-img root-margin="512px"  src="/assets/img/flow-loop-slow.png" alt="Flow loops are slow" >
-    <noscript><img data-ignore  src="/assets/img/flow-loop-slow.png" alt="Flow loops are slow" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+  <hy-img root-margin="512px"  src="/assets/img/flow-loop-slow.png" alt="Flow loops are slow" >    <noscript><img data-ignore  src="/assets/img/flow-loop-slow.png" alt="Flow loops are slow" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>60 iterations took 12 seconds!
 This is completely unexpected for someone coming from traditional programming.</p>
@@ -1006,13 +918,7 @@ Unlike a traditional while or for loop, the control actions spawn a sub process 
 <p>As you can see, simple loops are very counter-intuitive in Flows.
 In order to rectify the situation, oftentimes the concurrency is upped.
 This does lead to faster execution, but increases the load on the system and can impact quota usage.
-
-  <hy-img root-margin="512px"  src="/assets/img/flow-concurrency.png" alt="Flow concurrency maxed out" >
-    <noscript><img data-ignore  src="/assets/img/flow-concurrency.png" alt="Flow concurrency maxed out" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img>
+  <hy-img root-margin="512px"  src="/assets/img/flow-concurrency.png" alt="Flow concurrency maxed out" >    <noscript><img data-ignore  src="/assets/img/flow-concurrency.png" alt="Flow concurrency maxed out" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
 Besides, you’ll hit the max eventually.</p>
 
 <p>Surely, there’s gotta be a better way, right? After all, loops are such a fundamental part of any program.</p>
@@ -1020,13 +926,7 @@ Besides, you’ll hit the max eventually.</p>
 <h1 id="data-operations">Data Operations</h1>
 <p>The antidote to the <code class="language-plaintext highlighter-rouge">Control loop</code> slowness comes in the form of <code class="language-plaintext highlighter-rouge">Data operations</code>.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/flow-data-operations.png" alt="Flow data operations are fast" >
-    <noscript><img data-ignore  src="/assets/img/flow-data-operations.png" alt="Flow data operations are fast" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/flow-data-operations.png" alt="Flow data operations are fast" >    <noscript><img data-ignore  src="/assets/img/flow-data-operations.png" alt="Flow data operations are fast" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>Data operations are to control loops as declarative programming is to imperative.
 They are basically higher order functions.</p>
@@ -1035,26 +935,14 @@ They are basically higher order functions.</p>
 
 <h2 id="select">Select</h2>
 <p>One example could be the transformation of a set of row objects to an array of their ids.
-
-  <hy-img root-margin="512px"  src="/assets/img/flow-loop.png" alt="Flow loop" >
-    <noscript><img data-ignore  src="/assets/img/flow-loop.png" alt="Flow loop" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img>
+  <hy-img root-margin="512px"  src="/assets/img/flow-loop.png" alt="Flow loop" >    <noscript><img data-ignore  src="/assets/img/flow-loop.png" alt="Flow loop" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img>
 The imperative <code class="language-plaintext highlighter-rouge">Apply to each</code> loop takes ~3 minutes for 300 records,
 even though the individual append operation takes less than a second.
 The functional <code class="language-plaintext highlighter-rouge">Select</code> operation completes within 1 second.</p>
 
 <h2 id="filter">Filter</h2>
 <p>Looping over 100 items, even without any logic in the condition, takes a significant amount of time.
-
-  <hy-img root-margin="512px"  src="/assets/img/flow-filter.png" alt="Flow filter" >
-    <noscript><img data-ignore  src="/assets/img/flow-filter.png" alt="Flow filter" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+  <hy-img root-margin="512px"  src="/assets/img/flow-filter.png" alt="Flow filter" >    <noscript><img data-ignore  src="/assets/img/flow-filter.png" alt="Flow filter" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <p>The functional <code class="language-plaintext highlighter-rouge">Filter array</code> operation completes in less than a second, as we would expect from such a workload.</p>
 
@@ -1088,7 +976,7 @@ Avoid looping over arrays of even medium size (100s).
 Prefer data operations like <code class="language-plaintext highlighter-rouge">Select</code>, <code class="language-plaintext highlighter-rouge">Compose</code>, <code class="language-plaintext highlighter-rouge">Join</code>, <code class="language-plaintext highlighter-rouge">Filter</code> to manipulate and transform multiple records at once.
 (Analogous to functional &gt; imperative in OO)</p>
 
-<p>Reserve the control loops for situations where data operations cannot be used.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Addressing common performance bottlenecks in Flows. There is more to loops than meets the eye. Once again, functional beats imperative.]]></summary></entry><entry><title type="html">Language features across the boundary</title><link href="http://localhost:4000/blog/2021-07-25-topic-markers-in-language-design/" rel="alternate" type="text/html" title="Language features across the boundary" /><published>2021-07-25T00:00:00-07:00</published><updated>2021-07-25T00:00:00-07:00</updated><id>http://localhost:4000/blog/topic-markers-in-language-design</id><content type="html" xml:base="http://localhost:4000/blog/2021-07-25-topic-markers-in-language-design/"><![CDATA[<ol id="markdown-toc">
+<p>Reserve the control loops for situations where data operations cannot be used.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[Addressing common performance bottlenecks in Flows. There is more to loops than meets the eye. Once again, functional beats imperative.]]></summary></entry><entry><title type="html">Language features across the boundary</title><link href="https://andreasvolkmann.github.io//blog/2021-07-25-topic-markers-in-language-design/" rel="alternate" type="text/html" title="Language features across the boundary" /><published>2021-07-25T00:00:00-07:00</published><updated>2021-07-25T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/topic-markers-in-language-design</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-07-25-topic-markers-in-language-design/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#topic-markers" id="markdown-toc-topic-markers">Topic markers</a>    <ol>
       <li><a href="#implicit-topics" id="markdown-toc-implicit-topics">Implicit topics</a></li>
     </ol>
@@ -1323,7 +1211,7 @@ In context-heavy languages we can omit a lot of implicit information,
 often leading to much shorter, concise sentences.</p>
 
 <p>To me, both Kotlin and Japanese have a sense of elegance, 
-as it is super easy to produce highly expressive and concise output.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Topic markers and context can help keep you DRY]]></summary></entry><entry><title type="html">Clean Architecture with ArchUnit</title><link href="http://localhost:4000/blog/2021-04-24-clean-arch-unit/" rel="alternate" type="text/html" title="Clean Architecture with ArchUnit" /><published>2021-04-24T00:00:00-07:00</published><updated>2021-04-24T00:00:00-07:00</updated><id>http://localhost:4000/blog/clean-arch-unit</id><content type="html" xml:base="http://localhost:4000/blog/2021-04-24-clean-arch-unit/"><![CDATA[<ol id="markdown-toc">
+as it is super easy to produce highly expressive and concise output.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Topic markers and context can help keep you DRY]]></summary></entry><entry><title type="html">Clean Architecture with ArchUnit</title><link href="https://andreasvolkmann.github.io//blog/software/2021-04-24-clean-arch-unit/" rel="alternate" type="text/html" title="Clean Architecture with ArchUnit" /><published>2021-04-24T00:00:00-07:00</published><updated>2021-04-24T00:00:00-07:00</updated><id>https://andreasvolkmann.github.io//blog/software/clean-arch-unit</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/software/2021-04-24-clean-arch-unit/"><![CDATA[<ol id="markdown-toc">
   <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
   <li><a href="#rules" id="markdown-toc-rules">Rules</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -1349,13 +1237,7 @@ just like for <a href="https://en.wikipedia.org/wiki/AspectJ">AspectJ</a> we now
 <p>Anyway, this is convenient for me, 
 since I wanted to take a look at enforcing a clean architecture in C# today. 
 (Please read <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Uncle Bob’s post</a>)
-<a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">
-  <hy-img root-margin="512px"  src="/assets/img/CleanArchitecture.jpg" alt="Overview of the Clean Architecture" >
-    <noscript><img data-ignore  src="/assets/img/CleanArchitecture.jpg" alt="Overview of the Clean Architecture" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></a></p>
+<a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">  <hy-img root-margin="512px"  src="/assets/img/CleanArchitecture.jpg" alt="Overview of the Clean Architecture" >    <noscript><img data-ignore  src="/assets/img/CleanArchitecture.jpg" alt="Overview of the Clean Architecture" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></a></p>
 
 <p>In the Java ArchUnit, there is out of the box support for both <code class="language-plaintext highlighter-rouge">layered</code> and <code class="language-plaintext highlighter-rouge">onion</code> architectures, 
 but not in the dotnet ports.</p>
@@ -1367,13 +1249,7 @@ So, while the end goal is a clean architecture,
 for now I just want to implement some simple layer checks, 
 similar to the ones shown in the image below.</p>
 
-<p>
-  <hy-img root-margin="512px"  src="/assets/img/layer-check.png" alt="Overview of the Clean Architecture" >
-    <noscript><img data-ignore  src="/assets/img/layer-check.png" alt="Overview of the Clean Architecture" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
+<p>  <hy-img root-margin="512px"  src="/assets/img/layer-check.png" alt="Overview of the Clean Architecture" >    <noscript><img data-ignore  src="/assets/img/layer-check.png" alt="Overview of the Clean Architecture" /></noscript>    <span class="loading" slot="loading" hidden>      <span class="icon-cog"></span>    </span>  </hy-img></p>
 
 <h2 id="setup">Setup</h2>
 
@@ -1432,155 +1308,4 @@ Whilst the AOP compile-time approach is great, too, I prefer an AOP-independent 
 
 <p>It would be great to have the layer and onion dsl ported to C#, too.</p>
 
-<p>I will be experimenting with the layers and slowly approach a clean architecture.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Enforcing a layered architecture with tests]]></summary></entry><entry><title type="html">Arkenv v3.2.0 - available on maven central</title><link href="http://localhost:4000/blog/2021-04-03-arkenv-new-release/" rel="alternate" type="text/html" title="Arkenv v3.2.0 - available on maven central" /><published>2021-04-03T00:00:00-07:00</published><updated>2021-04-03T00:00:00-07:00</updated><id>http://localhost:4000/blog/arkenv-new-release</id><content type="html" xml:base="http://localhost:4000/blog/2021-04-03-arkenv-new-release/"><![CDATA[<ol id="markdown-toc">
-  <li><a href="#background" id="markdown-toc-background">Background</a></li>
-  <li><a href="#new-repository" id="markdown-toc-new-repository">New repository</a></li>
-  <li><a href="#new-features" id="markdown-toc-new-features">New features</a>    <ol>
-      <li><a href="#plain-class-support" id="markdown-toc-plain-class-support">Plain class support</a>        <ol>
-          <li><a href="#constructor-injection" id="markdown-toc-constructor-injection">Constructor injection</a></li>
-          <li><a href="#modules" id="markdown-toc-modules">Modules</a></li>
-        </ol>
-      </li>
-      <li><a href="#new-feature-syntax" id="markdown-toc-new-feature-syntax">New feature syntax</a></li>
-    </ol>
-  </li>
-  <li><a href="#breaking-changes" id="markdown-toc-breaking-changes">Breaking changes</a></li>
-  <li><a href="#further-information" id="markdown-toc-further-information">Further information</a></li>
-</ol>
-
-<p>I am happy to announce that we have migrated from JCenter to <a href="https://search.maven.org/search?q=arkenv">Maven Central</a>, and are
-releasing version <code class="language-plaintext highlighter-rouge">3.2.0</code> with new features, including plain class support and constructor injection.
-Before we dive into the news, I want to take a look back at how we got here.</p>
-
-<p>
-  <hy-img root-margin="512px"  src="https://raw.githubusercontent.com/aPureBase/arkenv/master/docs/arkenv_logo.png" alt="Arkenv logo" >
-    <noscript><img data-ignore  src="https://raw.githubusercontent.com/aPureBase/arkenv/master/docs/arkenv_logo.png" alt="Arkenv logo" /></noscript>
-    <span class="loading" slot="loading" hidden>
-      <span class="icon-cog"></span>
-    </span>
-  </hy-img></p>
-
-<p>Throughout its lifetime, <a href="https://github.com/aPureBase/arkenv">Arkenv</a> has offered many great learning opportunities, 
-and having the chance to create such a project is something I wish upon every developer.</p>
-
-<p>Even though it is in no way a complex, or groundbreaking venture, 
-I still consider it an important stepping stone, being my first open-source library.
-Keeping the scope small and manageable is probably an advantage when starting out.</p>
-
-<h2 id="background">Background</h2>
-<p>There were two primary reasons for the conception of Arkenv.</p>
-
-<p>Firstly, we were looking for a way to seamlessly bridge the changing configuration needs in 
-different environments with minimal developer intervention.
-Starting out with command line libraries like <a href="https://github.com/cbeust/jcommander">JCommander</a>, 
-we soon realized that we wanted a central abstraction to define our external configuration,
-which didn’t depend on the configuration source. 
-Pretty much like <a href="https://spring.io/blog/2020/04/23/spring-tips-configuration">Environment</a> in Spring.</p>
-
-<p>For example, we wanted to be able to go from a command line-driven environment to an
-environment variable-driven one without having to add code or recompile.</p>
-
-<p>Secondly, I really wanted to try to build something with <a href="https://kotlinlang.org/docs/delegated-properties.html">Kotlin delegates</a>.
-Another issue we had with many existing, annotation-based libraries, was the lack of type-safety 
-and null support. 
-Quickly, we saw that delegates were a perfect fit for these criteria, and the first version
-with CLI and ENV support didn’t fill more than a few lines.</p>
-
-<p>The idea was to declare an immutable property, with nullability indicating whether it is optional or not,
-and whose name is used to resolve it.</p>
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">port</span><span class="p">:</span> <span class="nc">Int</span> <span class="k">by</span> <span class="nf">argument</span><span class="p">()</span>
-</code></pre></div></div>
-<p>Once declared, it can be provided via CLI <code class="language-plaintext highlighter-rouge">--port 443</code>, environment variable <code class="language-plaintext highlighter-rouge">PORT=443</code>,
-or in a profile (properties, yaml) <code class="language-plaintext highlighter-rouge">port: 443</code>.</p>
-
-<p>Later on we added support for other sources, like <a href="https://apurebase.gitlab.io/arkenv/features/dot-env-files/">.env files</a>
- and <a href="https://apurebase.gitlab.io/arkenv/features/docker-secrets/">Docker secrets</a>.</p>
-
-<h2 id="new-repository">New repository</h2>
-<p>With the announcement of JCenter ending support of their popular repository, 
-many open-source projects had to migrate to Maven Central.
-We could have lived without this interruption, but on the other hand,
-it is great to be able to go with the default repository.</p>
-
-<p>From now on, all new releases will be available here.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">repositories</span> <span class="p">{</span>
-    <span class="nf">mavenCentral</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="nf">implementation</span><span class="p">(</span><span class="s">"com.apurebase"</span><span class="p">,</span> <span class="s">"arkenv"</span><span class="p">,</span> <span class="s">"3.2.0"</span><span class="p">)</span>
-<span class="nf">implementation</span><span class="p">(</span><span class="s">"com.apurebase"</span><span class="p">,</span> <span class="s">"arkenv-yaml"</span><span class="p">,</span> <span class="s">"3.2.0"</span><span class="p">)</span> <span class="c1">// for yaml support</span>
-</code></pre></div></div>
-
-<h2 id="new-features">New features</h2>
-
-<h3 id="plain-class-support">Plain class support</h3>
-
-<p>It is no longer necessary to extend <code class="language-plaintext highlighter-rouge">Arkenv</code> when defining an argument class.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="nc">Configuration</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">port</span><span class="p">:</span> <span class="nc">Int</span> <span class="k">by</span> <span class="nf">argument</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="nc">Arkenv</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nc">Arguments</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Plain classes do not have a <code class="language-plaintext highlighter-rouge">help</code> argument by default.</p>
-
-<h4 id="constructor-injection">Constructor injection</h4>
-<p>Instead of declaring arguments, one can now let <code class="language-plaintext highlighter-rouge">Arkenv</code> inject directly
-into the constructor of a plain class.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Configuration</span><span class="p">(</span><span class="kd">val</span> <span class="py">port</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span>
-
-<span class="c1">// construct an instance with the parse factory function</span>
-<span class="kd">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Arkenv</span><span class="p">.</span><span class="n">parse</span><span class="p">&lt;</span><span class="nc">Configuration</span><span class="p">&gt;(</span><span class="n">args</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Consequently, we cannot apply any config to these arguments, 
-but default values are supported natively.</p>
-
-<h4 id="modules">Modules</h4>
-<p>The above approaches can be combined freely, and both support modules, too.
-In plain classes, modules are declared with a delegate, i.e. <code class="language-plaintext highlighter-rouge">by module()</code>.
-The module delegate function also accepts a configuration lambda with prefix support.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">SubConfig</span><span class="p">(</span><span class="kd">val</span> <span class="py">country</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">port</span><span class="p">:</span> <span class="nc">Int</span> <span class="k">by</span> <span class="nf">argument</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="kd">object</span>  <span class="nc">Configuration</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">subModule</span> <span class="k">by</span> <span class="n">module</span><span class="p">&lt;</span><span class="nc">SubConfig</span><span class="p">&gt;()</span>
-<span class="p">}</span>
-
-<span class="nc">Arkenv</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nc">Configuration</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-<span class="nc">Configuration</span><span class="p">.</span><span class="n">subModule</span><span class="p">.</span><span class="n">port</span> <span class="c1">// member access</span>
-</code></pre></div></div>
-
-<p>The above <code class="language-plaintext highlighter-rouge">SubConfig</code> class accepts constructor parameters and declares arguments in its body.</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">Configuration</code> object declares a module that is automatically created on parse.</p>
-
-<h3 id="new-feature-syntax">New feature syntax</h3>
-<p>Features can now be configured with <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code>.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Arkenv</span><span class="p">.</span><span class="n">parse</span><span class="p">&lt;</span><span class="nc">Configuration</span><span class="p">&gt;(</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="p">+</span><span class="nc">ProfileFeature</span><span class="p">(</span><span class="n">prefix</span> <span class="p">=</span> <span class="s">"app"</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="breaking-changes">Breaking changes</h2>
-<p>Most extension functions have moved to the <code class="language-plaintext highlighter-rouge">util</code> package.
-This will break your build when upgrading, but should be easy to fix,
-by importing the correct packages.</p>
-
-<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//import com.apurebase.arkenv.parse</span>
-<span class="k">import</span> <span class="nn">com.apurebase.arkenv.util.parse</span>
-</code></pre></div></div>
-
-<h2 id="further-information">Further information</h2>
-<p>Log any bugs or feature requests on <a href="https://github.com/aPureBase/arkenv">Github</a>.</p>
-
-<p>📃 Please visit <a href="https://apurebase.gitlab.io/arkenv/">https://apurebase.gitlab.io/arkenv/</a> for in-depth documentation.</p>
-
-<p>🤝 Ask any questions in the Arkenv channel in the <a href="https://kotlinlang.slack.com/messages/CGF74HD19/">official Kotlin Slack</a>.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[New repository, new features, and a look at how we got here]]></summary></entry></feed>
+<p>I will be experimenting with the layers and slowly approach a clean architecture.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[Enforcing a layered architecture with tests]]></summary></entry></feed>
