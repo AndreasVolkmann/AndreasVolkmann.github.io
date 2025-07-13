@@ -1,5 +1,135 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2025-05-01T21:26:00-07:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
-</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">♨️ Onsen - Yunnan</title><link href="https://andreasvolkmann.github.io//blog/onsen/2025-04-30-yunnan-onsen/" rel="alternate" type="text/html" title="♨️ Onsen - Yunnan" /><published>2025-04-30T00:00:00-07:00</published><updated>2025-05-01T21:19:39-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen/yunnan-onsen</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/onsen/2025-04-30-yunnan-onsen/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://andreasvolkmann.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://andreasvolkmann.github.io//" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-06T15:17:31-07:00</updated><id>https://andreasvolkmann.github.io//feed.xml</id><title type="html">Andreas Volkmann</title><subtitle>A personal page for showcasing projects and talking about my interests.
+</subtitle><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><entry><title type="html">🌐 Typing of the Dead</title><link href="https://andreasvolkmann.github.io//blog/language/2025-07-06-typing-of-the-dead/" rel="alternate" type="text/html" title="🌐 Typing of the Dead" /><published>2025-07-06T00:00:00-07:00</published><updated>2025-07-06T15:12:07-07:00</updated><id>https://andreasvolkmann.github.io//blog/language/typing-of-the-dead</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/language/2025-07-06-typing-of-the-dead/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#installation" id="markdown-toc-installation">Installation</a>    <ul>
+      <li><a href="#display-japanese-chars-in-setup" id="markdown-toc-display-japanese-chars-in-setup">Display Japanese chars in Setup</a></li>
+      <li><a href="#find-serial" id="markdown-toc-find-serial">Find serial</a></li>
+    </ul>
+  </li>
+  <li><a href="#running-the-game" id="markdown-toc-running-the-game">Running the game</a></li>
+  <li><a href="#hacking-the-dictionary" id="markdown-toc-hacking-the-dictionary">Hacking the dictionary</a>    <ul>
+      <li><a href="#adapt-for-chinese" id="markdown-toc-adapt-for-chinese">Adapt for Chinese</a></li>
+    </ul>
+  </li>
+  <li><a href="#anki-integration" id="markdown-toc-anki-integration">Anki integration</a></li>
+  <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
+</ul>
+
+<p>If you were young in the 00s, you may have run into the arcade light-gun game “House of the Dead” which is a rail shooter where you have to fight through zombies to survive.</p>
+
+<p>I recently discovered that there is a version of this game called “Typing of the Dead” where you have to type words to kill zombies instead of shooting them.</p>
+
+<p>This was sold as a tool to help people learn how to type, but I am more interested in using it for learning languages.</p>
+
+<p>Therefore the question arose:</p>
+<blockquote>
+  <p>Can we hack the game to include custom vocabulary for language learning?</p>
+</blockquote>
+
+<h2 id="installation">Installation</h2>
+
+<ul>
+  <li>Download from <a href="https://www.myabandonware.com/game/the-typing-of-the-dead-bee">Abandonware</a></li>
+  <li>Choose: ISO Version <img src="https://www.myabandonware.com/media/img/lang/ja.gif" alt="Japanese (ja) version" />  614 MB</li>
+  <li>Use <a href="https://wincdemu.sysprogs.org/">WinCdEmu</a> to mount the<code class="language-plaintext highlighter-rouge">Typing of the Dead, The (Japan).cue</code> file</li>
+  <li>Go to the mounted drive and run <code class="language-plaintext highlighter-rouge">Setup.exe</code></li>
+</ul>
+
+<h3 id="display-japanese-chars-in-setup">Display Japanese chars in Setup</h3>
+
+<p>You may have issues reading the setup:
+<img src="/assets/img/typing/setup_issue.png" alt="Garbled characters in the setup" /></p>
+
+<ul>
+  <li>Go to <strong>Settings</strong> &gt; <strong>Time &amp; Language</strong> &gt; <strong>Language &amp; Region</strong></li>
+  <li>Click <strong>Administrative language settings</strong></li>
+  <li>Click <strong>Change system locale</strong></li>
+  <li>Check <strong>Beta: Use Unicode UTF-8 for worldwide language support</strong></li>
+  <li>Restart your computer</li>
+</ul>
+
+<h3 id="find-serial">Find serial</h3>
+<p>In order to install we need a serial number. I first tried the one from the Abandonware site, which is marked for the English version, but it didn’t work.
+After some searching I found the correct format in this thread: <a href="http://oshiete.goo.ne.jp/qa/252031.html">oshiete.goo.ne.jp/qa/252031.html</a>.</p>
+
+<p>TLDR the structure follows the pattern <code class="language-plaintext highlighter-rouge">TODXXXXX-XXXXXX-XXXXX</code>, where <code class="language-plaintext highlighter-rouge">X</code> is a digit.
+You can take the serial from the Abandonware site and replace the prefix.</p>
+
+<h2 id="running-the-game">Running the game</h2>
+
+<ul>
+  <li>Use Locale Emulator to run the game in a Japanese locale: <a href="https://xupefei.github.io/Locale-Emulator/">LocaleEmulator</a></li>
+  <li>Set compatibility mode to Windows XP</li>
+</ul>
+
+<p>At this point we are ready to play:
+<img src="/assets/img/typing/vanilla.png" alt="vanilla game" /></p>
+
+<p>Out of box, the game can be used to practice Japanese, but the lack of vocab-customization means it’s not ideal for language learning.</p>
+
+<h2 id="hacking-the-dictionary">Hacking the dictionary</h2>
+<p>The vocabulary used in the game is stored in the <code class="language-plaintext highlighter-rouge">/word</code> folder as <code class="language-plaintext highlighter-rouge">.bin</code> files.</p>
+
+<p>In order to modify, we need to understand the file format.</p>
+
+<p>The main structure is explained in this <a href="https://www.arcade-projects.com/threads/making-an-english-version-of-typing-of-the-dead-arcade.106/page-10#post-70062">arcade thread</a> by user sammargh.</p>
+
+<p>In order to build the first version of the decoder, I gave Copilot the <code class="language-plaintext highlighter-rouge">S000L010.bin</code> file and the posts in the thread above, which, after some back and forth, resulted in correct extraction of the current vocabulary.</p>
+
+<p>It then took some trial and error to figure out how to map back new vocabulary to the game, and initial attempts looked like this:</p>
+
+<p><img src="/assets/img/typing/first-attempt.png" alt="first attempt" /></p>
+
+<h3 id="adapt-for-chinese">Adapt for Chinese</h3>
+<p>The game is designed for Japanese, so the engine works off Shift-JIS encoding, which means we cannot display simplified Chinese characters.</p>
+
+<p>However, as a workaround, we can fallback to traditional Chinese characters.</p>
+
+<p>So the phrase is the traditional version of my vocab word, and the key is the pinyin.2 version, which means <code class="language-plaintext highlighter-rouge">标准</code> -&gt; <code class="language-plaintext highlighter-rouge">biao1zhun3</code>.
+This ensures we can easily type the keys.</p>
+
+<h2 id="anki-integration">Anki integration</h2>
+
+<p>Now naturally the next step is to integrate this with Anki, so we can use the game to practice our actual vocabulary in real time, instead of static vocab.</p>
+
+<p>I already have a project where I integrate Anki with some gen AI to backfill cards which lack sample sentence, audio, or image.</p>
+
+<p>To connect to Anki, I use <a href="https://git.sr.ht/~foosoft/anki-connect">AnkiConnect</a> which in the current software climate feels like an Anki MCP server.</p>
+
+<p>It essentially hosts a local HTTP server which exposes APIs to interact with Anki, allowing us to programmatically query, create, and modify cards.</p>
+
+<p>So I just dropped my code into the project and wrote a command to find cards due today with traditional and pinyin fields populated, and then generate the <code class="language-plaintext highlighter-rouge">.bin</code> file from it.</p>
+
+<p>Here you can see my Anki browser where the data is taken from:
+<img src="/assets/img/typing/anki-browser.png" alt="anki deck" /></p>
+
+<p>And here is the result in the game:
+<img src="/assets/img/typing/traditional-zh.png" alt="chinese version" /></p>
+
+<p>All code is in <a href="https://github.com/AndreasVolkmann/yuyan">github</a></p>
+
+<p>For this experiment, I tried to rely on LLMs to speed up work. As a result ~90% of the code is written by Copilot.</p>
+
+<p>The file format decoding was the hardest part, and I found that I needed a larger model like Claude Opus 4 to make sense of it.</p>
+
+<p>I had to go back to <code class="language-plaintext highlighter-rouge">Ask</code> mode for most of the work as Agent mode does not support Claude Opus 4 and the other models produced mostly garbage.</p>
+
+<p>Always optimize the context for the task at hand.
+In this case I needed to minimize the context to the utmost essential to prevent it from getting side-tracked.</p>
+
+<p>Also see <a href="/blog/software/2024-07-22-first-agent/#context-is-everything">Learning from Agents - Context is Everything</a></p>
+
+<p>Ultimately this is what the process looks like:
+<img src="/assets/img/typing/diagram.png" alt="diagram" /></p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>Even though we achieved dynamic vocabulary via Anki, there are still some shortcomings that make the experience impractical:</p>
+<ul>
+  <li>Ideally, we can hide the keycode so that User has to know the keys for the phrase rather than read it off the screen</li>
+  <li>Font is limited to Kanji, so we cannot display simplified Chinese characters</li>
+</ul>
+
+<p>Given these limitations, this idea works best for Japanese Anki decks.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="language" /><summary type="html"><![CDATA[Learn anything with reinforcement learning and zombies]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://andreasvolkmann.github.io//assets/img/typing/athumbnail.png" /><media:content medium="image" url="https://andreasvolkmann.github.io//assets/img/typing/athumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">♨️ Onsen - Tengchong 腾冲</title><link href="https://andreasvolkmann.github.io//blog/onsen/2025-04-30-yunnan-onsen/" rel="alternate" type="text/html" title="♨️ Onsen - Tengchong 腾冲" /><published>2025-04-30T00:00:00-07:00</published><updated>2025-07-06T13:00:15-07:00</updated><id>https://andreasvolkmann.github.io//blog/onsen/yunnan-onsen</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/onsen/2025-04-30-yunnan-onsen/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#angsana" id="markdown-toc-angsana">Angsana</a></li>
   <li><a href="#huangguajing" id="markdown-toc-huangguajing">HuangguaJing</a></li>
   <li><a href="#rehai" id="markdown-toc-rehai">Rehai</a></li>
@@ -976,7 +1106,7 @@ Avoid looping over arrays of even medium size (100s).
 Prefer data operations like <code class="language-plaintext highlighter-rouge">Select</code>, <code class="language-plaintext highlighter-rouge">Compose</code>, <code class="language-plaintext highlighter-rouge">Join</code>, <code class="language-plaintext highlighter-rouge">Filter</code> to manipulate and transform multiple records at once.
 (Analogous to functional &gt; imperative in OO)</p>
 
-<p>Reserve the control loops for situations where data operations cannot be used.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[Addressing common performance bottlenecks in Flows. There is more to loops than meets the eye. Once again, functional beats imperative.]]></summary></entry><entry><title type="html">Language features across the boundary</title><link href="https://andreasvolkmann.github.io//blog/2021-07-25-topic-markers-in-language-design/" rel="alternate" type="text/html" title="Language features across the boundary" /><published>2021-07-25T00:00:00-07:00</published><updated>2025-05-01T21:21:41-07:00</updated><id>https://andreasvolkmann.github.io//blog/topic-markers-in-language-design</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/2021-07-25-topic-markers-in-language-design/"><![CDATA[<ul id="markdown-toc">
+<p>Reserve the control loops for situations where data operations cannot be used.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[Addressing common performance bottlenecks in Flows. There is more to loops than meets the eye. Once again, functional beats imperative.]]></summary></entry><entry><title type="html">🌐 Language features across the boundary</title><link href="https://andreasvolkmann.github.io//blog/language/2021-07-25-topic-markers-in-language-design/" rel="alternate" type="text/html" title="🌐 Language features across the boundary" /><published>2021-07-25T00:00:00-07:00</published><updated>2025-07-06T13:03:42-07:00</updated><id>https://andreasvolkmann.github.io//blog/language/topic-markers-in-language-design</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/language/2021-07-25-topic-markers-in-language-design/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#topic-markers" id="markdown-toc-topic-markers">Topic markers</a>    <ul>
       <li><a href="#implicit-topics" id="markdown-toc-implicit-topics">Implicit topics</a></li>
     </ul>
@@ -1211,101 +1341,4 @@ In context-heavy languages we can omit a lot of implicit information,
 often leading to much shorter, concise sentences.</p>
 
 <p>To me, both Kotlin and Japanese have a sense of elegance, 
-as it is super easy to produce highly expressive and concise output.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><summary type="html"><![CDATA[Topic markers and context can help keep you DRY]]></summary></entry><entry><title type="html">Clean Architecture with ArchUnit</title><link href="https://andreasvolkmann.github.io//blog/software/2021-04-24-clean-arch-unit/" rel="alternate" type="text/html" title="Clean Architecture with ArchUnit" /><published>2021-04-24T00:00:00-07:00</published><updated>2025-05-01T21:21:41-07:00</updated><id>https://andreasvolkmann.github.io//blog/software/clean-arch-unit</id><content type="html" xml:base="https://andreasvolkmann.github.io//blog/software/2021-04-24-clean-arch-unit/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
-  <li><a href="#rules" id="markdown-toc-rules">Rules</a></li>
-  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
-</ul>
-
-<p>In a <a href="/blog/2020-02-20-spring-kotlin-gradle-aop">previous post</a>
-I discussed ways in which AOP can help in defining our architecture, 
-even allowing us to verify architectural rules at compile time.</p>
-
-<p>While this approach certainly does work, it has a few drawbacks, like its reliance on 
-AOP, which is not always an option. 
-Furthermore, the way these rules are defined is slightly unnatural.</p>
-
-<p>A more idiomatic way of automatically verifying one’s architecture is <a href="https://www.archunit.org/">ArchUnit</a>,
-which enables us to define our rules as unit tests.</p>
-
-<p>Originally a Java library, the project has since been ported to C#, 
-which makes sense, considering <s>Java</s> Kotlin and C# are the same language.
-If a truly useful library is created in either of these, 
-it will eventually be ported to the others, 
-just like for <a href="https://en.wikipedia.org/wiki/AspectJ">AspectJ</a> we now got <a href="https://www.postsharp.net/">PostSharp</a>.</p>
-
-<p>Anyway, this is convenient for me, 
-since I wanted to take a look at enforcing a clean architecture in C# today. 
-(Please read <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Uncle Bob’s post</a>)
-<a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"><img src="/assets/img/CleanArchitecture.jpg" alt="Overview of the Clean Architecture" /></a></p>
-
-<p>In the Java ArchUnit, there is out of the box support for both <code class="language-plaintext highlighter-rouge">layered</code> and <code class="language-plaintext highlighter-rouge">onion</code> architectures, 
-but not in the dotnet ports.</p>
-
-<p>I won’t be going for a full-blown onion / clean arch as my purpose is to slowly evolve 
-and improve the architecture of my project. Taking things from 0 to 100 in one step is 
-likely not gonna benefit anyone, and it is easier to adapt to small, incremental changes.
-So, while the end goal is a clean architecture, 
-for now I just want to implement some simple layer checks, 
-similar to the ones shown in the image below.</p>
-
-<p><img src="/assets/img/layer-check.png" alt="Overview of the Clean Architecture" /></p>
-
-<h2 id="setup">Setup</h2>
-
-<p>I found two candidates for ArchUnit-style tests:</p>
-<ul>
-  <li><a href="https://github.com/TNG/ArchUnitNET">ArchUnitNET</a></li>
-  <li><a href="https://github.com/BenMorris/NetArchTest">NetArchTest</a></li>
-</ul>
-
-<p>I decided to go with the former, as it is from TNG, the same team as the original library.</p>
-
-<p>After installing, I noticed there is no assert support for <code class="language-plaintext highlighter-rouge">MSTest</code>, 
-so I recommend to just copy the related classes from <a href="https://github.com/TNG/ArchUnitNET/tree/master/ArchUnitNET.xUnit">the xUnit folder</a>.</p>
-
-<p><a href="https://github.com/AndreasVolkmann/archNet/tree/master/TestProject1/Arch">Here</a> is what I ended up with.</p>
-
-<h2 id="rules">Rules</h2>
-
-<p>The individual layers can be defined like this:</p>
-<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">serviceLayer</span>     <span class="p">=</span> <span class="nf">Types</span><span class="p">().</span><span class="nf">That</span><span class="p">().</span><span class="nf">ResideInNamespace</span><span class="p">(</span><span class="s">".Service"</span><span class="p">);</span>
-<span class="kt">var</span> <span class="n">controllerLayer</span>  <span class="p">=</span> <span class="nf">Types</span><span class="p">().</span><span class="nf">That</span><span class="p">().</span><span class="nf">ResideInNamespace</span><span class="p">(</span><span class="s">".Controller"</span><span class="p">);</span>
-<span class="kt">var</span> <span class="n">peristenceLayer</span>  <span class="p">=</span> <span class="nf">Types</span><span class="p">().</span><span class="nf">That</span><span class="p">().</span><span class="nf">ResideInNamespace</span><span class="p">(</span><span class="s">".Repository"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>Let’s start with our first rule: 
-None of our code should depend on any controller / inbound port.</p>
-
-<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">TestMethod</span><span class="p">]</span>
-<span class="k">public</span> <span class="k">void</span> <span class="nf">LayeredArch_Controller</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="kt">var</span> <span class="n">rule</span> <span class="p">=</span> <span class="nf">Types</span><span class="p">().</span><span class="nf">That</span><span class="p">().</span><span class="nf">AreNot</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">controllerLayer</span><span class="p">)</span>
-        <span class="p">.</span><span class="nf">Should</span><span class="p">().</span><span class="nf">NotDependOnAny</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">controllerLayer</span><span class="p">);</span>
-
-    <span class="n">rule</span><span class="p">.</span><span class="nf">Check</span><span class="p">(</span><span class="n">Architecture</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The next rule prevents access from the persistence layer to the service layer.</p>
-<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">Types</span><span class="p">().</span><span class="nf">That</span><span class="p">().</span><span class="nf">Are</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">peristenceLayer</span><span class="p">)</span>
-    <span class="p">.</span><span class="nf">Should</span><span class="p">().</span><span class="nf">NotDependOnAny</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">serviceLayer</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>And lastly, only allow the service layer to access the persistence layer.</p>
-<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">Types</span><span class="p">().</span><span class="nf">That</span><span class="p">().</span><span class="nf">AreNot</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">serviceLayer</span><span class="p">)</span>
-    <span class="p">.</span><span class="nf">Should</span><span class="p">().</span><span class="nf">NotDependOnAny</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">peristenceLayer</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The complete test class is available <a href="https://github.com/AndreasVolkmann/archNet/blob/master/TestProject1/Arch/ArchitectureTests.cs">here</a>.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>ArchUnit provides an elegant way of defining architectural rules, helping you enforce
-your design. 
-Whilst the AOP compile-time approach is great, too, I prefer an AOP-independent solution.</p>
-
-<p>It would be great to have the layer and onion dsl ported to C#, too.</p>
-
-<p>I will be experimenting with the layers and slowly approach a clean architecture.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[Enforcing a layered architecture with tests]]></summary></entry></feed>
+as it is super easy to produce highly expressive and concise output.</p>]]></content><author><name>Andreas Volkmann</name><email>avolkmann@me.com</email></author><category term="blog" /><category term="language" /><summary type="html"><![CDATA[Topic markers and context can help keep you DRY]]></summary></entry></feed>
