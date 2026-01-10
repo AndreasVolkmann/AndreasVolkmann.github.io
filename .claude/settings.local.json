@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:andreasvolkmann.github.io)",
+      "Bash(powershell -Command \"Select-String -Path temp_onsen_check.txt -Pattern ''initOnsenMap'' -Context 0,20 | Select-Object -First 1\")",
+      "Bash(powershell:*)",
+      "Bash(node -e:*)"
+    ]
+  }
+}
